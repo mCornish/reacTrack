@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ampersand App
 
 This app was generated with the [ampersand cli tool](http://ampersandjs.com/learn/quick-start-guide).
@@ -21,3 +22,6 @@ Built by folks at [&yet](http://andyet.com).
 ## Want a deeper understanding?
 
 Get the book: http://humanjavascript.com
+=======
+# reacTrack
+>>>>>>> cfe87cc4de7a9831bddb64be62059eba99463191
