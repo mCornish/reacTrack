@@ -6,7 +6,7 @@ var tracks = [
         name: 'Whiplash',
         created: '3/4/15',
         author: 'admin',
-        length: 55670030,
+        length: '1:46:59',
         reactions: [
             {
                 id: 121,
@@ -30,7 +30,7 @@ var tracks = [
         name: 'Big Hero 6',
         created: '1/25/15',
         author: 'admin',
-        length: 25600230,
+        length: '1:48:00',
         reactions: [
             {
                 id: 123,
