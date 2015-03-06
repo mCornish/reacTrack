@@ -1,4 +1,5 @@
 var AmpersandModel = require('ampersand-model');
+var Reactions = require('./reactions')
 
 
 module.exports = AmpersandModel.extend({
@@ -7,13 +8,12 @@ module.exports = AmpersandModel.extend({
         name: ['string', true, 'Name'],
         created: ['date', true, 'Date'],
         author: ['string', true, 'Author'],
-        length: ['number', true, '0:00'],
-        reactions: ['array', true, '[]'],
+        length: ['string', true, '0:00'],
         slug: ['string', true, 'slug']
     },
     derived: {
         viewUrl: {
-            deps: ['slug'],
+            deps: ['id'],
             fn: function () {
                 return '/tracks/' + encodeURIComponent(this.id);
             }
@@ -24,5 +24,8 @@ module.exports = AmpersandModel.extend({
                 return '' + this.viewUrl + '/edit';
             }
         }
+    },
+    collections: {
+        reactions: Reactions
     }
 });

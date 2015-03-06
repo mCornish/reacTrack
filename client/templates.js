@@ -35,6 +35,11 @@
         return '<li class="person list-group-item"><img data-hook="avatar" width="40" height="40"/><a data-hook="name"></a><span class="btn-group pull-right"> <a data-hook="action-edit" class="btn btn-default">edit </a><a href="#" data-hook="action-delete" class="btn btn-danger">delete</a></span></li>';
     };
 
+    // includes/reaction.jade compiled template
+    templatizer["includes"]["reaction"] = function tmpl_includes_reaction() {
+        return '<li class="reaction list-group-item"><h2 data-hook="name"></h2><h3 data-hook="author"></h3><p data-hook="text"></p></li>';
+    };
+
     // includes/track.jade compiled template
     templatizer["includes"]["track"] = function tmpl_includes_track() {
         return '<li class="track list-group-item"><a data-hook="view"><h2 data-hook="name"></h2><h3 data-hook="length"></h3></a></li>';
@@ -70,9 +75,14 @@
         return '<section class="page view-person"><h2 data-hook="name"></h2><img data-hook="avatar" width="80" height="80"/><div class="buttons"><a data-hook="edit" class="btn">Edit</a><button data-hook="delete" class="btn">Delete</button></div></section>';
     };
 
+    // pages/reactionView.jade compiled template
+    templatizer["pages"]["reactionView"] = function tmpl_pages_reactionView() {
+        return '<section class="page"><h2 data-hook="name"></h2><h3 data-hook="author"></h3><p data-hook="text"></p></section>';
+    };
+
     // pages/trackView.jade compiled template
     templatizer["pages"]["trackView"] = function tmpl_pages_trackView() {
-        return '<section class="page view-person"><h2 data-hook="name"></h2><h3 data-hook="length"></h3><a data-hook="edit">Edit</a></section>';
+        return '<section class="page view-person"><h2 data-hook="name"></h2><h3 data-hook="length"></h3><a data-hook="edit">Edit</a><ul data-hook="reaction-list" class="list-group"></ul></section>';
     };
 
     // pages/tracks.jade compiled template
