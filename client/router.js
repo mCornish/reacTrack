@@ -8,6 +8,8 @@ var PersonEditPage = require('./pages/person-edit');
 var PersonViewPage = require('./pages/person-view');
 var TracksPage = require('./pages/tracks');
 var TrackViewPage = require('./pages/track-view');
+var ReactionsPage = require('./pages/reactions');
+var ReactionViewPage = require('./pages/reaction-view');
 
 
 module.exports = Router.extend({
@@ -20,6 +22,8 @@ module.exports = Router.extend({
         'person/:id/edit': 'personEdit',
         'tracks': 'tracks',
         'tracks/:id': 'trackView',
+        'reactions': 'reactions',
+        'reactions/:id': 'reactionView',
         '(*path)': 'catchAll'
     },
 
@@ -68,6 +72,20 @@ module.exports = Router.extend({
 
     trackView: function (id) {
         this.trigger('page', new TrackViewPage({
+            id: id,
+            collection: app.reactions
+        }));
+    },
+
+    reactions: function () {
+        this.trigger('page', new ReactionsPage({
+            model: me,
+            collection: app.reactions
+        }));
+    },
+
+    reactionView: function (id) {
+        this.trigger('page', new ReactionViewPage({
             id: id
         }));
     },

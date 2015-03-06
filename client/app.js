@@ -9,6 +9,7 @@ var MainView = require('./views/main');
 var Me = require('./models/me');
 var People = require('./models/persons');
 var Tracks = require('./models/tracks');
+var Reactions = require('./models/reactions');
 var domReady = require('domready');
 
 
@@ -21,6 +22,7 @@ module.exports = {
         window.me = new Me();
         this.people = new People();
         this.tracks = new Tracks();
+        this.reactions = new Reactions();
 
         // init our URL handlers and the history tracker
         this.router = new Router();

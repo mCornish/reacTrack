@@ -1,4 +1,5 @@
 var AmpersandModel = require('ampersand-model');
+var Reactions = require('./reactions')
 
 
 module.exports = AmpersandModel.extend({
@@ -24,5 +25,8 @@ module.exports = AmpersandModel.extend({
                 return '' + this.viewUrl + '/edit';
             }
         }
+    },
+    collections: {
+        reactions: Reactions
     }
 });

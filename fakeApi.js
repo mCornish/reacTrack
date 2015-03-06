@@ -10,15 +10,17 @@ var tracks = [
         reactions: [
             {
                 id: 121,
-                author: 'CobraxGunnerz',
-                time: '15000',
+                track: 111,
+                author: 'Reactor 1',
+                time: 15000,
                 text: 'That was AWESOME!!!',
                 posted: '3/4/15'
             },
             {
                 id: 122,
-                author: 'xPhillyDxX',
-                time: '70000',
+                track: 111,
+                author: 'Reactor 2',
+                time: 70000,
                 text: 'That guy just got filled in.',
                 posted: '3/2/15'
             }
@@ -34,15 +36,17 @@ var tracks = [
         reactions: [
             {
                 id: 123,
-                author: 'Shahashi',
-                time: '244500',
+                track: 112,
+                author: 'Reactor 3',
+                time: 244500,
                 text: 'Domo arigato Hairy Baby.',
                 posted: '1/30/15'
             },
             {
                 id: 124,
-                author: 'ShadowWarrior95',
-                time: '235432',
+                track: 112,
+                author: 'Reactor 4',
+                time: 235432,
                 text: 'Iron Giant wannabe. Oh please.',
                 posted: '2/2/15'
             }
@@ -103,6 +107,24 @@ exports.getTrack = function (req, res) {
     var found = get(req.params.id);
     res.status(found ? 200 : 404);
     res.send(found);
+};
+
+function getReaction(id) {
+    return _.findWhere(reactions, {id: id});
+};
+
+exports.listReactions = function (req, res) {
+    res.send(tracks[0].reactions);
+};
+
+exports.getReaction = function (req, res) {
+    var found = get(req.params.id);
+    res.status(found ? 200 : 404);
+    res.send(found);
+};
+
+exports.listReactionsByTrack = function (req, res) {
+    res.send(reactions);
 };
 
 function getPerson(id) {
