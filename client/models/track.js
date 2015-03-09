@@ -9,6 +9,7 @@ module.exports = AmpersandModel.extend({
         created: ['date', true, 'Date'],
         author: ['string', true, 'Author'],
         length: ['string', true, '0:00'],
+        reactions: ['array', true, '[]'],
         slug: ['string', true, 'slug']
     },
     derived: {
