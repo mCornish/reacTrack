@@ -114,7 +114,15 @@ function getReaction(id) {
 };
 
 exports.listReactions = function (req, res) {
-    res.send(tracks[0].reactions);
+    var reactionArray = [];
+
+    tracks.forEach(function(track) {
+        track.reactions.forEach(function(reaction) {
+            reactionArray.push(reaction);
+        });
+    });
+
+    res.send(reactionArray);
 };
 
 exports.getReaction = function (req, res) {

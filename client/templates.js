@@ -17,12 +17,12 @@
 
     // body.jade compiled template
     templatizer["body"] = function tmpl_body() {
-        return '<body><nav class="navbar navbar-default"><div class="container-fluid"><div class="navbar-header"><a href="/" class="navbar-brand">Ampersand App</a><ul class="nav navbar-nav"><li><a href="/">home</a></li><li><a href="/collections">collection demo</a></li><li><a href="/info">more info</a></li><li><a href="/tracks">tracks</a></li></ul></div></div></nav><div class="container"><main data-hook="page-container"></main></div></body>';
+        return '<body><nav class="navbar navbar-default"><div class="container-fluid"><div class="navbar-header"><a href="/" class="navbar-brand">Ampersand App</a><ul class="nav navbar-nav"><li><a href="/">home</a></li><li><a href="/collections">collection demo</a></li><li><a href="/info">more info</a></li><li><a href="/tracks">tracks</a></li><li><a href="/reactions">reactions</a></li></ul></div></div></nav><div class="container"><main data-hook="page-container"></main></div></body>';
     };
 
     // head.jade compiled template
     templatizer["head"] = function tmpl_head() {
-        return '<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><meta name="apple-mobile-web-app-capable" content="yes"/>';
+        return '<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><meta name="apple-mobile-web-app-capable" content="yes"/><script src=\'https://cdn.firebase.com/js/client/2.2.1/firebase.js\'></script>';
     };
 
     // includes/formInput.jade compiled template
@@ -78,6 +78,11 @@
     // pages/reactionView.jade compiled template
     templatizer["pages"]["reactionView"] = function tmpl_pages_reactionView() {
         return '<section class="page"><h2 data-hook="name"></h2><h3 data-hook="author"></h3><p data-hook="text"></p></section>';
+    };
+
+    // pages/reactions.jade compiled template
+    templatizer["pages"]["reactions"] = function tmpl_pages_reactions() {
+        return '<section class="page"><h2>Reactions</h2><ul data-hook="reaction-list" class="list-group"></ul></section>';
     };
 
     // pages/trackView.jade compiled template
