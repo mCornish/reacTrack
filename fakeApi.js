@@ -1,4 +1,6 @@
 var _ = require('underscore');
+var Firebase = require('firebase');
+var postsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/blog/posts');
 
 var posts = [
     {
@@ -114,16 +116,28 @@ var people = [
 ];
 var id = 7;
 
+exports.addPost = function (req, res) {
+    var post = req.body;
+    var newPostRef = postsRef.push(post, function(error) {
+        if (error) {
+            console.log('Error: ' + error);
+        }
+    });
+    post.id = newPostRef.key();
+    console.log(post);
+    res.status(201).send(post);
+};
+
 function getPost(id) {
-    return _.findWhere(posts, {id: id});
+    return postsRef.child(id);
 };
 
 exports.listPosts = function (req, res) {
-    res.send(posts);
+    res.send(postsRef);
 };
 
 exports.getPost = function (req, res) {
-    var found = get(req.params.id);
+    var found = postsRef.child(req.params.id);
     res.status(found ? 200 : 404);
     res.send(found);
 };

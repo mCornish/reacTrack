@@ -30,6 +30,11 @@
         return '<div class="form-group"><label data-hook="label"></label><div data-hook="message-container"><div data-hook="message-text" class="alert alert-danger"></div></div><input class="form-control"/></div>';
     };
 
+    // includes/formTextarea.jade compiled template
+    templatizer["includes"]["formTextarea"] = function tmpl_includes_formTextarea() {
+        return '<div class="form-group"><label data-hook="label"></label><div data-hook="message-container"><div data-hook="message-text" class="alert alert-danger"></div></div><textarea class="form-control"></textarea></div>';
+    };
+
     // includes/person.jade compiled template
     templatizer["includes"]["person"] = function tmpl_includes_person() {
         return '<li class="person list-group-item"><img data-hook="avatar" width="40" height="40"/><a data-hook="name"></a><span class="btn-group pull-right"> <a data-hook="action-edit" class="btn btn-default">edit </a><a href="#" data-hook="action-delete" class="btn btn-danger">delete</a></span></li>';
@@ -83,6 +88,11 @@
     // pages/personView.jade compiled template
     templatizer["pages"]["personView"] = function tmpl_pages_personView() {
         return '<section class="page view-person"><h2 data-hook="name"></h2><img data-hook="avatar" width="80" height="80"/><div class="buttons"><a data-hook="edit" class="btn">Edit</a><button data-hook="delete" class="btn">Delete</button></div></section>';
+    };
+
+    // pages/postAdd.jade compiled template
+    templatizer["pages"]["postAdd"] = function tmpl_pages_postAdd() {
+        return '<section class="page add-post"><h2>New Post</h2><form data-hook="ppost-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Publish</button></div></form></section>';
     };
 
     // pages/postView.jade compiled template

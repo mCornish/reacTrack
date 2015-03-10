@@ -3,12 +3,12 @@ var AmpersandModel = require('ampersand-model');
 
 module.exports = AmpersandModel.extend({
     props: {
-        id: ['any', true, null],
+        id: 'any',
         title: ['string', true, 'Title'],
         created: ['date', true, Date.now()],
         content: ['string', true, 'Content here.'],
-        categories: ['array', true, function() { return []; }],
-        tags: ['array', true, function() { return []; }]
+        categories: ['string', false, ''],
+        tags: ['string', false, '']
     },
     derived: {
         viewUrl: {
