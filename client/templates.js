@@ -17,7 +17,7 @@
 
     // body.jade compiled template
     templatizer["body"] = function tmpl_body() {
-        return '<body><nav class="navbar navbar-default"><div class="container-fluid"><div class="navbar-header"><a href="/" class="navbar-brand">Ampersand App</a><ul class="nav navbar-nav"><li><a href="/">home</a></li><li><a href="/collections">collection demo</a></li><li><a href="/info">more info</a></li><li><a href="/tracks">tracks</a></li><li><a href="/reactions">reactions</a></li></ul></div></div></nav><div class="container"><main data-hook="page-container"></main></div></body>';
+        return '<body><nav class="navbar navbar-default"><div class="container-fluid"><div class="navbar-header"><a href="/" class="navbar-brand">Ampersand App</a><ul class="nav navbar-nav"><li><a href="/">home</a></li><li><a href="/blog">blog</a></li><li><a href="/collections">collection demo</a></li><li><a href="/info">more info</a></li><li><a href="/tracks">tracks</a></li><li><a href="/reactions">reactions</a></li></ul></div></div></nav><div class="container"><main data-hook="page-container"></main></div></body>';
     };
 
     // head.jade compiled template
@@ -35,6 +35,11 @@
         return '<li class="person list-group-item"><img data-hook="avatar" width="40" height="40"/><a data-hook="name"></a><span class="btn-group pull-right"> <a data-hook="action-edit" class="btn btn-default">edit </a><a href="#" data-hook="action-delete" class="btn btn-danger">delete</a></span></li>';
     };
 
+    // includes/post.jade compiled template
+    templatizer["includes"]["post"] = function tmpl_includes_post() {
+        return '<li class="post list-group-item"><a data-hook="view"><h3 data-hook="date"></h3><h2 data-hook="title"></h2><p data-hook="content"></p></a></li>';
+    };
+
     // includes/reaction.jade compiled template
     templatizer["includes"]["reaction"] = function tmpl_includes_reaction() {
         return '<li class="reaction list-group-item"><h2 data-hook="name"></h2><h3 data-hook="author"></h3><p data-hook="text"></p></li>';
@@ -43,6 +48,11 @@
     // includes/track.jade compiled template
     templatizer["includes"]["track"] = function tmpl_includes_track() {
         return '<li class="track list-group-item"><a data-hook="view"><h2 data-hook="name"></h2><h3 data-hook="length"></h3></a></li>';
+    };
+
+    // pages/blog.jade compiled template
+    templatizer["pages"]["blog"] = function tmpl_pages_blog() {
+        return '<section class="page"><h2>Blog</h2><ul data-hook="post-list" class="list-group"></ul></section>';
     };
 
     // pages/collectionDemo.jade compiled template
@@ -73,6 +83,11 @@
     // pages/personView.jade compiled template
     templatizer["pages"]["personView"] = function tmpl_pages_personView() {
         return '<section class="page view-person"><h2 data-hook="name"></h2><img data-hook="avatar" width="80" height="80"/><div class="buttons"><a data-hook="edit" class="btn">Edit</a><button data-hook="delete" class="btn">Delete</button></div></section>';
+    };
+
+    // pages/postView.jade compiled template
+    templatizer["pages"]["postView"] = function tmpl_pages_postView() {
+        return '<section class="page view-post"><h3 data-hook="date"></h3><h2 data-hook="title"></h2><a data-hook="edit">Edit</a><p data-hook="content"></p></section>';
     };
 
     // pages/reactionView.jade compiled template

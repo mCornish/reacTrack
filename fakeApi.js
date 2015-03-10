@@ -1,5 +1,24 @@
 var _ = require('underscore');
 
+var posts = [
+    {
+        id: 11,
+        title: 'Sample Title 1',
+        created: '3/4/15',
+        content: 'Test content 1',
+        categories: ['categories'],
+        tags: ['tags']
+    },
+    {
+        id: 12,
+        title: 'Sample Title 2',
+        created: '3/9/15',
+        content: 'Test content 2',
+        categories: ['categories'],
+        tags: ['tags']
+    }
+];
+
 var tracks = [
     {
         id: 111,
@@ -94,6 +113,21 @@ var people = [
     }
 ];
 var id = 7;
+
+function getPost(id) {
+    return _.findWhere(posts, {id: id});
+};
+
+exports.listPosts = function (req, res) {
+    res.send(posts);
+};
+
+exports.getPost = function (req, res) {
+    var found = get(req.params.id);
+    res.status(found ? 200 : 404);
+    res.send(found);
+};
+
 
 function getTrack(id) {
     return _.findWhere(tracks, {id: id});

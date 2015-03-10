@@ -49,6 +49,8 @@ app.set('view engine', 'jade');
 // Set up our little demo API
 // -----------------
 var api = require('./fakeApi');
+app.get('/api/posts', api.listPosts);
+app.get('/api/posts/:id', api.getPost);
 app.get('/api/reactions', api.listReactions);
 app.get('/api/reactions/:id', api.getReaction);
 app.get('/api/tracks', api.listTracks);
