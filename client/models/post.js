@@ -8,13 +8,14 @@ module.exports = AmpersandModel.extend({
         created: ['date', true, Date.now()],
         content: ['string', true, 'Content here.'],
         categories: ['string', false, ''],
-        tags: ['string', false, '']
+        tags: ['string', false, ''],
+        slug: 'string'
     },
     derived: {
         viewUrl: {
             deps: ['id'],
             fn: function () {
-                return '/posts/' + encodeURIComponent(this.id);
+                return '/posts/' + encodeURIComponent(this.slug);
             }
         },
         editUrl: {

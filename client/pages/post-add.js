@@ -16,16 +16,16 @@ module.exports = PageView.extend({
                 return new PostForm({
                     el: el,
                     submitCallback: function (data) {
-                        for (var key in data) {
-                            if (data.hasOwnProperty(key) && data[key] === null) {
-                                data[key] = '';
-                            }
-                        }
+                        // for (var key in data) {
+                        //     if (data.hasOwnProperty(key) && data[key] === null) {
+                        //         data[key] = '';
+                        //     }
+                        // }
                         app.blog.create(data, {
                             wait: true,
-                            success: function (res) {
-                                app.navigate('/posts/' + res.key);
-                                app.people.fetch();
+                            success: function (collection, res) {
+                                app.navigate('/posts/' + res.slug);
+                                app.blog.fetch();
                             }
                         });
                     }

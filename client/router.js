@@ -19,7 +19,7 @@ module.exports = Router.extend({
     routes: {
         '': 'home',
         'blog': 'blog',
-        'posts/:id': 'postView',
+        'posts/:slug': 'postView',
         'post/new': 'postAdd',
         'collections': 'collectionDemo',
         'info': 'info',

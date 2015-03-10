@@ -124,20 +124,25 @@ exports.addPost = function (req, res) {
         }
     });
     post.id = newPostRef.key();
-    console.log(post);
+    post.slug = post.title.toLowerCase().replace(/[^\w\s]/gi, '').replace(/ /g, '-');
+    console.log(post.slug);
     res.status(201).send(post);
 };
 
-function getPost(id) {
-    return postsRef.child(id);
-};
+// function getPost(id) {
+//     return postsRef.child(id);
+// };
 
 exports.listPosts = function (req, res) {
     res.send(postsRef);
 };
 
 exports.getPost = function (req, res) {
-    var found = postsRef.child(req.params.id);
+    var found;
+    postsRef.orderByChild('slug').equalTo(req.params.slug).once('value', function(snap) {
+        found = snap;
+    });
+    console.log(found);
     res.status(found ? 200 : 404);
     res.send(found);
 };
