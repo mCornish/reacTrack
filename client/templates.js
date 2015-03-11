@@ -42,7 +42,7 @@
 
     // includes/post.jade compiled template
     templatizer["includes"]["post"] = function tmpl_includes_post() {
-        return '<li class="post list-group-item"><a data-hook="view"><h3 data-hook="date"></h3><h2 data-hook="title"></h2><p data-hook="content"></p></a></li>';
+        return '<li class="post list-group-item"><h3 data-hook="date"></h3><a data-hook="view"><h2 data-hook="title"></h2></a><p data-hook="content"></p></li>';
     };
 
     // includes/reaction.jade compiled template

@@ -9,19 +9,19 @@ module.exports = AmpersandModel.extend({
         content: ['string', true, 'Content here.'],
         categories: ['string', false, ''],
         tags: ['string', false, ''],
-        slug: 'string'
+        slug: ['string', false, '']
     },
     derived: {
         viewUrl: {
             deps: ['id'],
             fn: function () {
-                return '/posts/' + encodeURIComponent(this.slug);
+                return '/posts/' + this.id;
             }
         },
         editUrl: {
             deps: ['id'],
             fn: function () {
-                return '' + this.viewUrl + '/edit';
+                return '/posts/' + this.id + '/edit';
             }
         }
     }

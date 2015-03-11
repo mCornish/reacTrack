@@ -24,8 +24,10 @@ module.exports = PageView.extend({
     },
     initialize: function (spec) {
         var self = this;
-        app.blog.getOrFetch(spec.id, {all: true}, function (err, model) {
+        console.log('init');
+        app.blog.fetch(spec.id, {all: true}, function (err, model) {
             if (err) alert('couldnt find a model with id: ' + spec.id);
+            console.log(model);
             self.model = model;
         });
     }

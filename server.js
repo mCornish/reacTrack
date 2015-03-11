@@ -51,7 +51,7 @@ app.set('view engine', 'jade');
 var api = require('./fakeApi');
 app.post('/posts', api.addPost);
 app.get('/posts', api.listPosts);
-app.get('/posts/:slug', api.getPost);
+app.get('/posts/:id', api.getPost);
 app.get('/api/reactions', api.listReactions);
 app.get('/api/reactions/:id', api.getReaction);
 app.get('/api/tracks', api.listTracks);

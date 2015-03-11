@@ -4,5 +4,7 @@ var Post = require('./post');
 
 module.exports = Collection.extend({
     model: Post,
-    url: '/posts'
+    url: '/posts',
+    mainIndex: 'id',
+    indexes: ['slug']
 });

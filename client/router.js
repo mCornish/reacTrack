@@ -18,8 +18,9 @@ var ReactionViewPage = require('./pages/reaction-view');
 module.exports = Router.extend({
     routes: {
         '': 'home',
+        'posts': 'blog',
         'blog': 'blog',
-        'posts/:slug': 'postView',
+        'posts/:id': 'postView',
         'post/new': 'postAdd',
         'collections': 'collectionDemo',
         'info': 'info',
