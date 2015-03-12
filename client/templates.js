@@ -70,6 +70,11 @@
         return '<section class="page pageTwo"><h2>Simple Page Example</h2><p>This page was rendered by a simple page view file at client/pages/info.js.</p></section>';
     };
 
+    // pages/login.jade compiled template
+    templatizer["pages"]["login"] = function tmpl_pages_login() {
+        return '<section class="page login"><h2>Login<form data-hook="login-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Sign In</button></div></form></h2></section>';
+    };
+
     // pages/personAdd.jade compiled template
     templatizer["pages"]["personAdd"] = function tmpl_pages_personAdd() {
         return '<section class="page add-person"><h2>Add Person</h2><p>This form and all behavior is defined by the form view in <code>client/forms/person.js</code>.</p><p>The same form-view is used for both editing and creating new users.</p><form data-hook="person-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn">Submit</button></div></form></section>';

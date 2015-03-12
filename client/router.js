@@ -3,6 +3,7 @@ var Router = require('ampersand-router');
 var HomePage = require('./pages/home');
 var BlogPage = require('./pages/blog');
 var PostViewPage = require('./pages/post-view');
+var LoginPage = require('./pages/login');
 var CollectionDemo = require('./pages/collection-demo');
 var InfoPage = require('./pages/info');
 var PersonAddPage = require('./pages/person-add');
@@ -19,6 +20,7 @@ module.exports = Router.extend({
         '': 'home',
         'blog': 'blog',
         'posts/:id': 'postView',
+        'login': 'login',
         'collections': 'collectionDemo',
         'info': 'info',
         'person/add': 'personAdd',
@@ -48,6 +50,12 @@ module.exports = Router.extend({
     postView: function (id) {
         this.trigger('page', new PostViewPage({
             id: id
+        }));
+    },
+
+    login: function () {
+        this.trigger('page', new LoginPage({
+            model: me
         }));
     },
 
