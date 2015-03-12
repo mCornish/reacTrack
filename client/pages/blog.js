@@ -10,14 +10,7 @@ module.exports = PageView.extend({
         this.renderWithTemplate();
         this.renderCollection(this.collection, PostView, this.queryByHook('post-list'));
         if (!this.collection.length) {
-            this.fetchCollection();
+            this.collection.fetch();
         }
-    },
-    fetchCollection: function () {
-        this.collection.fetch();
-        return false;
-    },
-    resetCollection: function () {
-        this.collection.reset();
     }
 });

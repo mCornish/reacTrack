@@ -140,33 +140,41 @@ exports.addPost = function (req, res) {
 };
 
 function getPost(id) {
-    var post = {};
-
-    postsRef.child(id).on('value', function(snap) {
-        post = snap.val();
-        post.id = snap.key();
-    });
-
-    return post;
+    // var post = {};
+    //
+    // postsRef.child(id).on('value', function(snap) {
+    //     post = snap.val();
+    //     console.log(snap.val());
+    //     post.id = snap.key();
+    // });
+    //
+    // return post;
 };
 
 exports.getPost = function (req, res) {
-    var found = getPost(req.params.id);
-
-    res.status(found ? 200 : 404);
-    res.send(found);
+    // var found = getPost(req.params.id);
+    //
+    // res.status(found ? 200 : 404);
+    // res.send(found);
 };
 
 exports.listPosts = function (req, res) {
     var posts = [];
 
-    postsRef.on("child_added", function(snapshot) {
-        posts.push(snapshot.val());
+    postsRef.on("value", function(snapshot) {
+        console.log(snapshot.val());
+        var snap = snapshot.val();
+
+        for (key in snap) {
+            posts.push(snap[key]);
+        }
+
+        res.send(posts);
+
     }, function(errorObj) {
         console.log('Error: ' + errorObj.code);
     });
 
-    res.send(posts);
 };
 
 
@@ -213,7 +221,7 @@ exports.listReactionsByTrack = function (req, res) {
 
 
 function getPerson(id) {
-    return _.findWhere(people, {id: parseInt(id + '', 10)});
+    // return _.findWhere(people, {id: parseInt(id + '', 10)});
 };
 
 exports.listPeople = function (req, res) {
@@ -228,9 +236,9 @@ exports.addPerson = function (req, res) {
 };
 
 exports.getPerson = function (req, res) {
-    var found = get(req.params.id);
-    res.status(found ? 200 : 404);
-    res.send(found);
+    // var found = get(req.params.id);
+    // res.status(found ? 200 : 404);
+    // res.send(found);
 };
 
 exports.deletePerson = function (req, res) {

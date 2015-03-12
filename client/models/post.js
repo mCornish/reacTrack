@@ -15,13 +15,13 @@ module.exports = AmpersandModel.extend({
         viewUrl: {
             deps: ['id'],
             fn: function () {
-                return '/posts/' + this.id;
+                return '/post/' + this.id;
             }
         },
         editUrl: {
             deps: ['id'],
             fn: function () {
-                return '/posts/' + this.id + '/edit';
+                return '/post/' + this.id + '/edit';
             }
         }
     }

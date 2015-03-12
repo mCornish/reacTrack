@@ -4,7 +4,7 @@ var templates = require('../templates');
 
 
 module.exports = PageView.extend({
-    pageTitle: 'Track',
+    pageTitle: 'Post',
     template: templates.pages.postView,
     bindings: {
         'model.created': {
@@ -24,10 +24,8 @@ module.exports = PageView.extend({
     },
     initialize: function (spec) {
         var self = this;
-        console.log('init');
-        app.blog.fetch(spec.id, {all: true}, function (err, model) {
+        app.blog.getOrFetch(spec.id, {all: true}, function (err, model) {
             if (err) alert('couldnt find a model with id: ' + spec.id);
-            console.log(model);
             self.model = model;
         });
     }

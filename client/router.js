@@ -20,7 +20,7 @@ module.exports = Router.extend({
         '': 'home',
         'posts': 'blog',
         'blog': 'blog',
-        'posts/:id': 'postView',
+        'post/:id': 'postView',
         'post/new': 'postAdd',
         'collections': 'collectionDemo',
         'info': 'info',
