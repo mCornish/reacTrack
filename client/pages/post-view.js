@@ -4,7 +4,7 @@ var templates = require('../templates');
 
 
 module.exports = PageView.extend({
-    pageTitle: 'Track',
+    pageTitle: 'Post',
     template: templates.pages.postView,
     bindings: {
         'model.created': {

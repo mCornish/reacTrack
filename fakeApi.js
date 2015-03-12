@@ -1,4 +1,6 @@
 var _ = require('underscore');
+var Firebase = require('firebase');
+var postsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/blog/posts');
 
 var posts = [
     {
@@ -114,27 +116,70 @@ var people = [
 ];
 var id = 7;
 
-function getPost(id) {
-    return _.findWhere(posts, {id: id});
+
+exports.addPost = function (req, res) {
+    var post = req.body;
+
+    post.slug = post.title.toLowerCase().replace(/[^\w\s]/gi, '').replace(/ /g, '-');
+
+    var newPostRef = postsRef.push(post, function(error) {
+        if (error) {
+            console.log('Error: ' + error);
+        }
+    });
+
+    post.id = newPostRef.key();
+
+    postsRef.child(post.id).update(post, function(error) {
+        if (error) {
+            console.log('Error: ' + error);
+        }
+    });
+
+    res.status(201).send(post);
 };
 
-exports.listPosts = function (req, res) {
-    res.send(posts);
+function getPost(id) {
+    // var post = {};
+    //
+    // postsRef.child(id).on('value', function(snap) {
+    //     post = snap.val();
+    //     console.log(snap.val());
+    //     post.id = snap.key();
+    // });
+    //
+    // return post;
 };
 
 exports.getPost = function (req, res) {
-    var found = get(req.params.id);
-    res.status(found ? 200 : 404);
-    res.send(found);
+    // var found = getPost(req.params.id);
+    //
+    // res.status(found ? 200 : 404);
+    // res.send(found);
+};
+
+exports.listPosts = function (req, res) {
+    var posts = [];
+
+    postsRef.on("value", function(snapshot) {
+        console.log(snapshot.val());
+        var snap = snapshot.val();
+
+        for (key in snap) {
+            posts.push(snap[key]);
+        }
+
+        res.send(posts);
+
+    }, function(errorObj) {
+        console.log('Error: ' + errorObj.code);
+    });
+
 };
 
 
 function getTrack(id) {
     return _.findWhere(tracks, {id: id});
-};
-
-exports.listTracks = function (req, res) {
-    res.send(tracks);
 };
 
 exports.getTrack = function (req, res) {
@@ -143,8 +188,19 @@ exports.getTrack = function (req, res) {
     res.send(found);
 };
 
+exports.listTracks = function (req, res) {
+    res.send(tracks);
+};
+
+
 function getReaction(id) {
     return _.findWhere(reactions, {id: id});
+};
+
+exports.getReaction = function (req, res) {
+    var found = get(req.params.id);
+    res.status(found ? 200 : 404);
+    res.send(found);
 };
 
 exports.listReactions = function (req, res) {
@@ -159,18 +215,13 @@ exports.listReactions = function (req, res) {
     res.send(reactionArray);
 };
 
-exports.getReaction = function (req, res) {
-    var found = get(req.params.id);
-    res.status(found ? 200 : 404);
-    res.send(found);
-};
-
 exports.listReactionsByTrack = function (req, res) {
     res.send(reactions);
 };
 
+
 function getPerson(id) {
-    return _.findWhere(people, {id: parseInt(id + '', 10)});
+    // return _.findWhere(people, {id: parseInt(id + '', 10)});
 };
 
 exports.listPeople = function (req, res) {
@@ -185,9 +236,9 @@ exports.addPerson = function (req, res) {
 };
 
 exports.getPerson = function (req, res) {
-    var found = get(req.params.id);
-    res.status(found ? 200 : 404);
-    res.send(found);
+    // var found = get(req.params.id);
+    // res.status(found ? 200 : 404);
+    // res.send(found);
 };
 
 exports.deletePerson = function (req, res) {
