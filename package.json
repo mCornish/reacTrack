@@ -2,6 +2,10 @@
   "name": "ampersand-app",
   "author": "Mike Cornish",
   "version": "0.0.0",
+  "repository": "https://github.com/mCornish/reacTrack.git",
+  "engines": {
+    "node": "0.10.35"
+  },
   "main": "server.js",
   "dependencies": {
     "ampersand-dom": "^1.2.1",
