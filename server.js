@@ -129,5 +129,6 @@ new Moonboots({
 
 
 // listen for incoming http requests on the port as specified in our config
-app.listen(config.http.port);
-console.log('Ampersand App is running at: http://localhost:' + config.http.port + ' Yep. That\'s pretty awesome.');
+app.listen(process.env.PORT || 5000, function() {
+    console.log('Ampersand App is running at: http://localhost:' + config.http.port + ' Yep. That\'s pretty awesome.');    
+});
