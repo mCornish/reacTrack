@@ -49,18 +49,18 @@ app.set('view engine', 'jade');
 // Set up our little demo API
 // -----------------
 var api = require('./fakeApi');
-app.post('/posts', api.addPost);
-app.get('/posts', api.listPosts);
-app.get('/posts/:id', api.getPost);
-app.get('/api/reactions', api.listReactions);
-app.get('/api/reactions/:id', api.getReaction);
-app.get('/api/tracks', api.listTracks);
-app.get('/api/tracks/:id', api.getTrack);
-app.get('/api/people', api.listPeople);
-app.get('/api/people/:id', api.getPerson);
-app.delete('/api/people/:id', api.deletePerson);
-app.put('/api/people/:id', api.updatePerson);
-app.post('/api/people', api.addPerson);
+// app.post('/posts', api.addPost);
+// app.get('/posts', api.listPosts);
+// app.get('/posts/:id', api.getPost);
+// app.get('/api/reactions', api.listReactions);
+// app.get('/api/reactions/:id', api.getReaction);
+// app.get('/api/tracks', api.listTracks);
+// app.get('/api/tracks/:id', api.getTrack);
+// app.get('/api/people', api.listPeople);
+// app.get('/api/people/:id', api.getPerson);
+// app.delete('/api/people/:id', api.deletePerson);
+// app.put('/api/people/:id', api.updatePerson);
+// app.post('/api/people', api.addPerson);
 
 
 // -----------------
@@ -129,6 +129,6 @@ new Moonboots({
 
 
 // listen for incoming http requests on the port as specified in our config
-app.listen(process.env.PORT || 5000, function() {
-    console.log('Ampersand App is running at: http://localhost:' + config.http.port + ' Yep. That\'s pretty awesome.');    
+app.listen(config.http.port, function() {
+    console.log('Ampersand App is running at: http://localhost:' + config.http.port + ' Yep. That\'s pretty awesome.');
 });
