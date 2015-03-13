@@ -140,23 +140,27 @@ exports.addPost = function (req, res) {
 };
 
 function getPost(id) {
-    // var post = {};
-    //
-    // postsRef.child(id).on('value', function(snap) {
-    //     post = snap.val();
-    //     console.log(snap.val());
-    //     post.id = snap.key();
-    // });
-    //
-    // return post;
+    var post = {};
+
+    postsRef.child(id).on('value', function(snap) {
+        post = snap.val();
+
+        post.id = snap.key();
+    });
+
+    return post;
 };
 
 exports.getPost = function (req, res) {
-    // var found = getPost(req.params.id);
-    //
-    // res.status(found ? 200 : 404);
-    // res.send(found);
+    var found = getPost(req.params.id);
+
+    res.status(found ? 200 : 404);
+    res.send(found);
 };
+
+exports.updatePost = function(req, res) {
+    postRef.child(id).update(req.body);
+}
 
 exports.listPosts = function (req, res) {
     var posts = [];
@@ -220,7 +224,7 @@ exports.listReactionsByTrack = function (req, res) {
 
 
 function getPerson(id) {
-    // return _.findWhere(people, {id: parseInt(id + '', 10)});
+    return _.findWhere(people, {id: parseInt(id + '', 10)});
 };
 
 exports.listPeople = function (req, res) {
@@ -235,9 +239,9 @@ exports.addPerson = function (req, res) {
 };
 
 exports.getPerson = function (req, res) {
-    // var found = get(req.params.id);
-    // res.status(found ? 200 : 404);
-    // res.send(found);
+    var found = get(req.params.id);
+    res.status(found ? 200 : 404);
+    res.send(found);
 };
 
 exports.deletePerson = function (req, res) {

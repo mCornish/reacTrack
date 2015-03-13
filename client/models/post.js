@@ -12,6 +12,13 @@ module.exports = AmpersandModel.extend({
         slug: ['string', false, '']
     },
     derived: {
+        date: {
+            deps: ['created'],
+            fn: function () {
+                var date = this.created;
+                return date.getMonth() + '-' + date.getDay() + '-' + date.getFullYear();
+            }
+        },
         viewUrl: {
             deps: ['id'],
             fn: function () {

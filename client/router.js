@@ -2,9 +2,11 @@
 var Router = require('ampersand-router');
 var HomePage = require('./pages/home');
 var BlogPage = require('./pages/blog');
-var PostViewPage = require('./pages/post-view');
-var LoginPage = require('./pages/login');
 var PostAddPage = require('./pages/post-add');
+var PostEditPage = require('./pages/post-edit');
+var PostViewPage = require('./pages/post-view');
+var AllPostsPage = require('./pages/all-posts');
+var LoginPage = require('./pages/login');
 var CollectionDemo = require('./pages/collection-demo');
 var InfoPage = require('./pages/info');
 var PersonAddPage = require('./pages/person-add');
@@ -21,8 +23,10 @@ module.exports = Router.extend({
         '': 'home',
         'posts': 'blog',
         'blog': 'blog',
-        'post/:id': 'postView',
+        'post/:slug': 'postView',
         'post/new': 'postAdd',
+        'post/:id/edit': 'postEdit',
+        'all-posts': 'allPosts',
         'login': 'login',
         'collections': 'collectionDemo',
         'info': 'info',
@@ -50,9 +54,26 @@ module.exports = Router.extend({
         }));
     },
 
+    postAdd: function () {
+        this.trigger('page', new PostAddPage());
+    },
+
+    postEdit: function(id) {
+        this.trigger('page', new PostEditPage({
+            id: id
+        }));
+    },
+
     postView: function (id) {
         this.trigger('page', new PostViewPage({
             id: id
+        }));
+    },
+
+    allPosts: function() {
+        this.trigger('page', new AllPostsPage({
+            model: me,
+            collection: app.blog
         }));
     },
 
@@ -60,10 +81,6 @@ module.exports = Router.extend({
         this.trigger('page', new LoginPage({
             model: me
         }));
-    },
-    
-    postAdd: function () {
-        this.trigger('page', new PostAddPage());
     },
 
     collectionDemo: function () {

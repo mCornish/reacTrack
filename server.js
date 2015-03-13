@@ -53,6 +53,7 @@ var api = require('./fakeApi');
 app.get('/posts', api.listPosts);
 app.post('/posts', api.addPost);
 app.get('/posts/:id', api.getPost);
+app.get('/posts/:id/edit', api.getPost);
 
 app.get('/api/reactions', api.listReactions);
 app.get('/api/reactions/:id', api.getReaction);

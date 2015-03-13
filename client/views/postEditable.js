@@ -3,7 +3,7 @@ var templates = require('../templates');
 
 
 module.exports = View.extend({
-    template: templates.includes.post,
+    template: templates.includes.postEditable,
     bindings: {
         'model.date': {
             hook: 'date'
@@ -11,12 +11,9 @@ module.exports = View.extend({
         'model.title': {
             hook: 'title'
         },
-        'model.content': {
-            hook: 'content',
-        },
-        'model.viewUrl': {
+        'model.editUrl': {
             type: 'attribute',
-            hook: 'view',
+            hook: 'edit',
             name: 'href'
         }
     }

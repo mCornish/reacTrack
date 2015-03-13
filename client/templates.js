@@ -45,6 +45,11 @@
         return '<li class="post list-group-item"><h3 data-hook="date"></h3><a data-hook="view"><h2 data-hook="title"></h2></a><p data-hook="content"></p></li>';
     };
 
+    // includes/postEditable.jade compiled template
+    templatizer["includes"]["postEditable"] = function tmpl_includes_postEditable() {
+        return '<li class="post list-group-item"><a data-hook="edit"><span data-hook="date"></span><span> | </span><span data-hook="title"></span></a></li>';
+    };
+
     // includes/reaction.jade compiled template
     templatizer["includes"]["reaction"] = function tmpl_includes_reaction() {
         return '<li class="reaction list-group-item"><h2 data-hook="name"></h2><h3 data-hook="author"></h3><p data-hook="text"></p></li>';
@@ -53,6 +58,11 @@
     // includes/track.jade compiled template
     templatizer["includes"]["track"] = function tmpl_includes_track() {
         return '<li class="track list-group-item"><a data-hook="view"><h2 data-hook="name"></h2><h3 data-hook="length"></h3></a></li>';
+    };
+
+    // pages/allPosts.jade compiled template
+    templatizer["pages"]["allPosts"] = function tmpl_pages_allPosts() {
+        return '<section class="page"><h2>All Posts</h2><ul data-hook="post-list" class="list-group"></ul></section>';
     };
 
     // pages/blog.jade compiled template
@@ -98,6 +108,11 @@
     // pages/postAdd.jade compiled template
     templatizer["pages"]["postAdd"] = function tmpl_pages_postAdd() {
         return '<section class="page add-post"><h2>New Post</h2><form data-hook="ppost-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Publish</button></div></form></section>';
+    };
+
+    // pages/postEdit.jade compiled template
+    templatizer["pages"]["postEdit"] = function tmpl_pages_postEdit() {
+        return '<section class="page edit-post"><h2>Edit Post</h2><form data-hook="ppost-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Publish</button></div></form></section>';
     };
 
     // pages/postView.jade compiled template
