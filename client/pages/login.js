@@ -24,9 +24,8 @@ module.exports = PageView.extend({
                     submitCallback: function (data) {
                         ref.authWithPassword(data, function(error, authData) {
                             if (error) {
-                                console.log("Login Failed!", error);
+                                console.log("Login Failed: ", error);
                             } else {
-                                console.log("Authenticated successfully with payload:", authData);
                                 app.navigate('/');
                             }
                         })

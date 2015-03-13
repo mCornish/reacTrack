@@ -16,6 +16,8 @@ var TracksPage = require('./pages/tracks');
 var TrackViewPage = require('./pages/track-view');
 var ReactionsPage = require('./pages/reactions');
 var ReactionViewPage = require('./pages/reaction-view');
+var Firebase = require('firebase');
+var ref = new Firebase('sizzling-fire-6725.firebaseIO.com');
 
 
 module.exports = Router.extend({
@@ -24,7 +26,7 @@ module.exports = Router.extend({
         'posts': 'blog',
         'blog': 'blog',
         'post/:slug': 'postView',
-        'post/new': 'postAdd',
+        'new-post': 'postAdd',
         'post/:id/edit': 'postEdit',
         'all-posts': 'allPosts',
         'login': 'login',
@@ -55,11 +57,11 @@ module.exports = Router.extend({
     },
 
     postAdd: function () {
-        this.trigger('page', new PostAddPage());
+        this.authenticate(new PostAddPage());
     },
 
     postEdit: function(id) {
-        this.trigger('page', new PostEditPage({
+        this.authenticate(new PostEditPage({
             id: id
         }));
     },
@@ -71,7 +73,7 @@ module.exports = Router.extend({
     },
 
     allPosts: function() {
-        this.trigger('page', new AllPostsPage({
+        this.authenticate(new AllPostsPage({
             model: me,
             collection: app.blog
         }));
@@ -141,5 +143,14 @@ module.exports = Router.extend({
 
     catchAll: function () {
         this.redirectTo('');
+    },
+
+    // ------- USED TO AUTHENTICATE ADMIN PAGES ---------
+    authenticate: function(page) {
+        if (ref.getAuth()) {
+            this.trigger('page', page);
+        } else {
+            this.redirectTo('login');
+        }
     }
 });

@@ -3,6 +3,7 @@ var PageView = require('./base');
 var templates = require('../templates');
 var PostForm = require('../forms/post');
 var Firebase = require('firebase');
+var ref = new Firebase('sizzling-fire-6725.firebaseIO.com');
 var postsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/blog/posts');
 
 

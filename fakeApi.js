@@ -1,5 +1,6 @@
 var _ = require('underscore');
 var Firebase = require('firebase');
+var ref = new Firebase('sizzling-fire-6725.firebaseIO.com');
 var postsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/blog/posts');
 
 var posts = [

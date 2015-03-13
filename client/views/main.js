@@ -11,6 +11,8 @@ var dom = require('ampersand-dom');
 var templates = require('../templates');
 var tracking = require('../helpers/metrics');
 var setFavicon = require('favicon-setter');
+var Firebase = require('firebase');
+var ref = new Firebase('sizzling-fire-6725.firebaseIO.com');
 
 
 module.exports = View.extend({
@@ -20,6 +22,7 @@ module.exports = View.extend({
         this.listenTo(app.router, 'page', this.handleNewPage);
     },
     events: {
+        'click [data-hook~=action-logout]': 'handleLogoutClick',
         'click a[href]': 'handleLinkClick'
     },
     render: function () {
@@ -81,5 +84,12 @@ module.exports = View.extend({
                 dom.removeClass(aTag.parentNode, 'active');
             }
         });
+    },
+
+    handleLogoutClick: function () {
+        if (ref.getAuth()) {
+            ref.unauth();
+            app.navigate('/');
+        }
     }
 });

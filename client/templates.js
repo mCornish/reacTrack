@@ -17,7 +17,7 @@
 
     // body.jade compiled template
     templatizer["body"] = function tmpl_body() {
-        return '<body><nav class="navbar navbar-default"><div class="container-fluid"><div class="navbar-header"><a href="/" class="navbar-brand">Ampersand App</a><ul class="nav navbar-nav"><li><a href="/">home</a></li><li><a href="/blog">blog</a></li><li><a href="/collections">collection demo</a></li><li><a href="/info">more info</a></li><li><a href="/tracks">tracks</a></li><li><a href="/reactions">reactions</a></li></ul></div></div></nav><div class="container"><main data-hook="page-container"></main></div></body>';
+        return '<body><nav class="navbar navbar-default"><div class="container-fluid"><div class="navbar-header"><a href="/" class="navbar-brand">Ampersand App</a><ul class="nav navbar-nav"><li><a href="/">home</a></li><li><a href="/blog">blog</a></li><li><a href="/collections">collection demo</a></li><li><a href="/info">more info</a></li><li><a href="/tracks">tracks</a></li><li><a href="/reactions">reactions</a></li><li><a href="#" data-hook="action-logout">log out</a></li></ul></div></div></nav><div class="container"><main data-hook="page-container"></main></div></body>';
     };
 
     // head.jade compiled template
