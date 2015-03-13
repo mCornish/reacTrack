@@ -162,7 +162,6 @@ exports.listPosts = function (req, res) {
     var posts = [];
 
     postsRef.on("value", function(snapshot) {
-        console.log(snapshot.val());
         var snap = snapshot.val();
 
         for (key in snap) {
