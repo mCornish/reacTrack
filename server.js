@@ -86,49 +86,49 @@ app.use(function (req, res, next) {
 // ---------------------------------------------------
 // Configure Moonboots to serve our client application
 // ---------------------------------------------------
-new Moonboots({
-    moonboots: {
-        jsFileName: 'ampersand-app',
-        cssFileName: 'ampersand-app',
-        main: fixPath('client/app.js'),
-        developmentMode: config.isDev,
-        libraries: [
-        ],
-        stylesheets: [
-            fixPath('public/css/bootstrap.css'),
-            fixPath('public/css/app.css')
-        ],
-        browserify: {
-            debug: false
-        },
-        beforeBuildJS: function () {
-            // This re-builds our template files from jade each time the app's main
-            // js file is requested. Which means you can seamlessly change jade and
-            // refresh in your browser to get new templates.
-            if (config.isDev) {
-                templatizer(fixPath('templates'), fixPath('client/templates.js'));
-            }
-        },
-        beforeBuildCSS: function (done) {
-            // This re-builds css from stylus each time the app's main
-            // css file is requested. Which means you can seamlessly change stylus files
-            // and see new styles on refresh.
-            if (config.isDev) {
-                stylizer({
-                    infile: fixPath('public/css/app.styl'),
-                    outfile: fixPath('public/css/app.css'),
-                    development: true
-                }, done);
-            } else {
-                done();
-            }
-        }
-    },
-    server: app
-});
+// new Moonboots({
+//     moonboots: {
+//         jsFileName: 'ampersand-app',
+//         cssFileName: 'ampersand-app',
+//         main: fixPath('client/app.js'),
+//         developmentMode: config.isDev,
+//         libraries: [
+//         ],
+//         stylesheets: [
+//             fixPath('public/css/bootstrap.css'),
+//             fixPath('public/css/app.css')
+//         ],
+//         browserify: {
+//             debug: false
+//         },
+//         beforeBuildJS: function () {
+//             // This re-builds our template files from jade each time the app's main
+//             // js file is requested. Which means you can seamlessly change jade and
+//             // refresh in your browser to get new templates.
+//             if (config.isDev) {
+//                 templatizer(fixPath('templates'), fixPath('client/templates.js'));
+//             }
+//         },
+//         beforeBuildCSS: function (done) {
+//             // This re-builds css from stylus each time the app's main
+//             // css file is requested. Which means you can seamlessly change stylus files
+//             // and see new styles on refresh.
+//             if (config.isDev) {
+//                 stylizer({
+//                     infile: fixPath('public/css/app.styl'),
+//                     outfile: fixPath('public/css/app.css'),
+//                     development: true
+//                 }, done);
+//             } else {
+//                 done();
+//             }
+//         }
+//     },
+//     server: app
+// });
 
-
+app.set('port', (process.env.PORT || 5000));
 // listen for incoming http requests on the port as specified in our config
-app.listen(config.http.port, function() {
-    console.log('Ampersand App is running at: http://localhost:' + config.http.port + ' Yep. That\'s pretty awesome.');
+app.listen(app.get('port'), function() {
+    console.log('Ampersand App is running at: http://localhost:' + app.get('port') + ' Yep. That\'s pretty awesome.');
 });
