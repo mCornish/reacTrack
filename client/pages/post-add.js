@@ -20,7 +20,7 @@ module.exports = PageView.extend({
                         app.blog.create(data, {
                             wait: true,
                             success: function (collection, res) {
-                                app.navigate('/posts/' + res.id);
+                                app.navigate('/post/' + res.id);
                                 app.blog.fetch();
                             }
                         });

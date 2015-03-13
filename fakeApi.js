@@ -115,7 +115,6 @@ var people = [
         coolnessFactor: 4
     }
 ];
-var id = 7;
 
 
 exports.addPost = function (req, res) {
@@ -160,7 +159,20 @@ exports.getPost = function (req, res) {
 };
 
 exports.updatePost = function(req, res) {
-    postRef.child(id).update(req.body);
+    var id = req.params.id;
+    var data = req.body;
+
+    postsRef.child(id).update(data, function(error) {
+        if (error) {
+            alert('Post could not be saved: ' + error);
+        } else {
+
+        }
+
+        res.send(data);
+    });
+
+
 }
 
 exports.listPosts = function (req, res) {

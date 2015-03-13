@@ -27,10 +27,10 @@ module.exports = PageView.extend({
                     el: el,
                     model: this.model,
                     submitCallback: function (data) {
-                        app.blog.save(data, {
+                        model.save(data, {
                             wait: true,
                             success: function (collection, res) {
-                                app.navigate('/posts/' + res.id);
+                                app.navigate('/post/' + res.id);
                             }
                         });
                     }
