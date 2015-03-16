@@ -23,6 +23,7 @@ var ref = new Firebase('sizzling-fire-6725.firebaseIO.com');
 module.exports = Router.extend({
     routes: {
         '': 'home',
+        'gifts:' 'gifts',
         'posts': 'blog',
         'blog': 'blog',
         'post/:slug': 'postView',
@@ -46,6 +47,13 @@ module.exports = Router.extend({
     home: function () {
         this.trigger('page', new HomePage({
             model: me
+        }));
+    },
+
+    gifts: function () {
+        this.trigger('page', new GiftsPage({
+            model: me,
+            collection: app.gifts
         }));
     },
 

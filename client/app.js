@@ -21,6 +21,7 @@ module.exports = {
 
         // create our global 'me' object and an empty collection for our people models.
         window.me = new Me();
+        this.gifts = new Gifts();
         this.blog = new Blog();
         this.people = new People();
         this.tracks = new Tracks();
