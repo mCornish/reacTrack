@@ -1,6 +1,10 @@
 /*global me, app*/
 var Router = require('ampersand-router');
 var HomePage = require('./pages/home');
+var UserAddPage = require('./pages/user-add');
+var UserViewPage = require('./pages/user-view');
+var GiftsPage = require('./pages/gifts');
+var GiftAddPage = require('./pages/gift-add');
 var BlogPage = require('./pages/blog');
 var PostAddPage = require('./pages/post-add');
 var PostEditPage = require('./pages/post-edit');
@@ -23,7 +27,10 @@ var ref = new Firebase('sizzling-fire-6725.firebaseIO.com');
 module.exports = Router.extend({
     routes: {
         '': 'home',
-        'gifts:' 'gifts',
+        'register': 'userAdd',
+        'user/:id': 'userView',
+        'ygmyg': 'gifts',
+        'gift/new': 'giftAdd',
         'posts': 'blog',
         'blog': 'blog',
         'post/:slug': 'postView',
@@ -50,11 +57,25 @@ module.exports = Router.extend({
         }));
     },
 
+    userAdd: function () {
+        this.trigger('page', new UserAddPage());
+    },
+
+    userView: function (id) {
+        this.trigger('page', new UserViewPage({
+            id: id
+        }));
+    },
+
     gifts: function () {
         this.trigger('page', new GiftsPage({
             model: me,
             collection: app.gifts
         }));
+    },
+
+    giftAdd: function () {
+        this.authenticate(new GiftAddPage());
     },
 
     blog: function () {

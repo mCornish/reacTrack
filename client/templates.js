@@ -17,7 +17,7 @@
 
     // body.jade compiled template
     templatizer["body"] = function tmpl_body() {
-        return '<body><nav class="navbar navbar-default"><div class="container-fluid"><div class="navbar-header"><a href="/" class="navbar-brand">Ampersand App</a><ul class="nav navbar-nav"><li><a href="/">home</a></li><li><a href="/blog">blog</a></li><li><a href="/collections">collection demo</a></li><li><a href="/info">more info</a></li><li><a href="/tracks">tracks</a></li><li><a href="/reactions">reactions</a></li><li><a href="/gifts">Gifts</a></li><li><a href="#" data-hook="action-logout">log out</a></li></ul></div></div></nav><div class="container"><main data-hook="page-container"></main></div></body>';
+        return '<body><nav class="navbar navbar-default"><div class="container-fluid"><div class="navbar-header"><a href="/" class="navbar-brand">Mike\'s AmperSandbox</a><ul class="nav navbar-nav"><li><a href="/">Home</a></li><li><a href="/ygmyg">Gifts</a></li><li><a href="/blog">Blog</a></li><!--lia(href="/collections") collection demo--><!--lia(href="/tracks") tracks--><!--lia(href="/reactions") reactions--><li><a data-hook="profile-link" class="authed">Profile</a></li><li><a href="/login" class="unauthed login-button">Log In</a></li><li><a data-hook="action-logout" class="authed logout-button">Log Out</a></li></ul></div></div></nav><div class="container"><main data-hook="page-container"></main></div></body>';
     };
 
     // head.jade compiled template
@@ -33,6 +33,11 @@
     // includes/formTextarea.jade compiled template
     templatizer["includes"]["formTextarea"] = function tmpl_includes_formTextarea() {
         return '<div class="form-group"><label data-hook="label"></label><div data-hook="message-container"><div data-hook="message-text" class="alert alert-danger"></div></div><textarea class="form-control"></textarea></div>';
+    };
+
+    // includes/gift.jade compiled template
+    templatizer["includes"]["gift"] = function tmpl_includes_gift() {
+        return '<div class="gift list-group-item"><a data-hook="view"><h2 data-hook="title"></h2><img data-hook="image"/><p data-hook="user"></p></a></div>';
     };
 
     // includes/person.jade compiled template
@@ -75,9 +80,19 @@
         return '<section class="page pageOne"><h2>Collection demo</h2><p>Intelligently rendering collections can be a bit tricky. </p><p><a href="https://github.com/ampersandjs/ampersand-view">ampersand-view\'s</a> <code>renderCollection()</code> method makes it simple.</p><p>The only code required to manage the collection is:</p><pre><code>this.renderCollection(\n   this.collection, \n   PersonView, \n   this.queryByHook(\'people-list\')\n);</code></pre><h3>People container:</h3><ul data-hook="people-list" class="list-group"></ul><p>Try it by clicking the buttons</p><div class="buttons btn-group"><button data-hook="reset" class="btn btn-default">.reset() </button><button data-hook="fetch" class="btn btn-default">.fetch() </button><button data-hook="shuffle" class="btn btn-default">.shuffle() </button><button data-hook="add" class="btn btn-default">.addRandom()</button><a href="/person/add" class="btn btn-default">Add Person</a></div><p>Events are always managed so you don\'t get any leaks.</p></section>';
     };
 
+    // pages/giftAdd.jade compiled template
+    templatizer["pages"]["giftAdd"] = function tmpl_pages_giftAdd() {
+        return '<section class="page add-gift"><h2>New Gift</h2><form data-hook="gift-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Post</button></div></form></section>';
+    };
+
+    // pages/gifts.jade compiled template
+    templatizer["pages"]["gifts"] = function tmpl_pages_gifts() {
+        return '<section class="page"><div class="container"></div><h2>Gifts</h2><div data-hook="gift-list" class="list-group"></div></section>';
+    };
+
     // pages/home.jade compiled template
     templatizer["pages"]["home"] = function tmpl_pages_home() {
-        return '<section class="page home"><h2>Welcome to a skeleton for Ampersand App</h2><p>If you "view source" you\'ll see it\'s 100% client rendered.</p><p>Click around the site using the nav bar at the top. </p><p>Things to note:<ul><li>The url changes, no requests are made to the server.</li><li>Refreshing the page will always get you back to the same page</li><li>Page changes are nearly instantaneous</li><li>In development mode, you don\'t need to restart the server to see changes, just edit and refresh.</li><li>In production mode, it will serve minfied, uniquely named files with super agressive cache headers. To test:<ul> <li>in dev_config.json set <code>isDev</code> to <code>false</code>.</li><li>restart the server.</li><li>view source and you\'ll see minified css and js files with unique names.</li><li>open the "network" tab in chrome dev tools (or something similar). You\'ll also want to make sure you haven\'t disabled your cache.</li><li>without hitting "refresh" load the app again (selecting current URL in url bar and hitting "enter" works great).</li><li>you should now see that the JS and CSS files were both served from cache without making any request to the server at all.</li></ul></li></ul></p></section>';
+        return '<section class="page home"><h2>Currently in Development:</h2><ul><li>YGMyG</li><li>Blog with admin dashboard</li><li>reacTrack</li></ul></section>';
     };
 
     // pages/info.jade compiled template
@@ -87,7 +102,7 @@
 
     // pages/login.jade compiled template
     templatizer["pages"]["login"] = function tmpl_pages_login() {
-        return '<section class="page login"><h2>Login<form data-hook="login-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Sign In</button></div></form></h2></section>';
+        return '<section class="page login"><h2>Login</h2><form data-hook="login-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><div class="form-group"><button data-hook="reset" type="submit" class="btn btn-primary">Sign In</button><a href="/register">Register</a></div></div></form></section>';
     };
 
     // pages/personAdd.jade compiled template
@@ -107,7 +122,7 @@
 
     // pages/postAdd.jade compiled template
     templatizer["pages"]["postAdd"] = function tmpl_pages_postAdd() {
-        return '<section class="page add-post"><h2>New Post</h2><form data-hook="ppost-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Publish</button></div></form></section>';
+        return '<section class="page add-post"><h2>New Post</h2><form data-hook="post-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Publish</button></div></form></section>';
     };
 
     // pages/postEdit.jade compiled template
@@ -138,6 +153,16 @@
     // pages/tracks.jade compiled template
     templatizer["pages"]["tracks"] = function tmpl_pages_tracks() {
         return '<section class="page"><h2>Tracks</h2><ul data-hook="track-list" class="list-group"></ul></section>';
+    };
+
+    // pages/userAdd.jade compiled template
+    templatizer["pages"]["userAdd"] = function tmpl_pages_userAdd() {
+        return '<section class="page add-user"><h2>Register</h2><form data-hook="user-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Register</button></div></form></section>';
+    };
+
+    // pages/userView.jade compiled template
+    templatizer["pages"]["userView"] = function tmpl_pages_userView() {
+        return '<section class="page view-user"><h2 data-hook="name"></h2></section>';
     };
 
     return templatizer;

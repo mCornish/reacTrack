@@ -1,7 +1,9 @@
 section.page.login
-  h2 Login
+    h2 Login
 
     form(data-hook="login-form")
       fieldset(data-hook="field-container")
       .buttons
-        button.btn.btn-primary(data-hook="reset", type="submit") Sign In
+        .form-group
+            button.btn.btn-primary(data-hook="reset", type="submit") Sign In
+            a(href="/register") Register

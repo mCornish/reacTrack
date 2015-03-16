@@ -1,26 +1,11 @@
 var _ = require('underscore');
+
 var Firebase = require('firebase');
 var ref = new Firebase('sizzling-fire-6725.firebaseIO.com');
+var usersRef = new Firebase('sizzling-fire-6725.firebaseIO.com/YGMYG/users');
+var giftsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/YGMYG/gifts');
 var postsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/blog/posts');
 
-var posts = [
-    {
-        id: 11,
-        title: 'Sample Title 1',
-        created: '3/4/15',
-        content: 'Test content 1',
-        categories: ['categories'],
-        tags: ['tags']
-    },
-    {
-        id: 12,
-        title: 'Sample Title 2',
-        created: '3/9/15',
-        content: 'Test content 2',
-        categories: ['categories'],
-        tags: ['tags']
-    }
-];
 
 var tracks = [
     {
@@ -116,6 +101,136 @@ var people = [
     }
 ];
 
+exports.getUser = function (req, res) {
+    var id = 'simplelogin:' + req.params.id;
+    var user;
+
+    usersRef.child(id).on('value', function(snap) {
+
+        user = snap.val();
+        user.id = snap.key();
+
+        res.send(user);
+
+    }, function(errorObj) {
+        console.log('Could not get user: ' + errorObj.code);
+    });
+};
+
+exports.addUser = function (req, res) {
+    var user = req.body;
+    console.log(user);
+    ref.child('users').child(user.id).set(user, function(error) {
+        if (error) {
+            alert('User could not be created: ' + error);
+        } else {
+            res.send(user);
+        }
+    });
+
+};
+
+exports.listUsers = function (req, res) {
+    var users = [];
+
+    usersRef.on("value", function(snapshot) {
+        var snap = snapshot.val();
+
+        for (key in snap) {
+            users.push(snap[key]);
+        }
+
+        res.send(users);
+
+    }, function(errorObj) {
+        console.log('Error fetching users: ' + errorObj.code);
+    });
+};
+
+exports.updateUser = function(req, res) {
+    var id = req.params.id;
+    var data = req.body;
+
+    usersRef.child(id).update(data, function(error) {
+        if (error) {
+            alert('User could not be updated: ' + error);
+        } else {
+
+            res.send(data);
+
+        }
+
+    });
+};
+
+
+exports.getGift = function (req, res) {
+    var id = req.params.id;
+    var gift = {};
+
+    giftsRef.child(id).on('value', function(snap) {
+        gift = snap.val();
+
+        gift.id = snap.key();
+    });
+
+    res.status(gift ? 200 : 404);
+    res.send(gift);
+};
+
+exports.addGift = function (req, res) {
+    var gift = req.body;
+
+    var newGiftRef = giftsRef.push(gift, function(error) {
+        if (error) {
+            console.log('Error: ' + error);
+        } else {
+
+            gift.id = newGiftRef.key();
+
+            giftsRef.child(gift.id).update(gift, function(error) {
+                if (error) {
+                    console.log('Error: ' + error);
+                }
+
+                res.status(201).send(gift);
+            });
+        }
+    });
+};
+
+exports.listGifts = function (req, res) {
+    var gifts = [];
+
+    giftsRef.on("value", function(snapshot) {
+        var snap = snapshot.val();
+
+        for (key in snap) {
+            gifts.push(snap[key]);
+        }
+
+        res.send(gifts);
+
+    }, function(errorObj) {
+        console.log('Error: ' + errorObj.code);
+    });
+};
+
+exports.updateGift = function(req, res) {
+    var id = req.params.id;
+    var data = req.body;
+
+    giftsRef.child(id).update(data, function(error) {
+        if (error) {
+            alert('Gift could not be saved: ' + error);
+        } else {
+
+        }
+
+        res.send(data);
+    });
+};
+
 
 exports.addPost = function (req, res) {
     var post = req.body;
@@ -125,18 +240,19 @@ exports.addPost = function (req, res) {
     var newPostRef = postsRef.push(post, function(error) {
         if (error) {
             console.log('Error: ' + error);
+        } else {
+
+            post.id = newPostRef.key();
+
+            postsRef.child(post.id).update(post, function(error) {
+                if (error) {
+                    console.log('Error: ' + error);
+                }
+            });
+
+            res.status(201).send(post);
         }
     });
-
-    post.id = newPostRef.key();
-
-    postsRef.child(post.id).update(post, function(error) {
-        if (error) {
-            console.log('Error: ' + error);
-        }
-    });
-
-    res.status(201).send(post);
 };
 
 function getPost(id) {
@@ -171,9 +287,7 @@ exports.updatePost = function(req, res) {
 
         res.send(data);
     });
-
-
-}
+};
 
 exports.listPosts = function (req, res) {
     var posts = [];
@@ -190,7 +304,6 @@ exports.listPosts = function (req, res) {
     }, function(errorObj) {
         console.log('Error: ' + errorObj.code);
     });
-
 };
 
 

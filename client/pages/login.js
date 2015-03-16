@@ -24,14 +24,50 @@ module.exports = PageView.extend({
                     submitCallback: function (data) {
                         ref.authWithPassword(data, function(error, authData) {
                             if (error) {
-                                console.log("Login Failed: ", error);
+                                console.log('Login failed: ' + error);
                             } else {
-                                app.navigate('/');
+
+                                me.id = authData.uid;
+                                me.username = authData.password.email.replace(/@.*/, '');
+                                me.provider = authData.provider;
+                                me.email = authData.password.email;
+
+                                if (!app.users.getOrFetch(authData.uid)) {
+                                    var user = {
+                                        id: authData.uid,
+                                        username: authData.password.email.replace(/@.*/, ''),
+                                        provider: authData.provider,
+                                        email: authData.password.email
+                                    }
+
+                                    app.users.create(user, {
+                                        wait: true,
+                                        success: function (collection, res) {
+
+                                            app.navigate('/user/' + res.id.replace('simplelogin:', ''));
+                                            app.users.fetch();
+                                        }
+                                    });
+                                } else {
+                                    app.navigate('/user/' + authData.uid.replace('simplelogin:', ''));
+                                }
                             }
-                        })
+                        });
                     }
                 });
             }
         }
     }
 });
+
+
+function getName(authData) {
+    switch(authData.provider) {
+     case 'password':
+       return authData.password.email.replace(/@.*/, '');
+     case 'twitter':
+       return authData.twitter.displayName;
+     case 'facebook':
+       return authData.facebook.displayName;
+  }
+}

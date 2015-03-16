@@ -7,6 +7,8 @@ var Router = require('./router');
 var tracking = require('./helpers/metrics');
 var MainView = require('./views/main');
 var Me = require('./models/me');
+var Users = require('./models/users');
+var Gifts = require('./models/gifts');
 var Blog = require('./models/blog');
 var People = require('./models/persons');
 var Tracks = require('./models/tracks');
@@ -21,6 +23,7 @@ module.exports = {
 
         // create our global 'me' object and an empty collection for our people models.
         window.me = new Me();
+        this.users = new Users();
         this.gifts = new Gifts();
         this.blog = new Blog();
         this.people = new People();

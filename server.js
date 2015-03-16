@@ -50,6 +50,16 @@ app.set('view engine', 'jade');
 // -----------------
 var api = require('./fakeApi');
 
+app.get('/users', api.listUsers);
+app.post('/users', api.addUser);
+app.get('/users/:id', api.getUser);
+app.put('/users/:id', api.updateUser);
+
+app.get('/gifts', api.listGifts);
+app.post('/gifts', api.addGift);
+app.get('/gifts/:id', api.getGift);
+app.put('/gifts/:id', api.updateGift);
+
 app.get('/posts', api.listPosts);
 app.post('/posts', api.addPost);
 app.get('/posts/:id', api.getPost);

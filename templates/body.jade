@@ -2,23 +2,25 @@ body
     nav.navbar.navbar-default
         div.container-fluid
             div.navbar-header
-                a.navbar-brand(href='/') Ampersand App
+                a.navbar-brand(href='/') Mike's AmperSandbox
                 ul.nav.navbar-nav
                     li
-                        a(href="/") home
+                        a(href="/") Home
                     li
-                        a(href="/blog") blog
+                        a(href="/ygmyg") Gifts
                     li
+                        a(href="/blog") Blog
+                    //li
                         a(href="/collections") collection demo
-                    li
-                        a(href="/info") more info
-                    li
+                    //li
                         a(href="/tracks") tracks
-                    li
+                    //li
                         a(href="/reactions") reactions
                     li
-                        a(href="/gifts") Gifts
+                        a.authed(data-hook="profile-link") Profile
                     li
-                        a(href="#", data-hook="action-logout") log out
+                        a.unauthed.login-button(href="/login") Log In
+                    li
+                        a.authed.logout-button(data-hook="action-logout") Log Out
     .container
         main(data-hook="page-container")

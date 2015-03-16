@@ -4,36 +4,24 @@ var AmpersandModel = require('ampersand-model');
 module.exports = AmpersandModel.extend({
     props: {
         id: 'any',
-        firstName: ['string', true, ''],
-        lastName: ['string', true, ''],
-        coolnessFactor: ['number', true, 5]
-    },
-    session: {
-        selected: ['boolean', true, false]
+        title: ['string', true, 'Title'],
+        user: ['string', true, 'User'],
+        image: ['string', true, 'Image'],
+        description: ['string', false, 'Description'],
+        link: ['string', false, ''],
+        categories: ['array']
     },
     derived: {
-        fullName: {
-            deps: ['firstName', 'lastName'],
+        viewUrl: {
+            deps: ['id'],
             fn: function () {
-                return this.firstName + ' ' + this.lastName;
-            }
-        },
-        avatar: {
-            deps: ['firstName', 'lastName'],
-            fn: function () {
-                return 'http://robohash.org/' + encodeURIComponent(this.fullName) + '?size=80x80';
+                return '/gift' + this.id;
             }
         },
         editUrl: {
             deps: ['id'],
             fn: function () {
-                return '/person/' + this.id + '/edit';
-            }
-        },
-        viewUrl: {
-            deps: ['id'],
-            fn: function () {
-                return '/person/' + this.id;
+                return '/gift/' + this.id + '/edit';
             }
         }
     }

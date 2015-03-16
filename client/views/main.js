@@ -21,6 +21,13 @@ module.exports = View.extend({
         // this marks the correct nav item selected
         this.listenTo(app.router, 'page', this.handleNewPage);
     },
+    bindings: {
+        'model.viewUrl': {
+            type: 'attribute',
+            hook: 'profile-link',
+            name: 'href'
+        }
+    },
     events: {
         'click [data-hook~=action-logout]': 'handleLogoutClick',
         'click a[href]': 'handleLinkClick'
@@ -31,6 +38,22 @@ module.exports = View.extend({
 
         // main renderer
         this.renderWithTemplate({me: me});
+
+        // manage log in and log out display/hide
+        var authData = ref.getAuth()
+
+        if (authData) {
+            $('.unauthed').hide();
+            $('.authed').show();
+
+            me.id = authData.uid.replace('simplelogin:', '');
+            me.username = authData.password.email.replace(/@.*/, '');
+            me.provider = authData.provider;
+            me.email = authData.password.email;
+        } else {
+            $('.unauthed').show();
+            $('.authed').hide();
+        }
 
         // init and configure our page switcher
         this.pageSwitcher = new ViewSwitcher(this.queryByHook('page-container'), {

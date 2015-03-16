@@ -1,3 +1,24 @@
 body {
   background: #fff;
 }
+.login-button,
+.logout-button {
+  cursor: pointer;
+}
+.gift {
+  width: -webkit-calc((100% / 3) - 2em);
+  width: -moz-calc((100% / 3) - 2em);
+  width: -ms-calc((100% / 3) - 2em);
+  width: -o-calc((100% / 3) - 2em);
+  width: calc((100% / 3) - 2em);
+  position: relative;
+  display: inline-block;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+}
+.gift img {
+  width: 100%;
+}
+.gift + .gift {
+  margin-left: 1em;
+}
