@@ -37,7 +37,7 @@
 
     // includes/gift.jade compiled template
     templatizer["includes"]["gift"] = function tmpl_includes_gift() {
-        return '<div class="gift list-group-item"><a data-hook="view"><h2 data-hook="title"></h2><img data-hook="image"/><p data-hook="user"></p></a></div>';
+        return '<div class="gift list-group-item"><a data-hook="view"><h2 data-hook="title"></h2><img data-hook="image"/><p data-hook="user"></p><p data-hook="time-passed"></p></a></div>';
     };
 
     // includes/person.jade compiled template

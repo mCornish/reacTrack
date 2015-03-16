@@ -19,6 +19,7 @@ module.exports = PageView.extend({
                     submitCallback: function (data) {
 
                         data.user = me.username;
+                        data.created = Date.now();
 
                         app.gifts.create(data, {
                             wait: true,

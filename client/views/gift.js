@@ -20,6 +20,9 @@ module.exports = View.extend({
         },
         'model.user': {
             hook: 'user'
+        },
+        'model.time': {
+            hook: 'time-passed'
         }
     }
 });
