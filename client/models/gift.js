@@ -49,6 +49,8 @@ function analyzeDate(date) {
     } else if ( diff >= 60000 && diff < 60*60*1000) {
         return ( Math.round(diff/60000) +' minutes ago'); // 55 minutes ago
 
+    } else if ( diff > 60*60*100 && diff < 86400000) {
+        return ( Math.round(diff/3600000) + ' hours ago');
     } else {
         return reformatDate(date);
     }
@@ -65,14 +67,14 @@ function reformatDate(date) {
     var hours = date.getHours()+'';
     var minutes = date.getMinutes()+'';
 
-    if (day.length <2) { day = '0'+day; }
-    if (month.length <2) { month = '0'+month; }
-    if (year.length < 2) { year = '0'+year;}
-    if (hours.length <2) { hours = '0'+hours; }
-    if (minutes.length < 2) { minutes = '0'+minutes;}
+    if (day.length < 2) { day = '0' + day; }
+    if (month.length < 2) { month = '0' + month; }
+    if (year.length < 2) { year = '0' + year;}
+    if (hours.length < 2) { hours = '0' + hours; }
+    if (minutes.length < 2) { minutes = '0'+ minutes;}
 
-    fullDate.push(day);
     fullDate.push(month);
+    fullDate.push(day);
     fullDate.push( year.slice(-2) );
     fullTime.push(hours);
     fullTime.push(minutes);
