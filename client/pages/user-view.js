@@ -13,10 +13,10 @@ module.exports = PageView.extend({
     },
     initialize: function (spec) {
         var self = this;
-        var id = 'simplelogin:' + spec.id;
+        var _id = spec.id;
 
-        app.users.getOrFetch(id, {all: true}, function (err, model) {
-            if (err) alert('couldnt find a model with id: ' + id);
+        app.users.getOrFetch(_id, {all: true}, function (err, model) {
+            if (err) alert('Couldn\'t find a model with id: ' + _id);
             self.model = model;
         });
     }

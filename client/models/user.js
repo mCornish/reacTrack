@@ -4,16 +4,15 @@ var AmpersandModel = require('ampersand-model');
 module.exports = AmpersandModel.extend({
     type: 'user',
     props: {
-        id: ['string'],
-        username: ['string', true, ''],
-        provider: ['string', true, ''],
-        email: ['string', false, '']
+        _id: ['any'],
+        user: ['string', false, ''],
+        username: ['string', true, '']
     },
     derived: {
         viewUrl: {
-            deps: ['id'],
+            deps: ['_id'],
             fn: function () {
-                return '/user/' + this.id;
+                return '/user/' + this._id;
             }
         }
     }

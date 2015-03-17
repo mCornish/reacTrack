@@ -6,6 +6,9 @@ var usersRef = new Firebase('sizzling-fire-6725.firebaseIO.com/YGMYG/users');
 var giftsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/YGMYG/gifts');
 var postsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/blog/posts');
 
+var MongoClient = require('mongodb').MongoClient;
+var dbUrl = 'mongodb://localhost:27017/ygmyg';
+
 
 var tracks = [
     {
@@ -100,6 +103,49 @@ var people = [
         coolnessFactor: 4
     }
 ];
+
+exports.M_getUser = function (req, res) {
+    var id = req.params.id;
+    
+    MongoClient.connect(dbUrl, function(err, db) {
+        console.log('Connected to Mongo server.');
+        var collection = db.collection('users');
+        collection.findOne({_id: id}, function(e, result) {
+            if(e) console.log('Could not find user: ' + e);
+
+            res.send(result);
+            db.close();
+        });
+    });
+};
+
+exports.M_addUser = function (req, res) {
+    var user = req.body;
+
+    MongoClient.connect(dbUrl, function(err, db) {
+        console.log('Connected to Mongo server.');
+        var collection = db.collection('users');
+        collection.insert(user, function(e, result) {
+            if(e) console.log('Could not add user: ' + e);
+            res.send(user);
+            db.close();
+        });
+    });
+};
+
+exports.M_listUsers = function (req, res) {
+
+    MongoClient.connect(dbUrl, function(err, db) {
+        console.log('Connected to Mongo server.');
+        var collection = db.collection('users');
+        collection.find().toArray(function(e, result) {
+            if(e) console.log('Could not find collection: ' + e);
+            res.send(result);
+            db.close();
+        });
+    });
+};
+
 
 exports.getUser = function (req, res) {
     var id = 'simplelogin:' + req.params.id;
