@@ -4,7 +4,9 @@ var HomePage = require('./pages/home');
 var UserAddPage = require('./pages/user-add');
 var UserViewPage = require('./pages/user-view');
 var GiftsPage = require('./pages/gifts');
+var GiftViewPage = require('./pages/gift-view');
 var GiftAddPage = require('./pages/gift-add');
+var GiftEditPage = require('./pages/gift-edit');
 var BlogPage = require('./pages/blog');
 var PostAddPage = require('./pages/post-add');
 var PostEditPage = require('./pages/post-edit');
@@ -30,10 +32,12 @@ module.exports = Router.extend({
         'register': 'userAdd',
         'user/:id': 'userView',
         'ygmyg': 'gifts',
-        'gift/new': 'giftAdd',
+        'gift/:id': 'giftView',
+        'new-gift': 'giftAdd',
+        'gift/:id/edit': 'giftEdit',
         'posts': 'blog',
         'blog': 'blog',
-        'post/:slug': 'postView',
+        'post/:id': 'postView',
         'new-post': 'postAdd',
         'post/:id/edit': 'postEdit',
         'all-posts': 'allPosts',
@@ -74,8 +78,20 @@ module.exports = Router.extend({
         }));
     },
 
+    giftView: function (id) {
+        this.trigger('page', new GiftViewPage({
+            id: id
+        }));
+    },
+
     giftAdd: function () {
         this.authenticate(new GiftAddPage());
+    },
+
+    giftEdit: function(id) {
+        this.authenticate(new GiftEditPage({
+            id: id
+        }));
     },
 
     blog: function () {
@@ -176,7 +192,8 @@ module.exports = Router.extend({
 
     // ------- USED TO AUTHENTICATE ADMIN PAGES ---------
     authenticate: function(page) {
-        if (ref.getAuth()) {
+        //if (ref.getAuth()) {
+        if(true) {
             this.trigger('page', page);
         } else {
             this.redirectTo('login');

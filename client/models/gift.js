@@ -3,7 +3,7 @@ var AmpersandModel = require('ampersand-model');
 
 module.exports = AmpersandModel.extend({
     props: {
-        id: 'any',
+        _id: 'any',
         title: ['string', true, 'Title'],
         user: ['string', true, 'User'],
         image: ['string', true, 'Image'],
@@ -14,15 +14,15 @@ module.exports = AmpersandModel.extend({
     },
     derived: {
         viewUrl: {
-            deps: ['id'],
+            deps: ['_id'],
             fn: function () {
-                return '/gift' + this.id;
+                return '/gift/' + this._id;
             }
         },
         editUrl: {
-            deps: ['id'],
+            deps: ['_id'],
             fn: function () {
-                return '/gift/' + this.id + '/edit';
+                return '/gift/' + this._id + '/edit';
             }
         },
         time: {

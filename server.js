@@ -55,10 +55,10 @@ app.post('/users', api.M_addUser);
 app.get('/users/:id', api.M_getUser);
 app.put('/users/:id', api.updateUser);
 
-app.get('/gifts', api.listGifts);
-app.post('/gifts', api.addGift);
-app.get('/gifts/:id', api.getGift);
-app.put('/gifts/:id', api.updateGift);
+app.get('/gifts', api.M_listGifts);
+app.post('/gifts', api.M_addGift);
+app.get('/gifts/:id', api.M_getGift);
+app.put('/gifts/:id', api.M_updateGift);
 
 app.get('/posts', api.listPosts);
 app.post('/posts', api.addPost);

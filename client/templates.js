@@ -85,6 +85,16 @@
         return '<section class="page add-gift"><h2>New Gift</h2><form data-hook="gift-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Post</button></div></form></section>';
     };
 
+    // pages/giftEdit.jade compiled template
+    templatizer["pages"]["giftEdit"] = function tmpl_pages_giftEdit() {
+        return '<section class="page edit-gift"><h2>Edit Gift</h2><form data-hook="gift-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Update</button></div></form></section>';
+    };
+
+    // pages/giftView.jade compiled template
+    templatizer["pages"]["giftView"] = function tmpl_pages_giftView() {
+        return '<section class="page view-gift"><h3 data-hook="time-passed"></h3><h2 data-hook="title"></h2><img data-hook="image"/><p data-hook="description"></p><p data-hook="user"></p></section>';
+    };
+
     // pages/gifts.jade compiled template
     templatizer["pages"]["gifts"] = function tmpl_pages_gifts() {
         return '<section class="page"><div class="container"></div><h2>Gifts</h2><div data-hook="gift-list" class="list-group"></div></section>';
@@ -127,7 +137,7 @@
 
     // pages/postEdit.jade compiled template
     templatizer["pages"]["postEdit"] = function tmpl_pages_postEdit() {
-        return '<section class="page edit-post"><h2>Edit Post</h2><form data-hook="ppost-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Publish</button></div></form></section>';
+        return '<section class="page edit-post"><h2>Edit Post</h2><form data-hook="post-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Update</button></div></form></section>';
     };
 
     // pages/postView.jade compiled template

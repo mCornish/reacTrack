@@ -5,7 +5,7 @@ var PostForm = require('../forms/post');
 
 
 module.exports = PageView.extend({
-    pageTitle: 'edit person',
+    pageTitle: 'Edit Post',
     template: templates.pages.postEdit,
     initialize: function (spec) {
         var self = this;

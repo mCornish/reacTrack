@@ -7,7 +7,7 @@ var giftsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/YGMYG/gifts');
 var postsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/blog/posts');
 
 var MongoClient = require('mongodb').MongoClient;
-var dbUrl = 'mongodb://localhost:27017/ygmyg';
+var dbUrl = 'mongodb://admin:admin123@ds061767.mongolab.com:61767/heroku_app34829943';
 
 
 var tracks = [
@@ -106,7 +106,7 @@ var people = [
 
 exports.M_getUser = function (req, res) {
     var id = req.params.id;
-    
+
     MongoClient.connect(dbUrl, function(err, db) {
         console.log('Connected to Mongo server.');
         var collection = db.collection('users');
@@ -140,6 +140,81 @@ exports.M_listUsers = function (req, res) {
         var collection = db.collection('users');
         collection.find().toArray(function(e, result) {
             if(e) console.log('Could not find collection: ' + e);
+            res.send(result);
+            db.close();
+        });
+    });
+};
+
+
+exports.M_addGift = function (req, res) {
+    var gift = req.body;
+
+    MongoClient.connect(dbUrl, function(err, db) {
+        if (err) {
+            console.log('Could not connect to Mongo server: ' + err);
+            db.close();
+        }
+        console.log('Connected to Mongo server.');
+        var collection = db.collection('gifts');
+        collection.insert(gift, function(e, result) {
+            if(e) console.log('Could not add gift: ' + e);
+            res.send(gift);
+            db.close();
+        });
+    });
+};
+
+exports.M_listGifts = function (req, res) {
+
+    MongoClient.connect(dbUrl, function(err, db) {
+        if (err) {
+            console.log('Could not connect to Mongo server: ' + err);
+            db.close();
+        }
+        console.log('Connected to Mongo server.');
+        var collection = db.collection('gifts');
+        collection.find().toArray(function(e, result) {
+            if(e) console.log('Could not find gift collection: ' + e);
+            res.send(result);
+            db.close();
+        });
+    });
+};
+
+exports.M_getGift = function (req, res) {
+    var id = req.params.id;
+
+    MongoClient.connect(dbUrl, function(err, db) {
+        if (err) {
+            console.log('Could not connect to Mongo server: ' + err);
+            db.close();
+        }
+        console.log('Connected to Mongo server.');
+        var collection = db.collection('gifts');
+        collection.findOne({_id: id}, function(e, result) {
+            if(e) console.log('Could not find gift: ' + e);
+
+            res.send(result);
+            db.close();
+        });
+    });
+};
+
+exports.M_updateGift = function (req, res) {
+    var id = req.params.id;
+    var gift = req.body;
+
+    MongoClient.connect(dbUrl, function(err, db) {
+        if (err) {
+            console.log('Could not connect to Mongo server: ' + err);
+            db.close();
+        }
+        console.log('Connected to Mongo server.');
+        var collection = db.collection('gifts');
+        collection.update({_id: id}, gift, function(e, result) {
+            if(e) console.log('Could not find gift: ' + e);
+
             res.send(result);
             db.close();
         });
