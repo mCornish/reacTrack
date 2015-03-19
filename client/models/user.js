@@ -1,14 +1,19 @@
 var AmpersandModel = require('ampersand-model');
+var bcrypt = require('bcrypt');
 
 
 module.exports = AmpersandModel.extend({
     type: 'user',
     props: {
         _id: ['any'],
-        user: ['string', false, ''],
-        username: ['string', true, '']
+        email: ['string', true],
+        password: ['string', true],
+        username: ['string', true]
     },
     derived: {
+        hashedPassword: {
+            return bcrypt.hashSync(this.password, bcrpty.genSaltSync(8), null);
+        },
         viewUrl: {
             deps: ['_id'],
             fn: function () {
