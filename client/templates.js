@@ -111,8 +111,19 @@
     };
 
     // pages/login.jade compiled template
-    templatizer["pages"]["login"] = function tmpl_pages_login() {
-        return '<section class="page login"><h2>Login</h2><form data-hook="login-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><div class="form-group"><button data-hook="reset" type="submit" class="btn btn-primary">Sign In</button><a href="/register">Register</a></div></div></form></section>';
+    templatizer["pages"]["login"] = function tmpl_pages_login(locals) {
+        var buf = [];
+        var jade_mixins = {};
+        var jade_interp;
+        var locals_for_with = locals || {};
+        (function(message) {
+            buf.push('<section class="page login"><h2>Login</h2><form data-hook="login-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><div class="form-group"><button data-hook="reset" type="submit" class="btn btn-primary">Sign In</button><a href="/register">Register</a><div id="message"></div>');
+            if (message) {
+                buf.push('<h1 class="text-center error-message">' + jade.escape((jade_interp = message) == null ? "" : jade_interp) + "</h1>");
+            }
+            buf.push("</div></div></form></section>");
+        }).call(this, "message" in locals_for_with ? locals_for_with.message : typeof message !== "undefined" ? message : undefined);
+        return buf.join("");
     };
 
     // pages/personAdd.jade compiled template

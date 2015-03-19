@@ -1,6 +1,7 @@
 /* global console */
 var path = require('path');
 var express = require('express');
+var router = express.Router();
 var session = require('express-session');
 var helmet = require('helmet');
 var bodyParser = require('body-parser');
@@ -16,7 +17,8 @@ var MongoClient = require('mongodb').MongoClient;
 var dbUrl = 'mongodb://admin:admin123@ds061767.mongolab.com:61767/heroku_app34829943';
 var app = express();
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+var LocalStrategy   = require('passport-local').Strategy;
+var flash = require('connect-flash');
 
 // a little helper for fixing paths for various environments
 var fixPath = function (pathString) {
@@ -49,6 +51,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Initialize Passport
+var initPassport = require('./client/helpers/passport/init');
+initPassport(passport);
+
+app.use(flash());
+
 // in order to test this with spacemonkey we need frames
 if (!config.isDev) {
     app.use(helmet.xframe());
@@ -59,36 +67,65 @@ app.use(helmet.nosniff());
 app.set('view engine', 'jade');
 
 
-// ------------------
-// Configure passport
-// ------------------
-passport.use(new LocalStrategy(function(email, password, done) {
+passport.serializeUser(function(user, done) {
+    console.log('serializing user: ');console.log(user);
+    done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
     MongoClient.connect(dbUrl, function(err, db) {
         console.log('Connected to Mongo server.');
         var collection = db.collection('users');
-        collection.findOne({email: email}, function(err, user) {
-            if (err) return done(err);
-            if (!user) {
-                return done(null, false, {message: 'Incorrect username.'});
-            }
-            if (!user.validPassword(password)) {
-                return done(null, false, {message: 'Incorrect password.'});
-            }
-            return done(null, user);
+        collection.findOne({_id: id}, function(err, user) {
+
+            console.log('deserializing user:', user);
+            done(err, user);
+
             db.close();
         });
     });
-}));
-
-app.post('/logins', function(req, res) {
-    res.send('!!!');
 });
-    // passport.authenticate('local', {
-    //     successRedirect: '/',
-    //     failureRedirect: '/login',
-    //     failureFlash: true
-    // })
+passport.use(new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password'
+    },
+    function(email, password, done) {
+        // check in mongo whether a user with username exists
+        MongoClient.connect(dbUrl, function(err, db) {
+            console.log('Connected to Mongo server.');
+            var collection = db.collection('users');
+            collection.findOne({email: email}, function(err, user) {
 
+                // In case of any error, return using the done method
+                if (err)
+                    return done(err);
+                // Username does not exist, log the error and redirect back
+                if (!user) {
+                    console.log('User Not Found with email: ' + email);
+                    return done(null, false, flash('message', 'User Not found.'));
+                }
+                // User exists but wrong password, log the error
+                if (!isValidPassword(user, password)){
+                    console.log('Invalid Password');
+                    return done(null, false, flash('message', 'Invalid Password')); // redirect back to login page
+                }
+                // User and password both match, return user from done method
+                // which will be treated like success
+                return done(null, user);
+            });
+        });
+    })
+);
+
+
+var isValidPassword = function(user, password){
+    return bCrypt.compareSync(password, user.password);
+}
+
+
+app.post('/login', passport.authenticate('local'), function(req, res) {
+    res.redirect('/');
+});
 
 
 // -----------------

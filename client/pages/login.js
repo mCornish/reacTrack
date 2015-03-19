@@ -22,14 +22,11 @@ module.exports = PageView.extend({
                     el: el,
                     model: this.model,
                     submitCallback: function (data) {
-
-                        $.ajax({
-                            url: '/users',
-                            data: data,
-                            method: 'POST',
-                            success: function(data) {
-                                console.log('Data: ' + data);
-                            }
+                        console.log(data);
+                        $.post('http://localhost:5000/login', data).done(function(data) {
+                            console.log(data);
+                        }).fail(function(err) {
+                            console.log('Error: ' + err.responseText);
                         });
 
                         // ref.authWithPassword(data, function(error, authData) {
