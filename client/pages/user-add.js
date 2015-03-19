@@ -16,15 +16,7 @@ module.exports = PageView.extend({
             prepareView: function (el) {
                 return new UserForm({
                     el: el,
-                    submitCallback: function (data) {
-
-                        var user = {
-                            user: data.email,
-                            pwd: data.password,
-                            customData: {
-                                username: data.username
-                            }
-                        }
+                    submitCallback: function (user) {
 
                         app.users.create(user, {
                             wait: true,

@@ -4,8 +4,8 @@ var AmpersandModel = require('ampersand-model');
 module.exports = AmpersandModel.extend({
     props: {
         _id: 'any',
+        user_id: 'any',
         title: ['string', true, 'Title'],
-        user: ['string', true, 'User'],
         image: ['string', true, 'Image'],
         description: ['string', false, 'Description'],
         link: ['string', false, ''],
@@ -29,6 +29,24 @@ module.exports = AmpersandModel.extend({
             deps: ['date'],
             fn: function () {
                 return analyzeDate(this.created);
+            }
+        },
+        user: {
+            deps: ['user_id'],
+            fn: function () {
+                return; //request user
+            }
+        },
+        username: {
+            deps: ['user_id'],
+            fn: function () {
+                return this.user.username;
+            }
+        },
+        userUrl: {
+            deps: ['user_id'],
+            fn: function () {
+                return '/user/' + this.user_id;
             }
         }
     }

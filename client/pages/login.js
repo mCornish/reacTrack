@@ -3,7 +3,7 @@ var templates = require('../templates');
 var LoginForm = require('../forms/login');
 var Firebase = require('firebase');
 var ref = new Firebase('sizzling-fire-6725.firebaseIO.com');
-var $ = require('jquery-browserify');
+var flash = require('connect-flash');
 
 
 module.exports = PageView.extend({
@@ -22,37 +22,47 @@ module.exports = PageView.extend({
                     el: el,
                     model: this.model,
                     submitCallback: function (data) {
-                        ref.authWithPassword(data, function(error, authData) {
-                            if (error) {
-                                console.log('Login failed: ' + error);
-                            } else {
 
-                                me.id = authData.uid;
-                                me.username = authData.password.email.replace(/@.*/, '');
-                                me.provider = authData.provider;
-                                me.email = authData.password.email;
-
-                                if (!app.users.getOrFetch(authData.uid)) {
-                                    var user = {
-                                        id: authData.uid,
-                                        username: authData.password.email.replace(/@.*/, ''),
-                                        provider: authData.provider,
-                                        email: authData.password.email
-                                    }
-
-                                    app.users.create(user, {
-                                        wait: true,
-                                        success: function (collection, res) {
-
-                                            app.navigate('/user/' + res.id.replace('simplelogin:', ''));
-                                            app.users.fetch();
-                                        }
-                                    });
-                                } else {
-                                    app.navigate('/user/' + authData.uid.replace('simplelogin:', ''));
-                                }
+                        $.ajax({
+                            url: '/users',
+                            data: data,
+                            method: 'POST',
+                            success: function(data) {
+                                console.log('Data: ' + data);
                             }
                         });
+
+                        // ref.authWithPassword(data, function(error, authData) {
+                        //     if (error) {
+                        //         console.log('Login failed: ' + error);
+                        //     } else {
+                        //
+                        //         me.id = authData.uid;
+                        //         me.username = authData.password.email.replace(/@.*/, '');
+                        //         me.provider = authData.provider;
+                        //         me.email = authData.password.email;
+                        //
+                        //         if (!app.users.getOrFetch(authData.uid)) {
+                        //             var user = {
+                        //                 id: authData.uid,
+                        //                 username: authData.password.email.replace(/@.*/, ''),
+                        //                 provider: authData.provider,
+                        //                 email: authData.password.email
+                        //             }
+                        //
+                        //             app.users.create(user, {
+                        //                 wait: true,
+                        //                 success: function (collection, res) {
+                        //
+                        //                     app.navigate('/user/' + res.id.replace('simplelogin:', ''));
+                        //                     app.users.fetch();
+                        //                 }
+                        //             });
+                        //         } else {
+                        //             app.navigate('/user/' + authData.uid.replace('simplelogin:', ''));
+                        //         }
+                        //     }
+                        // });
                     }
                 });
             }

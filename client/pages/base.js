@@ -2,6 +2,7 @@
 // base view for pages
 var View = require('ampersand-view');
 var _ = require('underscore');
+var $ = require('jquery-browserify');
 //var key = require('keymaster');
 
 
