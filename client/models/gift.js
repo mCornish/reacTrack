@@ -38,13 +38,13 @@ module.exports = AmpersandModel.extend({
             }
         },
         username: {
-            dep: ['user_id'],
+            deps: ['user_id'],
             fn: function () {
                 return this.user.username;
             }
         },
         userUrl: {
-            dep: ['user_id'],
+            deps: ['user_id'],
             fn: function () {
                 return '/user/' + this.user_id;
             }

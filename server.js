@@ -1,6 +1,7 @@
 /* global console */
 var path = require('path');
 var express = require('express');
+var session = require('express-session');
 var helmet = require('helmet');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -11,7 +12,11 @@ var semiStatic = require('semi-static');
 var serveStatic = require('serve-static');
 var stylizer = require('stylizer');
 var templatizer = require('templatizer');
+var MongoClient = require('mongodb').MongoClient;
+var dbUrl = 'mongodb://admin:admin123@ds061767.mongolab.com:61767/heroku_app34829943';
 var app = express();
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 // a little helper for fixing paths for various environments
 var fixPath = function (pathString) {
@@ -35,6 +40,15 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Necessary for passport
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 // in order to test this with spacemonkey we need frames
 if (!config.isDev) {
     app.use(helmet.xframe());
@@ -43,6 +57,38 @@ app.use(helmet.xssFilter());
 app.use(helmet.nosniff());
 
 app.set('view engine', 'jade');
+
+
+// ------------------
+// Configure passport
+// ------------------
+passport.use(new LocalStrategy(function(email, password, done) {
+    MongoClient.connect(dbUrl, function(err, db) {
+        console.log('Connected to Mongo server.');
+        var collection = db.collection('users');
+        collection.findOne({email: email}, function(err, user) {
+            if (err) return done(err);
+            if (!user) {
+                return done(null, false, {message: 'Incorrect username.'});
+            }
+            if (!user.validPassword(password)) {
+                return done(null, false, {message: 'Incorrect password.'});
+            }
+            return done(null, user);
+            db.close();
+        });
+    });
+}));
+
+app.post('/logins', function(req, res) {
+    res.send('!!!');
+});
+    // passport.authenticate('local', {
+    //     successRedirect: '/',
+    //     failureRedirect: '/login',
+    //     failureFlash: true
+    // })
+
 
 
 // -----------------
