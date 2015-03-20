@@ -17,7 +17,7 @@
 
     // body.jade compiled template
     templatizer["body"] = function tmpl_body() {
-        return '<body><nav class="navbar navbar-default"><div class="container-fluid"><div class="navbar-header"><a href="/" class="navbar-brand">Mike\'s AmperSandbox</a><ul class="nav navbar-nav"><li><a href="/">Home</a></li><li><a href="/ygmyg">Gifts</a></li><li><a href="/blog">Blog</a></li><!--lia(href="/collections") collection demo--><!--lia(href="/tracks") tracks--><!--lia(href="/reactions") reactions--><li><a data-hook="profile-link" class="authed">Profile</a></li><li><a href="/login" class="unauthed login-button">Log In</a></li><li><a data-hook="action-logout" class="authed logout-button">Log Out</a></li></ul></div></div></nav><div class="container"><main data-hook="page-container"></main></div></body>';
+        return '<body><nav class="navbar navbar-default"><div class="container-fluid"><div class="navbar-header"><a href="/" class="navbar-brand">yGmyG</a><ul class="nav navbar-nav"><li><a href="/browse">Browse Gifts</a></li><li><a href="/find">Find a Gift</a></li><li><a href="/new-gift">Post a Gift</a></li><!--lia(href="/ygmyg") Gifts--><!--lia(href="/blog") Blog--><!--lia(href="/collections") collection demo--><!--lia(href="/tracks") tracks--><!--lia(href="/reactions") reactions--><li><a data-hook="profile-link" class="authed">Profile</a></li><li><a href="/login" class="unauthed login-button">Log In</a></li><li><a data-hook="action-logout" class="authed logout-button">Log Out</a></li></ul></div></div></nav><div class="container"><main data-hook="page-container"></main></div></body>';
     };
 
     // head.jade compiled template
