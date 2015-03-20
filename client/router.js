@@ -31,6 +31,7 @@ module.exports = Router.extend({
         '': 'home',
         'register': 'userAdd',
         'user/:id': 'userView',
+        'profile': 'meView',
         'ygmyg': 'gifts',
         'gift/:id': 'giftView',
         'new-gift': 'giftAdd',
@@ -68,6 +69,12 @@ module.exports = Router.extend({
     userView: function (id) {
         this.trigger('page', new UserViewPage({
             id: id
+        }));
+    },
+
+    meView: function () {
+        this.trigger('page', new UserViewPage({
+            id: me.id
         }));
     },
 
@@ -192,8 +199,7 @@ module.exports = Router.extend({
 
     // ------- USED TO AUTHENTICATE ADMIN PAGES ---------
     authenticate: function(page) {
-        //if (ref.getAuth()) {
-        if(true) {
+        if (ref.getAuth()) {
             this.trigger('page', page);
         } else {
             this.redirectTo('login');

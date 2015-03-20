@@ -3,7 +3,7 @@ var AmpersandModel = require('ampersand-model');
 
 module.exports = AmpersandModel.extend({
     props: {
-        _id: 'any',
+        id: 'any',
         user_id: 'any',
         title: ['string', true, 'Title'],
         image: ['string', true, 'Image'],
@@ -16,13 +16,13 @@ module.exports = AmpersandModel.extend({
         viewUrl: {
             deps: ['_id'],
             fn: function () {
-                return '/gift/' + this._id;
+                return '/gift/' + this.id;
             }
         },
         editUrl: {
             deps: ['_id'],
             fn: function () {
-                return '/gift/' + this._id + '/edit';
+                return '/gift/' + this.id + '/edit';
             }
         },
         time: {
@@ -34,7 +34,10 @@ module.exports = AmpersandModel.extend({
         user: {
             deps: ['user_id'],
             fn: function () {
-                return; // Request to user endpoint
+                app.users.getOrFetch(this.user_id, {all: true}, function (err, user) {
+                    if (err) console.log('Couldn\'t find a user with id: ' + this.user_id);
+                    return user;
+                });
             }
         },
         username: {

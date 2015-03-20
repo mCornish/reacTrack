@@ -11,8 +11,10 @@ var dom = require('ampersand-dom');
 var templates = require('../templates');
 var tracking = require('../helpers/metrics');
 var setFavicon = require('favicon-setter');
+
 var Firebase = require('firebase');
 var ref = new Firebase('sizzling-fire-6725.firebaseIO.com');
+var auth = require('../helpers/auth');
 
 
 module.exports = View.extend({
@@ -40,21 +42,8 @@ module.exports = View.extend({
         this.renderWithTemplate({me: me});
 
         // manage log in and log out display/hide
-        var authData = ref.getAuth()
-
-        if (authData) {
-            $('.unauthed').hide();
-            $('.authed').show();
-
-            me.id = authData.uid.replace('simplelogin:', '');
-            me.username = authData.password.email.replace(/@.*/, '');
-            me.provider = authData.provider;
-            me.email = authData.password.email;
-        } else {
-            $('.unauthed').show();
-            $('.authed').hide();
-        }
-
+        auth.init();
+        
         // init and configure our page switcher
         this.pageSwitcher = new ViewSwitcher(this.queryByHook('page-container'), {
             show: function (newView, oldView) {

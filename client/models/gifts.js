@@ -5,5 +5,5 @@ var Gift = require('./gift');
 module.exports = Collection.extend({
     model: Gift,
     url: '/gifts',
-    mainIndex: '_id'
+    mainIndex: 'id'
 });

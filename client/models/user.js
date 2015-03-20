@@ -1,26 +1,30 @@
 var AmpersandModel = require('ampersand-model');
 var bcrypt = require('bcrypt-nodejs');
+var auth = require('../helpers/auth');
 
 
 module.exports = AmpersandModel.extend({
     type: 'user',
     props: {
-        _id: ['any'],
+        id: ['any'],
         email: ['string', true],
-        password: ['string', true],
-        username: ['string', true]
+        provider: ['string', true],
+        username: ['string', false]
     },
     derived: {
-        hashedPassword: {
-            deps: ['password'],
+        derivedUsername: {
+            deps: ['id'],
             fn: function () {
-                return bcrypt.hashSync(this.password, bcrypt.genSaltSync(8), null);
+                if (this.username) return this.username;
+                else {
+                    return auth.getUsername();
+                }
             }
         },
         viewUrl: {
-            deps: ['_id'],
+            deps: ['id'],
             fn: function () {
-                return '/user/' + this._id;
+                return '/user/' + this.id;
             }
         }
     }

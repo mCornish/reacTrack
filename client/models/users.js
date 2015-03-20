@@ -5,5 +5,5 @@ var User = require('./user');
 module.exports = Collection.extend({
     model: User,
     url: '/users',
-    mainIndex: '_id'
+    mainIndex: 'id'
 });

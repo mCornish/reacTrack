@@ -16,52 +16,36 @@ module.exports = PageView.extend({
             prepareView: function (el) {
                 return new UserForm({
                     el: el,
-                    submitCallback: function (user) {
+                    submitCallback: function (data) {
 
-                        app.users.create(user, {
-                            wait: true,
-                            success: function (collection, res) {
+                        ref.createUser(data, function(error, userData) {
+                            if (error) {
+                                console.log('Error creating user: ' + error);
+                            } else {
 
-                                app.navigate('/user/' + res._id);
-                                app.users.fetch();
+                                ref.authWithPassword(data, function(error, authData) {
+                                    if (error) {
+                                        console.log('Login failed: ' + error);
+                                    } else {
+
+                                        me.id = authData.uid.replace('simplelogin:', '');
+                                        me.username = data.username;
+                                        me.provider = authData.provider;
+                                        me.email = authData.password.email;
+
+                                        app.users.create(me.toJSON(), {
+                                            wait: true,
+                                            success: function (collection, res) {
+
+                                                app.navigate('/user/' + res.id);
+                                                app.users.fetch();
+                                            }
+                                        });
+                                    }
+                                });
+
                             }
                         });
-
-                        // ref.createUser(data, function(error, userData) {
-                        //     if (error) {
-                        //         console.log('Error creating user: ' + error);
-                        //     } else {
-                        //
-                        //         ref.authWithPassword(data, function(error, authData) {
-                        //             if (error) {
-                        //                 console.log('Login failed: ' + error);
-                        //             } else {
-                        //
-                        //                 me.id = authData.uid.replace('simplelogin:', '');
-                        //                 me.username = authData.password.email.replace(/@.*/, '');
-                        //                 me.provider = authData.provider;
-                        //                 me.email = authData.password.email;
-                        //
-                        //                 var user = {
-                        //                     id: authData.uid.replace('simplelogin:', ''),
-                        //                     username: authData.password.email.replace(/@.*/, ''),
-                        //                     provider: authData.provider,
-                        //                     email: authData.password.email
-                        //                 }
-                        //
-                        //                 app.users.create(user, {
-                        //                     wait: true,
-                        //                     success: function (collection, res) {
-                        //
-                        //                         app.navigate('/user/' + res.id);
-                        //                         app.users.fetch();
-                        //                     }
-                        //                 });
-                        //             }
-                        //         });
-                        //
-                        //     }
-                        // });
 
                     }
                 });

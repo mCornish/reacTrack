@@ -97,7 +97,7 @@
 
     // pages/gifts.jade compiled template
     templatizer["pages"]["gifts"] = function tmpl_pages_gifts() {
-        return '<section class="page"><div class="container"></div><h2>Gifts</h2><div data-hook="gift-list" class="list-group"></div></section>';
+        return '<section class="page"><div class="container"></div><h2>Gifts</h2><a href="/new-gift">Post a gift</a><div data-hook="gift-list" class="list-group"></div></section>';
     };
 
     // pages/home.jade compiled template

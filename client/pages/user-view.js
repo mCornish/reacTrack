@@ -7,7 +7,7 @@ module.exports = PageView.extend({
     pageTitle: 'Profile',
     template: templates.pages.userView,
     bindings: {
-        'model.username': {
+        'model.derivedUsername': {
             hook: 'name'
         }
     },
