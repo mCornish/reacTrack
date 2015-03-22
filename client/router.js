@@ -7,6 +7,7 @@ var GiftsPage = require('./pages/gifts');
 var GiftViewPage = require('./pages/gift-view');
 var GiftAddPage = require('./pages/gift-add');
 var GiftEditPage = require('./pages/gift-edit');
+var BrowsePage = require('./pages/browse');
 var BlogPage = require('./pages/blog');
 var PostAddPage = require('./pages/post-add');
 var PostEditPage = require('./pages/post-edit');
@@ -36,6 +37,7 @@ module.exports = Router.extend({
         'gift/:id': 'giftView',
         'new-gift': 'giftAdd',
         'gift/:id/edit': 'giftEdit',
+        'browse': 'browseView',
         'posts': 'blog',
         'blog': 'blog',
         'post/:id': 'postView',
@@ -100,6 +102,10 @@ module.exports = Router.extend({
         this.authenticate(new GiftEditPage({
             id: id
         }));
+    },
+
+    browse: function () {
+        this.trigger('page', new BrowseViewPage());
     },
 
     blog: function () {

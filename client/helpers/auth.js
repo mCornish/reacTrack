@@ -19,8 +19,6 @@ exports.init = function() {
                     wait: true,
                     success: function (collection, res) {
 
-                        app.navigate('/user/' + res.id.replace('simplelogin:', ''));
-                        app.users.fetch();
                     }
                 });
             } else {

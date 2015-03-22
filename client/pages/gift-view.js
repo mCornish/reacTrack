@@ -15,7 +15,7 @@ module.exports = PageView.extend({
             hook: 'image',
             name: 'src'
         },
-        'model.user': {
+        'model.username': {
             hook: 'user'
         },
         'model.time': {

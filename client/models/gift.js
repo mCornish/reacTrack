@@ -10,20 +10,21 @@ module.exports = AmpersandModel.extend({
         image: ['string', true, 'Image'],
         description: ['string', false, 'Description'],
         link: ['string', false, ''],
-        categories: ['array'],
+        recipient: ['string'],
+        occasion: ['string'],
         created: ['date', true, Date.now()],
         upvotes: ['number', true, 0],
         downvotes: ['number', true, 0]
     },
     derived: {
         viewUrl: {
-            deps: ['_id'],
+            deps: ['id'],
             fn: function () {
                 return '/gift/' + this.id;
             }
         },
         editUrl: {
-            deps: ['_id'],
+            deps: ['id'],
             fn: function () {
                 return '/gift/' + this.id + '/edit';
             }
@@ -37,16 +38,17 @@ module.exports = AmpersandModel.extend({
         user: {
             deps: ['user_id'],
             fn: function () {
-                app.users.getOrFetch(this.user_id, {all: true}, function (err, user) {
-                    if (err) console.log('Couldn\'t find a user with id: ' + this.user_id);
-                    return user;
-                });
+
+                var user = app.users.get(this.user_id);
+                if(user) {
+                    return user.toJSON();
+                }
             }
         },
         username: {
             deps: ['user_id'],
             fn: function () {
-                return this.user.username;
+                if (this.user) return this.user.username;
             }
         },
         userUrl: {

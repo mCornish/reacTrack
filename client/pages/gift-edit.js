@@ -30,7 +30,7 @@ module.exports = PageView.extend({
                         model.save(data, {
                             wait: true,
                             success: function (collection, res) {
-                                app.navigate('/gift/' + res._id);
+                                app.navigate('/gift/' + res.id);
                             }
                         });
                     }

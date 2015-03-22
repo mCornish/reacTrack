@@ -1,12 +1,11 @@
 var FormView = require('ampersand-form-view');
 var InputView = require('ampersand-input-view');
+var SelectView = require('ampersand-select-view');
 var templates = require('../templates');
 var ExtendedInput = InputView.extend({
     template: templates.includes.formInput()
 });
-var ExtendedTextarea = InputView.extend({
-    template: templates.includes.formTextarea()
-});
+
 
 module.exports = FormView.extend({
     fields: function () {
@@ -41,6 +40,24 @@ module.exports = FormView.extend({
                 value: this.model && this.model.link,
                 required: false,
                 placeholder: 'Where can we buy the gift online?',
+                parent: this
+            }),
+            new SelectView({
+                label: 'Recipient',
+                name: 'recipient',
+                value: this.model && this.model.recipient,
+                required: false,
+                unselectedText: 'Who is the gift for?',
+                options: ['Dad', 'Mom', 'Sister', 'Brother'],
+                parent: this
+            }),
+            new SelectView({
+                label: 'Occasion',
+                name: 'occasion',
+                value: this.model && this.model.occasion,
+                required: false,
+                unselectedText: 'Why did you get the gift?',
+                options: ['Birthday', 'Christmas', 'Anniversary'],
                 parent: this
             })
         ];

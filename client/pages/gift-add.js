@@ -18,14 +18,13 @@ module.exports = PageView.extend({
                     el: el,
                     submitCallback: function (data) {
 
-                        data.user = me.username;
+                        data.user_id = me.id;
                         data.created = Date.now();
 
                         app.gifts.create(data, {
                             wait: true,
                             success: function (collection, res) {
-                                app.navigate('/gift/' + res._id);
-                                app.gifts.fetch();
+                                app.navigate('/gift/' + res.id);
                             }
                         });
                     }

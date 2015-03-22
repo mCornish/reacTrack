@@ -18,7 +18,7 @@ module.exports = View.extend({
             hook: 'view',
             name: 'href'
         },
-        'model.user': {
+        'model.username': {
             hook: 'user'
         },
         'model.time': {

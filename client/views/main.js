@@ -43,7 +43,10 @@ module.exports = View.extend({
 
         // manage log in and log out display/hide
         auth.init();
-        
+
+        // initialize users
+        app.users.fetch();
+
         // init and configure our page switcher
         this.pageSwitcher = new ViewSwitcher(this.queryByHook('page-container'), {
             show: function (newView, oldView) {
