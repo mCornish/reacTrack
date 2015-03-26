@@ -8,10 +8,15 @@ module.exports = PageView.extend({
     template: templates.pages.gifts,
     events: {
         'click [data-hook~=female]': 'filterFemale',
+        'click [data-hook~=male]': 'filterMale',
+        'click [data-hook~=birthday]': 'filterBirthday',
+        'click [data-hook~=christmas]': 'filterChristmas'
     },
     render: function() {
         this.renderWithTemplate();
-        this.renderCollection(this.collection, GiftView, this.queryByHook('gift-list'));
+        this.renderCollection(this.collection, GiftView, this.queryByHook('gift-list'), {
+            reverse: true
+        });
         if (!this.collection.length) {
             this.collection.fetch();
         }
@@ -21,6 +26,30 @@ module.exports = PageView.extend({
         this.renderCollection(this.collection, GiftView, this.queryByHook('gift-list'), {
             filter: function(gift) {
                 return gift.recipient === 'Mom' || gift.recipient === 'Sister' || gift.recipient === 'Daughter';
+            }
+        });
+    },
+    filterMale: function() {
+        this.renderWithTemplate();
+        this.renderCollection(this.collection, GiftView, this.queryByHook('gift-list'), {
+            filter: function(gift) {
+                return gift.recipient === 'Dad' || gift.recipient === 'Brother' || gift.recipient === 'Son';
+            }
+        });
+    },
+    filterBirthday: function() {
+        this.renderWithTemplate();
+        this.renderCollection(this.collection, GiftView, this.queryByHook('gift-list'), {
+            filter: function(gift) {
+                return gift.occasion === 'Birthday';
+            }
+        });
+    },
+    filterChristmas: function() {
+        this.renderWithTemplate();
+        this.renderCollection(this.collection, GiftView, this.queryByHook('gift-list'), {
+            filter: function(gift) {
+                return gift.occasion === 'Christmas';
             }
         });
     }

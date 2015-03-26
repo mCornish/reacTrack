@@ -1,6 +1,7 @@
 var FormView = require('ampersand-form-view');
 var InputView = require('ampersand-input-view');
 var SelectView = require('ampersand-select-view');
+var CheckboxView = require('ampersand-checkbox-view');
 var templates = require('../templates');
 var ExtendedInput = InputView.extend({
     template: templates.includes.formInput()
@@ -42,6 +43,13 @@ module.exports = FormView.extend({
                 placeholder: 'Where can we buy the gift online?',
                 parent: this
             }),
+            // new CheckboxView({
+            //     label: 'Gender',
+            //     name: 'male',
+            //     value: 'false',
+            //     required: false,
+            //     parent: this
+            // }),
             new SelectView({
                 label: 'Recipient',
                 name: 'recipient',

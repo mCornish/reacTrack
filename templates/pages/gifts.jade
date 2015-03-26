@@ -1,7 +1,12 @@
 section.page
     div.container
     h2 Gifts
-    button.btn(data-hook="female") Female
-    a(href="/new-gift") Post a gift
+    .btn-toolbar
+        .btn-group
+            button.btn.btn-default(data-hook="female") Female
+            button.btn.btn-default(data-hook="male") Male
+        .btn-group
+            button.btn.btn-default(data-hook="birthday") Birthday
+            button.btn.btn-default(data-hook="christmas") Christmas
 
-    div.list-group(data-hook="gift-list")
+    div.grid-list(data-hook="gift-list")

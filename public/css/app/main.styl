@@ -12,15 +12,40 @@ body
 .logout-button
     cursor: pointer
 
-.gift
-    width: calc('(100% / 3) - 2em')
-    position: relative;
-    display: inline-block;
-    padding: 10px 15px;
-    border: 1px solid #ddd;
+.grid-list
+    -moz-column-count: 3
+    -moz-column-gap: 10px
+    -moz-column-fill: auto
+    -webkit-column-count: 3
+    -webkit-column-gap: 10px
+    -webkit-column-fill: auto
+    column-count: 3
+    column-gap: 15px
+    column-fill: auto
+    margin: 0 auto
 
-    img
-        width: 100%
+    @media screen and (min-width: 960px)
+        -webkit-column-count: 4
+        -moz-column-count: 4
+        column-count: 4
 
-    + .gift
-        margin-left: 1em;
+    @media screen and (min-width: 1110px)
+        -webkit-column-count: 5
+        -moz-column-count: 5
+        column-count: 5
+
+.grid-list__item
+    -moz-column-break-inside: avoid
+    -webkit-column-break-inside: avoid
+    column-break-inside: avoid
+    display: inline-block; margin: 0 2px 15px
+    padding: 15px
+    border: 2px solid #FAFAFA
+    box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4)
+    background: #FEFEFE
+    background-image: linear-gradient(45deg, #FFF, #F9F9F9)
+
+
+
+.grid-list__image
+    width: 100%

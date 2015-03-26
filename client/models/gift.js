@@ -10,6 +10,7 @@ module.exports = AmpersandModel.extend({
         image: ['string', true, 'Image'],
         description: ['string', false, 'Description'],
         link: ['string', false, ''],
+        male: ['boolean'],
         recipient: ['string'],
         occasion: ['string'],
         created: ['date', true, Date.now()],

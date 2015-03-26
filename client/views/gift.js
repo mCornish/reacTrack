@@ -1,5 +1,6 @@
 var View = require('ampersand-view');
 var templates = require('../templates');
+var Masonry = require('../helpers/masonry');
 
 
 module.exports = View.extend({
@@ -24,5 +25,10 @@ module.exports = View.extend({
         'model.time': {
             hook: 'time-passed'
         }
-    }
+    },
+    render: function() {
+        this.renderWithTemplate();
+
+        this.trigger('masonry-loaded');
+    },
 });

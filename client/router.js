@@ -76,7 +76,7 @@ module.exports = Router.extend({
     },
 
     meView: function () {
-        this.trigger('page', new UserViewPage({
+        this.authenticate(new UserViewPage({
             id: me.id
         }));
     },
