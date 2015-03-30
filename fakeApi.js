@@ -4,6 +4,7 @@ var Firebase = require('firebase');
 var ref = new Firebase('sizzling-fire-6725.firebaseIO.com');
 var usersRef = new Firebase('sizzling-fire-6725.firebaseIO.com/YGMYG/users');
 var giftsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/YGMYG/gifts');
+var commentsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/YGMYG/comments');
 var postsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/blog/posts');
 
 // var MongoClient = require('mongodb').MongoClient;
@@ -226,6 +227,42 @@ exports.updateGift = function(req, res) {
 
     });
 };
+
+
+exports.listComments = function (req, res) {
+    var comments = [];
+
+    commentsRef.once("value", function(snapshot) {
+        var snap = snapshot.val();
+
+        for (key in snap) {
+            snap[key].id = key;
+            comments.push(snap[key]);
+        }
+
+        res.send(comments);
+
+    }, function(errorObj) {
+        console.log('Error: ' + errorObj.code);
+    });
+};
+
+exports.addComment = function (req, res) {
+    var comment = req.body;
+
+    var newCommentRef = commentsRef.push(comment, function(error) {
+        if (error) {
+            console.log('Error: ' + error);
+        } else {
+
+            comment.id = newCommentRef.key();
+            res.send(comment);
+        }
+    });
+};
+
+
+
 
 
 

@@ -25,6 +25,11 @@
         return '<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><meta name="apple-mobile-web-app-capable" content="yes"/><script src=\'https://cdn.firebase.com/js/client/2.2.1/firebase.js\'></script>';
     };
 
+    // includes/comment.jade compiled template
+    templatizer["includes"]["comment"] = function tmpl_includes_comment() {
+        return '<li class="post list-group-item"><div><span>posted&nbsp;</span><span data-hook="time"></span></div><div><span>by&nbsp;</span><a data-hook="authorUrl"><span data-hook="author"></span></a></div><p data-hook="content"></p></li>';
+    };
+
     // includes/formInput.jade compiled template
     templatizer["includes"]["formInput"] = function tmpl_includes_formInput() {
         return '<div class="form-group"><label data-hook="label"></label><div data-hook="message-container"><div data-hook="message-text" class="alert alert-danger"></div></div><input class="form-control"/></div>';
@@ -92,7 +97,7 @@
 
     // pages/giftView.jade compiled template
     templatizer["pages"]["giftView"] = function tmpl_pages_giftView() {
-        return '<section class="page view-gift"><h3 data-hook="time-passed"></h3><h2 data-hook="title"></h2><img data-hook="image"/><p data-hook="description"></p><p data-hook="user"></p><h3>Comment</h3><form data-hook="comment-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Comment</button></div></form></section>';
+        return '<section class="page view-gift"><h3 data-hook="time-passed"></h3><h2 data-hook="title"></h2><img data-hook="image"/><p data-hook="description"></p><p data-hook="user"></p><h3>Comments</h3><ul data-hook="comment-list" class="comments"></ul><form data-hook="comment-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Comment</button></div></form></section>';
     };
 
     // pages/gifts.jade compiled template

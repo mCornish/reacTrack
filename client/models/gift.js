@@ -7,6 +7,7 @@ module.exports = AmpersandModel.extend({
         id: 'any',
         user_id: 'any',
         title: ['string', true, 'Title'],
+        created: ['date', true, Date.now()],
         image: ['any', true, 'image'],
         description: ['string', false, 'Description'],
         link: ['string', false, ''],
@@ -15,7 +16,6 @@ module.exports = AmpersandModel.extend({
         age: ['number'],
         price: ['number'],
         occasion: ['string'],
-        created: ['date', true, Date.now()],
         wants: ['number', true, 0]
     },
     derived: {

@@ -5,11 +5,29 @@ var moment = require('moment');
 module.exports = AmpersandModel.extend({
     props: {
         id: 'any',
+        user_id: ['any', true],
+        gift_id: ['any', true],
         created: ['date', true, Date.now()],
         content: ['string', true],
-        author: ['string', false]
     },
     derived: {
+        author: {
+            deps: ['user_id'],
+            fn: function () {
+                var author = app.users.get(this.user_id);
+                if(author) {
+                    return author.toJSON().username;
+                } else {
+                    return 'Author';
+                }
+            }
+        },
+        authorUrl: {
+            deps: ['user_id'],
+            fn: function () {
+                return '/users/' + this.user_id
+            }
+        },
         time: {
             deps: ['created'],
             fn: function () {

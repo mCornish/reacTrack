@@ -9,6 +9,8 @@ var MainView = require('./views/main');
 var Me = require('./models/me');
 var Users = require('./models/users');
 var Gifts = require('./models/gifts');
+var Comments = require('./models/comments');
+
 var Blog = require('./models/blog');
 var People = require('./models/persons');
 var Tracks = require('./models/tracks');
@@ -26,6 +28,9 @@ module.exports = {
         window.me = new Me();
         this.users = new Users();
         this.gifts = new Gifts();
+        this.comments = new Comments();
+
+
         this.blog = new Blog();
         this.people = new People();
         this.tracks = new Tracks();

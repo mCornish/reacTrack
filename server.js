@@ -48,29 +48,32 @@ app.use(helmet.nosniff());
 app.set('view engine', 'jade');
 
 
-var done = false;
-
-app.use(multer({
-    dest: '/uploads/',
-    rename: function(fieldsname, filename) {
-        return filename + Date.now();
-    },
-    onFileUploadStart: function(file) {
-        console.log(file.originalname + ' is starting...');
-    },
-    onFileUploadComplete: function(file) {
-        console.log(file.fieldname + ' uploaded to ' + file.path);
-        done = true;
-    }
-}));
-
-app.post('/upload-photo', function(req, res) {
-    console.log('upload');
-    if(done === true) {
-        console.log(req.files);
-        res.end('File uploaded.');
-    }
-});
+// ---------------------------------
+// Configure multer for image upload
+// ---------------------------------
+// var done = false;
+//
+// app.use(multer({
+//     dest: '/uploads/',
+//     rename: function(fieldsname, filename) {
+//         return filename + Date.now();
+//     },
+//     onFileUploadStart: function(file) {
+//         console.log(file.originalname + ' is starting...');
+//     },
+//     onFileUploadComplete: function(file) {
+//         console.log(file.fieldname + ' uploaded to ' + file.path);
+//         done = true;
+//     }
+// }));
+//
+// app.post('/upload-photo', function(req, res) {
+//     console.log('upload');
+//     if(done === true) {
+//         console.log(req.files);
+//         res.end('File uploaded.');
+//     }
+// });
 
 
 // -----------------
@@ -87,6 +90,10 @@ app.get('/gifts', api.listGifts);
 app.post('/gifts', api.addGift);
 app.get('/gifts/:id', api.getGift);
 app.put('/gifts/:id', api.updateGift);
+
+app.get('/comments', api.listComments);
+app.post('/comments', api.addComment);
+
 
 
 app.get('/posts', api.listPosts);

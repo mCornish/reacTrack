@@ -32,16 +32,17 @@ module.exports = PageView.extend({
             if (err) alert('Couldn\'t find a model with id: ' + _id);
             self.model = model;
         });
+
+        // Make sure users and gifs are ready for rendering wants
         app.users.fetch({
             success: function() {
                 app.gifts.fetch({
                     success: function() {
                         self.render();
                     }
-                })
+                });
             }
         });
-        app.gifts.fetch();
     },
     render: function() {
         this.renderWithTemplate();
