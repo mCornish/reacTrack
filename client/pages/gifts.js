@@ -2,6 +2,8 @@ var PageView = require('./base');
 var templates = require('../templates');
 var GiftView = require('../views/gift');
 
+var auth = require('../helpers/auth');
+
 
 module.exports = PageView.extend({
     pageTitle: 'Gifts',
@@ -22,15 +24,16 @@ module.exports = PageView.extend({
         }
     },
     filterFemale: function() {
-        this.renderWithTemplate();
+        $('[data-hook="gift-list"]').empty();
         this.renderCollection(this.collection, GiftView, this.queryByHook('gift-list'), {
             filter: function(gift) {
                 return gift.recipient === 'Mom' || gift.recipient === 'Sister' || gift.recipient === 'Daughter';
-            }
+            },
+            reverse: true
         });
     },
     filterMale: function() {
-        this.renderWithTemplate();
+        $('[data-hook="gift-list"]').empty();
         this.renderCollection(this.collection, GiftView, this.queryByHook('gift-list'), {
             filter: function(gift) {
                 return gift.recipient === 'Dad' || gift.recipient === 'Brother' || gift.recipient === 'Son';
@@ -38,7 +41,7 @@ module.exports = PageView.extend({
         });
     },
     filterBirthday: function() {
-        this.renderWithTemplate();
+        $('[data-hook="gift-list"]').empty();
         this.renderCollection(this.collection, GiftView, this.queryByHook('gift-list'), {
             filter: function(gift) {
                 return gift.occasion === 'Birthday';
@@ -46,7 +49,7 @@ module.exports = PageView.extend({
         });
     },
     filterChristmas: function() {
-        this.renderWithTemplate();
+        $('[data-hook="gift-list"]').empty();
         this.renderCollection(this.collection, GiftView, this.queryByHook('gift-list'), {
             filter: function(gift) {
                 return gift.occasion === 'Christmas';

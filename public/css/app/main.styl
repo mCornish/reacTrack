@@ -38,14 +38,17 @@ body
     -moz-column-break-inside: avoid
     -webkit-column-break-inside: avoid
     column-break-inside: avoid
-    display: inline-block; margin: 0 2px 15px
-    padding: 15px
-    border: 2px solid #FAFAFA
-    box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4)
-    background: #FEFEFE
-    background-image: linear-gradient(45deg, #FFF, #F9F9F9)
-
-
+    display: inline-block;
+    margin: 0 2px 15px;
+    border: 1px solid rgba(0,0,0,.05);
+    border-radius: 1em;
+    background: #fefefe;
 
 .grid-list__image
     width: 100%
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+
+.grid-list__container
+    padding 1em;

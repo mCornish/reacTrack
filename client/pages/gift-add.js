@@ -5,6 +5,7 @@ var GiftForm = require('../forms/gift');
 var Firebase = require('firebase');
 var ref = new Firebase('sizzling-fire-6725.firebaseIO.com');
 var postsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/YGMYG/gifts');
+var $ = require('jquery-browserify');
 
 
 module.exports = PageView.extend({

@@ -9,7 +9,15 @@ module.exports = AmpersandModel.extend({
         id: ['any'],
         email: ['string', true],
         provider: ['string', true],
-        username: ['string', false]
+        username: ['string', false],
+        image: ['string', false],
+        firstName: ['string', false],
+        lastName: ['string', false],
+        website: ['string', false],
+        location: ['string', false],
+        wants: ['array', true, function() {
+            return [];
+        }]
     },
     derived: {
         derivedUsername: {

@@ -3,11 +3,11 @@ var Router = require('ampersand-router');
 var HomePage = require('./pages/home');
 var UserAddPage = require('./pages/user-add');
 var UserViewPage = require('./pages/user-view');
+var UserEditPage = require('./pages/user-edit');
 var GiftsPage = require('./pages/gifts');
 var GiftViewPage = require('./pages/gift-view');
 var GiftAddPage = require('./pages/gift-add');
 var GiftEditPage = require('./pages/gift-edit');
-var BrowsePage = require('./pages/browse');
 var BlogPage = require('./pages/blog');
 var PostAddPage = require('./pages/post-add');
 var PostEditPage = require('./pages/post-edit');
@@ -32,12 +32,13 @@ module.exports = Router.extend({
         '': 'home',
         'register': 'userAdd',
         'user/:id': 'userView',
+        'user/:id/edit': 'userEdit',
         'profile': 'meView',
-        'ygmyg': 'gifts',
         'gift/:id': 'giftView',
         'new-gift': 'giftAdd',
         'gift/:id/edit': 'giftEdit',
-        'browse': 'browseView',
+
+
         'posts': 'blog',
         'blog': 'blog',
         'post/:id': 'postView',
@@ -54,23 +55,31 @@ module.exports = Router.extend({
         'tracks/:id': 'trackView',
         'reactions': 'reactions',
         'reactions/:id': 'reactionView',
+
         '(*path)': 'catchAll'
     },
 
     // ------- ROUTE HANDLERS ---------
     home: function () {
-        this.trigger('page', new GiftsPage({
+        this.authenticate(new GiftsPage({
             model: me,
             collection: app.gifts
         }));
     },
 
     userAdd: function () {
-        this.trigger('page', new UserAddPage());
+        this.authenticate(new UserAddPage());
     },
 
     userView: function (id) {
-        this.trigger('page', new UserViewPage({
+        this.authenticate(new UserViewPage({
+            id: id,
+            collection: app.users
+        }));
+    },
+
+    userEdit: function (id) {
+        this.authenticate(new UserEditPage({
             id: id
         }));
     },
@@ -78,13 +87,6 @@ module.exports = Router.extend({
     meView: function () {
         this.authenticate(new UserViewPage({
             id: me.id
-        }));
-    },
-
-    gifts: function () {
-        this.trigger('page', new GiftsPage({
-            model: me,
-            collection: app.gifts
         }));
     },
 
@@ -104,9 +106,20 @@ module.exports = Router.extend({
         }));
     },
 
-    browse: function () {
-        this.trigger('page', new BrowseViewPage());
+    catchAll: function () {
+        this.redirectTo('');
     },
+
+    // ------- USED TO AUTHENTICATE ADMIN PAGES ---------
+    authenticate: function(page) {
+        if (ref.getAuth()) {
+            this.trigger('page', page);
+        } else {
+            this.redirectTo('login');
+        }
+    },
+
+
 
     blog: function () {
         this.trigger('page', new BlogPage({
@@ -198,18 +211,5 @@ module.exports = Router.extend({
         this.trigger('page', new ReactionViewPage({
             id: id
         }));
-    },
-
-    catchAll: function () {
-        this.redirectTo('');
-    },
-
-    // ------- USED TO AUTHENTICATE ADMIN PAGES ---------
-    authenticate: function(page) {
-        if (ref.getAuth()) {
-            this.trigger('page', page);
-        } else {
-            this.redirectTo('login');
-        }
     }
 });

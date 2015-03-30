@@ -27,6 +27,7 @@ module.exports = PageView.extend({
                             if (error) {
                                 console.log('Login failed: ' + error);
                             } else {
+                                console.log(authData);
                                 app.navigate(document.referrer);
                             }
                         });

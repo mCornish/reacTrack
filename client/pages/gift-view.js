@@ -1,6 +1,7 @@
 /*global app, alert*/
 var PageView = require('./base');
 var templates = require('../templates');
+var CommentForm = require('../forms/comment');
 
 
 module.exports = PageView.extend({
@@ -31,5 +32,27 @@ module.exports = PageView.extend({
             if (err) alert('couldnt find a model with id: ' + spec.id);
             self.model = model;
         });
+    },
+    render: function() {
+        
+    },
+    subviews: {
+        form: {
+            container: 'form',
+            prepareView: function (el) {
+                return new CommentForm({
+                    el: el,
+                    submitCallback: function (data) {
+
+                        app.comments.create(data, {
+                            wait: true,
+                            success: function (collection, res) {
+
+                            }
+                        });
+                    }
+                });
+            }
+        }
     }
 });

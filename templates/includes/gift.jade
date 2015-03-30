@@ -1,7 +1,9 @@
 div.grid-list__item.js-item
 
     a(data-hook="view")
-        h2(data-hook="title")
+        //h2(data-hook="title")
+        //p(data-hook="time-passed")
         img.grid-list__image(data-hook="image")
-        p(data-hook="user")
-        p(data-hook="time-passed")
+        div.grid-list__container
+            a(data-hook="action-want wantButton")
+            p(data-hook="wants")

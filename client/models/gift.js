@@ -7,15 +7,16 @@ module.exports = AmpersandModel.extend({
         id: 'any',
         user_id: 'any',
         title: ['string', true, 'Title'],
-        image: ['string', true, 'Image'],
+        image: ['any', true, 'image'],
         description: ['string', false, 'Description'],
         link: ['string', false, ''],
         male: ['boolean'],
         recipient: ['string'],
+        age: ['number'],
+        price: ['number'],
         occasion: ['string'],
         created: ['date', true, Date.now()],
-        upvotes: ['number', true, 0],
-        downvotes: ['number', true, 0]
+        wants: ['number', true, 0]
     },
     derived: {
         viewUrl: {
@@ -31,7 +32,7 @@ module.exports = AmpersandModel.extend({
             }
         },
         time: {
-            deps: ['date'],
+            deps: ['created'],
             fn: function () {
                 return moment(this.created).fromNow();
             }
@@ -57,6 +58,22 @@ module.exports = AmpersandModel.extend({
             fn: function () {
                 return '/user/' + this.user_id;
             }
+        },
+        wantButtonText: {
+            fn: function() {
+                if (me.wants.indexOf(this.id) < 0) {
+                    return 'Want';
+                } else {
+                    return 'You want this';
+                }
+            }
+        },
+        wantText: {
+            deps: ['wants'],
+            fn: function () {
+                return this.wants + ' people want this gift';
+            }
         }
+
     }
 });

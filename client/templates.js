@@ -17,7 +17,7 @@
 
     // body.jade compiled template
     templatizer["body"] = function tmpl_body() {
-        return '<body><nav class="navbar navbar-default"><div class="container-fluid"><div class="navbar-header"><a href="/" class="navbar-brand">yGmyG</a><ul class="nav navbar-nav"><li><a href="/find">Find a Gift</a></li><li><a href="/new-gift">Post a Gift</a></li><!--lia(href="/ygmyg") Gifts--><!--lia(href="/blog") Blog--><!--lia(href="/collections") collection demo--><!--lia(href="/tracks") tracks--><!--lia(href="/reactions") reactions--><li><a data-hook="profile-link" class="authed">Profile</a></li><li><a href="/login" class="unauthed login-button">Log In</a></li><li><a data-hook="action-logout" class="authed logout-button">Log Out</a></li></ul></div></div></nav><div class="container"><main data-hook="page-container"></main></div></body>';
+        return '<body><nav class="navbar navbar-default"><div class="container-fluid"><div class="navbar-header"><a data-hook="home-link" href="/" class="navbar-brand">yGmyG</a><ul class="nav navbar-nav"><li><a href="/find">Find a Gift</a></li><li><a href="/new-gift">Post a Gift</a></li><!--lia(href="/ygmyg") Gifts--><!--lia(href="/blog") Blog--><!--lia(href="/collections") collection demo--><!--lia(href="/tracks") tracks--><!--lia(href="/reactions") reactions--><li><a data-hook="profile-link">Profile</a></li><li><a data-hook="action-logout" class="logout-button">Log Out</a></li></ul></div></div></nav><div class="container"><main data-hook="page-container"></main></div></body>';
     };
 
     // head.jade compiled template
@@ -37,7 +37,7 @@
 
     // includes/gift.jade compiled template
     templatizer["includes"]["gift"] = function tmpl_includes_gift() {
-        return '<div class="grid-list__item js-item"><a data-hook="view"><h2 data-hook="title"></h2><img data-hook="image" class="grid-list__image"/><p data-hook="user"></p><p data-hook="time-passed"></p></a></div>';
+        return '<div class="grid-list__item js-item"><a data-hook="view"><!--h2(data-hook="title")--><!--p(data-hook="time-passed")--><img data-hook="image" class="grid-list__image"/><div class="grid-list__container"><a data-hook="action-want wantButton"></a><p data-hook="wants"></p></div></a></div>';
     };
 
     // includes/person.jade compiled template
@@ -92,7 +92,7 @@
 
     // pages/giftView.jade compiled template
     templatizer["pages"]["giftView"] = function tmpl_pages_giftView() {
-        return '<section class="page view-gift"><h3 data-hook="time-passed"></h3><h2 data-hook="title"></h2><img data-hook="image"/><p data-hook="description"></p><p data-hook="user"></p></section>';
+        return '<section class="page view-gift"><h3 data-hook="time-passed"></h3><h2 data-hook="title"></h2><img data-hook="image"/><p data-hook="description"></p><p data-hook="user"></p><h3>Comment</h3><form data-hook="comment-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Comment</button></div></form></section>';
     };
 
     // pages/gifts.jade compiled template
@@ -181,9 +181,14 @@
         return '<section class="page add-user"><h2>Register</h2><form data-hook="user-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Register</button></div></form></section>';
     };
 
+    // pages/userEdit.jade compiled template
+    templatizer["pages"]["userEdit"] = function tmpl_pages_userEdit() {
+        return '<section class="page edit-user"><h2>Update Profile</h2><form data-hook="user-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Update</button></div></form></section>';
+    };
+
     // pages/userView.jade compiled template
     templatizer["pages"]["userView"] = function tmpl_pages_userView() {
-        return '<section class="page view-user"><h2 data-hook="name"></h2></section>';
+        return '<section class="page view-user"><h2 data-hook="name"></h2><image data-hook="image"></image><h3>Wants</h3><div data-hook="gift-list" class="grid-list"></div></section>';
     };
 
     return templatizer;

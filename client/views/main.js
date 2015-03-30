@@ -12,6 +12,8 @@ var templates = require('../templates');
 var tracking = require('../helpers/metrics');
 var setFavicon = require('favicon-setter');
 
+var GiftView = require('../views/gift');
+
 var Firebase = require('firebase');
 var ref = new Firebase('sizzling-fire-6725.firebaseIO.com');
 var auth = require('../helpers/auth');
@@ -31,6 +33,7 @@ module.exports = View.extend({
         }
     },
     events: {
+        'click [data-hook~=home-link]': 'resetGifts',
         'click [data-hook~=action-logout]': 'handleLogoutClick',
         'click a[href]': 'handleLinkClick'
     },
@@ -41,11 +44,9 @@ module.exports = View.extend({
         // main renderer
         this.renderWithTemplate({me: me});
 
-        // manage log in and log out display/hide
+        // initialize authentication functions and fetch users
         auth.init();
 
-        // initialize users
-        app.users.fetch();
 
         // init and configure our page switcher
         this.pageSwitcher = new ViewSwitcher(this.queryByHook('page-container'), {
@@ -68,11 +69,17 @@ module.exports = View.extend({
     },
 
     handleNewPage: function (view) {
-        // tell the view switcher to render the new one
-        this.pageSwitcher.set(view);
 
-        // mark the correct nav item selected
-        this.updateActiveNav();
+        if(window.location.pathname === '/login') {
+            $('.navbar').hide();
+        } else {
+            $('.navbar').show();
+        }
+            // tell the view switcher to render the new one
+            this.pageSwitcher.set(view);
+
+            // mark the correct nav item selected
+            this.updateActiveNav();
     },
 
     handleLinkClick: function (e) {
@@ -84,6 +91,15 @@ module.exports = View.extend({
         if (local && !e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey && !e.defaultPrevented) {
             e.preventDefault();
             app.navigate(aTag.pathname);
+        }
+    },
+
+    resetGifts: function () {
+        if(window.location.pathname === '/') {
+            $('[data-hook="gift-list"]').empty();
+            this.renderCollection(app.gifts, GiftView, this.queryByHook('gift-list'), {
+                reverse: true
+            });
         }
     },
 

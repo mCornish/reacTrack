@@ -228,6 +228,7 @@ exports.updateGift = function(req, res) {
 };
 
 
+
 exports.addPost = function (req, res) {
     var post = req.body;
 

@@ -2,7 +2,7 @@ body
     nav.navbar.navbar-default
         div.container-fluid
             div.navbar-header
-                a.navbar-brand(href='/') yGmyG
+                a.navbar-brand(data-hook="home-link" href='/') yGmyG
                 ul.nav.navbar-nav
                     li
                         a(href="/find") Find a Gift
@@ -19,10 +19,8 @@ body
                     //li
                         a(href="/reactions") reactions
                     li
-                        a.authed(data-hook="profile-link") Profile
+                        a(data-hook="profile-link") Profile
                     li
-                        a.unauthed.login-button(href="/login") Log In
-                    li
-                        a.authed.logout-button(data-hook="action-logout") Log Out
+                        a.logout-button(data-hook="action-logout") Log Out
     .container
         main(data-hook="page-container")

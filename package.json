@@ -9,6 +9,7 @@
   "main": "server.js",
   "dependencies": {
     "ampersand-checkbox-view": "^2.0.2",
+    "ampersand-collection": "^1.4.4",
     "ampersand-dom": "^1.2.1",
     "ampersand-form-view": "^2.0.0",
     "ampersand-input-view": "^2.0.0",
@@ -41,6 +42,7 @@
     "moment": "^2.9.0",
     "mongodb": "^1.4.34",
     "moonboots-express": "^0.1.1",
+    "multer": "^0.1.8",
     "passport": "^0.2.1",
     "passport-local": "^1.0.0",
     "semi-static": "^0.0.5",
