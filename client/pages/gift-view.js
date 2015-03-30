@@ -22,6 +22,11 @@ module.exports = PageView.extend({
         'model.username': {
             hook: 'user'
         },
+        'model.userUrl': {
+            type: 'attribute',
+            hook: 'userUrl',
+            name: 'href'
+        },
         'model.time': {
             hook: 'time-passed'
         },
@@ -50,29 +55,21 @@ module.exports = PageView.extend({
                                 comments.push(comment);
                             }
                         });
+                        if (comments.length > 0) {
+                            commentsCollection = new AmpersandCollection(comments, {
+                                model: Comment
+                            });
 
-                        commentsCollection = new AmpersandCollection(comments, {
-                            model: Comment
-                        });
+                            self.renderCollection(commentsCollection, CommentView, self.queryByHook('comment-list'));
 
-                        self.renderCollection(commentsCollection, CommentView, self.queryByHook('comment-list'));
+                        } else {
+                            self.queryByHook('comment-list').innerHTML = self.noCommentText;
+                        }
                     }
                 });
             }
         });
     },
-    // render: function() {
-    //     this.renderWithTemplate();
-    //     console.log(app.comments.toJSON());
-    //     console.log(viewModel);
-    //     // var commentsCollection = new AmpersandCollection(comments, {
-    //     //     model: Comment
-    //     // });
-    //     //
-    //     // this.renderCollection(commentsCollection, CommentView, this.queryByHook('comment-list'), {
-    //     //     reverse: true
-    //     // });
-    // },
     subviews: {
         form: {
             container: 'form',
@@ -95,7 +92,8 @@ module.exports = PageView.extend({
                 });
             }
         }
-    }
+    },
+    noCommentText: 'No comments yet.'
 });
 
 var self, viewModel;

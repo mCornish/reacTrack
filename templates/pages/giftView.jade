@@ -1,11 +1,16 @@
 section.page.view-gift
 
-    h3(data-hook='time-passed')
     h2(data-hook='title')
+    h3
+        div
+            span Posted&nbsp;
+            span(data-hook='time-passed')
+            span &nbsp;by&nbsp;
+            a(data-hook='userUrl')
+                span(data-hook='user')
 
     img(data-hook='image')
     p(data-hook='description')
-    p(data-hook='user')
 
     h3 Comments
     ul.comments(data-hook='comment-list')

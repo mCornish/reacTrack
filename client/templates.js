@@ -97,7 +97,7 @@
 
     // pages/giftView.jade compiled template
     templatizer["pages"]["giftView"] = function tmpl_pages_giftView() {
-        return '<section class="page view-gift"><h3 data-hook="time-passed"></h3><h2 data-hook="title"></h2><img data-hook="image"/><p data-hook="description"></p><p data-hook="user"></p><h3>Comments</h3><ul data-hook="comment-list" class="comments"></ul><form data-hook="comment-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Comment</button></div></form></section>';
+        return '<section class="page view-gift"><h2 data-hook="title"></h2><h3><div><span>Posted&nbsp;</span><span data-hook="time-passed"></span><span>&nbsp;by&nbsp;</span><a data-hook="userUrl"><span data-hook="user"></span></a></div></h3><img data-hook="image"/><p data-hook="description"></p><h3>Comments</h3><ul data-hook="comment-list" class="comments"></ul><form data-hook="comment-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Comment</button></div></form></section>';
     };
 
     // pages/gifts.jade compiled template

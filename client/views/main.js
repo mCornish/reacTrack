@@ -33,7 +33,7 @@ module.exports = View.extend({
         }
     },
     events: {
-        'click [data-hook~=home-link]': 'resetGifts',
+        'click [data-hook~=home-link]': 'persistGifts',
         'click [data-hook~=action-logout]': 'handleLogoutClick',
         'click a[href]': 'handleLinkClick'
     },
@@ -94,7 +94,7 @@ module.exports = View.extend({
         }
     },
 
-    resetGifts: function () {
+    persistGifts: function () {
         if(window.location.pathname === '/') {
             $('[data-hook="gift-list"]').empty();
             this.renderCollection(app.gifts, GiftView, this.queryByHook('gift-list'), {
