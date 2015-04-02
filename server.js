@@ -94,6 +94,9 @@ app.put('/gifts/:id', api.updateGift);
 app.get('/comments', api.listComments);
 app.post('/comments', api.addComment);
 
+app.get('/categories', api.listCategories);
+app.post('/categories', api.addCategory);
+
 
 
 app.get('/posts', api.listPosts);

@@ -5,6 +5,8 @@ var ref = new Firebase('sizzling-fire-6725.firebaseIO.com');
 var usersRef = new Firebase('sizzling-fire-6725.firebaseIO.com/YGMYG/users');
 var giftsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/YGMYG/gifts');
 var commentsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/YGMYG/comments');
+var categoriesRef = new Firebase('sizzling-fire-6725.firebaseIO.com/YGMYG/categories');
+
 var postsRef = new Firebase('sizzling-fire-6725.firebaseIO.com/blog/posts');
 
 // var MongoClient = require('mongodb').MongoClient;
@@ -258,6 +260,53 @@ exports.addComment = function (req, res) {
             comment.id = newCommentRef.key();
             res.send(comment);
         }
+    });
+};
+
+
+exports.listCategories = function (req, res) {
+    var categories = [];
+
+    categoriesRef.once("value", function(snapshot) {
+        var snap = snapshot.val();
+
+        for (key in snap) {
+            snap[key].id = key;
+            categories.push(snap[key]);
+        }
+
+        res.send(categories);
+
+    }, function(errorObj) {
+        console.log('Error: ' + errorObj.code);
+    });
+};
+
+exports.addCategory = function (req, res) {
+    var category = req.body;
+
+    var newCategoryRef = categoriesRef.push(category, function(error) {
+        if (error) {
+            console.log('Error: ' + error);
+        } else {
+
+            category.id = newCategoryRef.key();
+            res.send(category);
+        }
+    });
+};
+
+exports.updateCategory = function(req, res) {
+    var id = req.params.id;
+    var data = req.body;
+
+    categoriesRef.child(id).update(data, function(error) {
+        if (error) {
+            alert('Gift could not be saved: ' + error);
+        } else {
+            res.send(data);
+        }
+
     });
 };
 

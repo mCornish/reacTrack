@@ -102,7 +102,7 @@
 
     // pages/gifts.jade compiled template
     templatizer["pages"]["gifts"] = function tmpl_pages_gifts() {
-        return '<section class="page"><div class="container"></div><h2>Gifts</h2><div class="btn-toolbar"><div class="btn-group"><button data-hook="female" class="btn btn-default">Female</button><button data-hook="male" class="btn btn-default">Male</button></div><div class="btn-group"><button data-hook="birthday" class="btn btn-default">Birthday</button><button data-hook="christmas" class="btn btn-default">Christmas</button></div></div><div data-hook="gift-list" class="grid-list"></div></section>';
+        return '<section class="page"><div class="container"></div><h2>Gifts</h2><div class="btn-toolbar"><div class="btn-group"><button data-hook="female" class="btn btn-default">Female</button><button data-hook="male" class="btn btn-default">Male</button></div><div class="dropdown"><button data-hook="birthday" class="btn btn-default">Birthday</button><button data-hook="christmas" class="btn btn-default">Christmas</button></div></div><div data-hook="gift-list" class="grid-list"></div></section>';
     };
 
     // pages/home.jade compiled template
@@ -122,7 +122,7 @@
         var jade_interp;
         var locals_for_with = locals || {};
         (function(message) {
-            buf.push('<section class="page login"><h2>Login</h2><form data-hook="login-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><div class="form-group"><button data-hook="reset" type="submit" class="btn btn-primary">Sign In</button><a href="/register">Register</a><div id="message"></div>');
+            buf.push('<section class="page login"><h2>Login</h2><form data-hook="login-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><div class="form-group"><button data-hook="reset" type="submit" class="btn btn-primary">Sign In</button><!--a(href="/register") Register--><div id="message"></div>');
             if (message) {
                 buf.push('<h1 class="text-center error-message">' + jade.escape((jade_interp = message) == null ? "" : jade_interp) + "</h1>");
             }

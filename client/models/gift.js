@@ -8,10 +8,9 @@ module.exports = AmpersandModel.extend({
         user_id: 'any',
         title: ['string', true, 'Title'],
         created: ['date', true, Date.now()],
-        image: ['any', true, 'image'],
+        image: ['any', true, 'http://crowisland36pto.org/wp-content/uploads/gift_box_blue.png'],
         description: ['string', false, 'Description'],
         link: ['string', false, ''],
-        male: ['boolean'],
         recipient: ['string'],
         age: ['number'],
         price: ['number'],
@@ -57,6 +56,14 @@ module.exports = AmpersandModel.extend({
             deps: ['user_id'],
             fn: function () {
                 return '/user/' + this.user_id;
+            }
+        },
+        gender: {
+            deps: ['recipient'],
+            fn: function () {
+
+                var category = app.categories.get(this.recipient);
+                return category.gender;
             }
         },
         wantButtonText: {

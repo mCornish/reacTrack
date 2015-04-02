@@ -10,6 +10,7 @@ var Me = require('./models/me');
 var Users = require('./models/users');
 var Gifts = require('./models/gifts');
 var Comments = require('./models/comments');
+var Categories = require('./models/categories');
 
 var Blog = require('./models/blog');
 var People = require('./models/persons');
@@ -29,6 +30,7 @@ module.exports = {
         this.users = new Users();
         this.gifts = new Gifts();
         this.comments = new Comments();
+        this.categories = new Categories();
 
 
         this.blog = new Blog();

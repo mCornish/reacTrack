@@ -24,7 +24,7 @@ module.exports = FormView.extend({
                 name: 'image',
                 value: this.model && this.model.image,
                 required: false,
-                type: 'file',
+                type: 'url',
                 placeholder: 'Image URL',
                 parent: this
             }),
