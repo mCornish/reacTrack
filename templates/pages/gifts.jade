@@ -1,12 +1,32 @@
 section.page
     div.container
     h2 Gifts
-    .btn-toolbar
-        .btn-group
-            button.btn.btn-default(data-hook="female") Female
-            button.btn.btn-default(data-hook="male") Male
-        .dropdown
-            button.btn.btn-default(data-hook="birthday") Birthday
-            button.btn.btn-default(data-hook="christmas") Christmas
+    .form-inline
+        .radio
+            label
+                input(data-hook="female" name="gender" type="radio")
+                span Female
+        .radio
+            label
+                input(data-hook="male" name="gender" type="radio")
+                span Male
+        .radio
+            label
+                input(data-hook="gender" name="gender" type="radio")
+                span Either
+        .form-group
+            select.form-control(data-hook="recipient-list")
+        .form-group
+            select.form-control(data-hook="occasion-list")
+        .form-group
+            input.form-control(data-hook="age" placeholder="Age")
+        .form-group
+            .input-group
+                .input-group-addon $
+                input.form-control(data-hook="price-min" placeholder="Minimum Price")
+        .form-group
+            .input-group
+                .input-group-addon $
+                input.form-control(data-hook="price-max" placeholder="Maximum Price")
 
     div.grid-list(data-hook="gift-list")

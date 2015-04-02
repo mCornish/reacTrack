@@ -5,5 +5,6 @@ var Category = require('./category');
 module.exports = Collection.extend({
     model: Category,
     url: '/categories',
-    mainIndex: 'id'
+    mainIndex: 'id',
+    indexes: ['name']
 });

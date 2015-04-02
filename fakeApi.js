@@ -217,8 +217,8 @@ exports.listGifts = function (req, res) {
 };
 
 exports.updateGift = function(req, res) {
-    var id = req.params.id;
     var data = req.body;
+    var id = data.id;
 
     giftsRef.child(id).update(data, function(error) {
         if (error) {

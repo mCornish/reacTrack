@@ -25,6 +25,11 @@
         return '<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><meta name="apple-mobile-web-app-capable" content="yes"/><script src=\'https://cdn.firebase.com/js/client/2.2.1/firebase.js\'></script>';
     };
 
+    // includes/categoryList.jade compiled template
+    templatizer["includes"]["categoryList"] = function tmpl_includes_categoryList() {
+        return '<option data-hook="name"></option>';
+    };
+
     // includes/comment.jade compiled template
     templatizer["includes"]["comment"] = function tmpl_includes_comment() {
         return '<li class="post list-group-item"><div><span>posted&nbsp;</span><span data-hook="time"></span></div><div><span>by&nbsp;</span><a data-hook="authorUrl"><span data-hook="author"></span></a></div><p data-hook="content"></p></li>';
@@ -102,7 +107,7 @@
 
     // pages/gifts.jade compiled template
     templatizer["pages"]["gifts"] = function tmpl_pages_gifts() {
-        return '<section class="page"><div class="container"></div><h2>Gifts</h2><div class="btn-toolbar"><div class="btn-group"><button data-hook="female" class="btn btn-default">Female</button><button data-hook="male" class="btn btn-default">Male</button></div><div class="dropdown"><button data-hook="birthday" class="btn btn-default">Birthday</button><button data-hook="christmas" class="btn btn-default">Christmas</button></div></div><div data-hook="gift-list" class="grid-list"></div></section>';
+        return '<section class="page"><div class="container"></div><h2>Gifts</h2><div class="form-inline"><div class="radio"><label><input data-hook="female" name="gender" type="radio"/><span>Female</span></label></div><div class="radio"><label><input data-hook="male" name="gender" type="radio"/><span>Male</span></label></div><div class="radio"><label><input data-hook="gender" name="gender" type="radio"/><span>Either</span></label></div><div class="form-group"><select data-hook="recipient-list" class="form-control"></select></div><div class="form-group"><select data-hook="occasion-list" class="form-control"></select></div><div class="form-group"><input data-hook="age" placeholder="Age" class="form-control"/></div><div class="form-group"><div class="input-group"><div class="input-group-addon">$</div><input data-hook="price-min" placeholder="Minimum Price" class="form-control"/></div></div><div class="form-group"><div class="input-group"><div class="input-group-addon">$</div><input data-hook="price-max" placeholder="Maximum Price" class="form-control"/></div></div></div><div data-hook="gift-list" class="grid-list"></div></section>';
     };
 
     // pages/home.jade compiled template

@@ -3,6 +3,7 @@ var moment = require('moment');
 
 
 module.exports = AmpersandModel.extend({
+    url: '/gift',
     props: {
         id: 'any',
         user_id: 'any',

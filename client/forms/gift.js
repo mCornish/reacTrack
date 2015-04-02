@@ -3,6 +3,10 @@ var InputView = require('ampersand-input-view');
 var SelectView = require('ampersand-select-view');
 var CheckboxView = require('ampersand-checkbox-view');
 var templates = require('../templates');
+
+var Occasions = require('../helpers/occasions');
+var Recipients = require('../helpers/recipients');
+
 var ExtendedInput = InputView.extend({
     template: templates.includes.formInput()
 });
@@ -67,37 +71,7 @@ module.exports = FormView.extend({
                 value: this.model && this.model.occasion,
                 required: false,
                 unselectedText: 'Why did you get the gift?',
-                options: [
-                    'Anniversary',
-                    'Baby Shower',
-                    'Bachelor Party',
-                    'Bachelorette Party',
-                    'Baptism',
-                    'Bar/Bat Mitzvah',
-                    'Birthday',
-                    'Bridal Shower',
-                    'Bridesmaid',
-                    'Cheer up',
-                    'Christening',
-                    'Christmas',
-                    'Communion',
-                    'Congratulations',
-                    'Easter',
-                    'Engagement',
-                    'Farewell',
-                    'Get well soon',
-                    'Good luck',
-                    'Graduation',
-                    'Groomsman',
-                    'Halloween',
-                    'Housewarming',
-                    'I miss you',
-                    'I\'m sorry',
-                    'Retirement',
-                    'Thank you',
-                    'Thinking of you',
-                    'Wedding'
-                ],
+                options: Occasions.array,
                 parent: this
             }),
             new SelectView({
@@ -106,31 +80,7 @@ module.exports = FormView.extend({
                 value: this.model && this.model.recipient,
                 required: false,
                 unselectedText: 'Who is the gift for?',
-                options: [
-                    'Babysitter',
-                    'Boyfriend',
-                    'Brother',
-                    'Client',
-                    'Co-worker',
-                    'Dad',
-                    'Daughter',
-                    'Employee',
-                    'Friend',
-                    'Girldfriend',
-                    'Granddaughter',
-                    'Grandfather',
-                    'Grandmother',
-                    'Grandson',
-                    'Husband',
-                    'Mom',
-                    'Nephew',
-                    'Niece',
-                    'Pet',
-                    'Sister',
-                    'Son',
-                    'Teacher',
-                    'Wife'
-                ],
+                options: Recipients.array,
                 parent: this
             }),
             new ExtendedInput({

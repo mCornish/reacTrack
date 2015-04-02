@@ -51,9 +51,12 @@ module.exports = View.extend({
 
             this.queryByHook('wantButton').innerHTML = this.wantOnText;
 
+            // Add 1 to gift.wants
             var data = {
+                id: gift.id,
                 wants: gift.wants + 1
-            }
+            };
+            // Update gift model and save to database
             gift.save(data, {
                 wait: true
             });
@@ -72,12 +75,12 @@ module.exports = View.extend({
 
             this.queryByHook('wantButton').innerHTML = this.wantOffText;
 
-            $('[data-hook="wantButton"]').html(this.wantOffText);
-
             // Remove 1 from gift.wants
             var data = {
+                id: gift.id,
                 wants: gift.wants - 1
-            }
+            };
+            // Update gift model and save to database
             gift.save(data, {
                 wait: true
             });
