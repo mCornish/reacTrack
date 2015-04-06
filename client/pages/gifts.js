@@ -23,7 +23,7 @@ module.exports = PageView.extend({
         'change [data-hook=either]': 'filter',
         'change [data-hook=recipient-list]': 'filter',
         'change [data-hook=occasion-list]': 'filter',
-        'change [data-hook=age]': 'filter',
+        'change [data-hook=age-list]': 'filter',
         'change [data-hook=price-min]': 'filter',
         'change [data-hook=price-max]': 'filter'
     },
@@ -72,7 +72,9 @@ module.exports = PageView.extend({
         var occasionFilter = this.queryByHook('occasion-list').value;
         occasionFilter === 'Occasion' ? occasionFilter = null : '';
 
-        var ageFilter = this.queryByHook('age').value;
+        var ageFilter = this.queryByHook('age-list').value;
+        ageFilter === 'Age' ? ageFilter = null : '';
+
         var priceMinFilter = this.queryByHook('price-min').value;
         var priceMaxFilter = this.queryByHook('price-max').value;
         var gifts = originalCollection.toJSON();
@@ -164,15 +166,27 @@ var filterOccasion = function(filter, gifts) {
     return newGifts;
 };
 
-var filterAge = function(filter, gifts) {
+var filterAge = function(ageRange, gifts) {
     var newGifts = [];
+    var minAge, maxAge;
 
+    if (ageRange.indexOf('Newborn') > -1) {
+        minAge = 0;
+        maxAge = 1;
+    } else if(ageRange.indexOf('+') < 0) {
+        var hyphen = ageRange.indexOf('-');
+        minAge = ageRange.substr(0, hyphen - 1);
+        maxAge = ageRange.substr(hyphen + 1);
+    } else {
+        minAge = 50;
+        maxAge = 150;
+    }
     gifts.forEach(function(gift, index) {
-        if(gift.age && gift.age.toString() === filter) {
+        if(gift.age && gift.age >= minAge && gift.age <= maxAge) {
             newGifts.push(gifts[index]);
         }
     });
-
+    console.log(minAge + ' ' + maxAge);
     return newGifts;
 };
 
