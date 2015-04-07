@@ -55,16 +55,6 @@ round($roundtl, $roundtr, $roundbr, $roundbl)
 textShadow($color, $x, $y, $blur)
   text-shadow: $color $x $y $blur
 
-calc()
-  if current-property
-    add-property(current-property[0], s('-webkit-calc(%s)', unquote(arguments)))
-    add-property(current-property[0], s('-moz-calc(%s)', unquote(arguments)))
-    add-property(current-property[0], s('-ms-calc(%s)', unquote(arguments)))
-    add-property(current-property[0], s('-o-calc(%s)', unquote(arguments)))
-    s('calc(%s)', unquote(arguments))
-  else
-    error('calc() must be used within a property')
-
 noselect()
   -webkit-touch-callout: none
   -webkit-user-select: none

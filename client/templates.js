@@ -35,6 +35,11 @@
         return '<li class="post list-group-item"><div><span>posted&nbsp;</span><span data-hook="time"></span></div><div><span>by&nbsp;</span><a data-hook="authorUrl"><span data-hook="author"></span></a></div><p data-hook="content"></p></li>';
     };
 
+    // includes/featuredGift.jade compiled template
+    templatizer["includes"]["featuredGift"] = function tmpl_includes_featuredGift() {
+        return '<div class="featured__item"><a data-hook="view"><img data-hook="image" class="featured__image"/></a></div>';
+    };
+
     // includes/formInput.jade compiled template
     templatizer["includes"]["formInput"] = function tmpl_includes_formInput() {
         return '<div class="form-group"><label data-hook="label"></label><div data-hook="message-container"><div data-hook="message-text" class="alert alert-danger"></div></div><input class="form-control"/></div>';
@@ -107,12 +112,12 @@
 
     // pages/gifts.jade compiled template
     templatizer["pages"]["gifts"] = function tmpl_pages_gifts() {
-        return '<section class="page"><div class="container"></div><h2>Gifts</h2><div class="form-inline"><div class="radio"><label><input data-hook="female" name="gender" type="radio"/><span>Female</span></label></div><div class="radio"><label><input data-hook="male" name="gender" type="radio"/><span>Male</span></label></div><div class="radio"><label><input data-hook="gender" name="gender" type="radio"/><span>Either</span></label></div><div class="form-group"><select data-hook="recipient-list" class="form-control"></select></div><div class="form-group"><select data-hook="occasion-list" class="form-control"></select></div><div class="form-group"><select data-hook="age-list" class="form-control"><option>Age</option><option>Newborn</option><option>1 - 5</option><option>11 - 15</option><option>16 - 20</option><option>21 - 30</option><option>31 - 40</option><option>41 - 50</option><option>50+</option></select></div><!--.form-groupinput.form-control(data-hook="age" placeholder="Age")--><div class="form-group"><div class="input-group"><div class="input-group-addon">$</div><input data-hook="price-min" placeholder="Minimum Price" class="form-control"/></div></div><div class="form-group"><div class="input-group"><div class="input-group-addon">$</div><input data-hook="price-max" placeholder="Maximum Price" class="form-control"/></div></div></div><div data-hook="gift-list" class="grid-list"></div></section>';
+        return '<section class="page"><div class="container"></div><h2>Gifts</h2><div class="form-inline"><div class="radio"><label><input data-hook="female" name="gender" type="radio"/><span>Female</span></label></div><div class="radio"><label><input data-hook="male" name="gender" type="radio"/><span>Male</span></label></div><div class="radio"><label><input data-hook="either" name="gender" type="radio"/><span>Either</span></label></div><div class="form-group"><select data-hook="recipient-list" class="form-control"></select></div><div class="form-group"><select data-hook="occasion-list" class="form-control"></select></div><div class="form-group"><select data-hook="age-list" class="form-control"><option>Age</option><option>Newborn</option><option>1 - 5</option><option>11 - 15</option><option>16 - 20</option><option>21 - 30</option><option>31 - 40</option><option>41 - 50</option><option>50+</option></select></div><!--.form-groupinput.form-control(data-hook="age-list" placeholder="Age")--><div class="form-group"><div class="input-group"><div class="input-group-addon">$</div><input data-hook="price-min" placeholder="Minimum Price" class="form-control"/></div></div><div class="form-group"><div class="input-group"><div class="input-group-addon">$</div><input data-hook="price-max" placeholder="Maximum Price" class="form-control"/></div></div><div class="form-group"><select data-hook="time-list" class="form-control"><option>From today</option><option>From this week</option><option>From this month</option><option>From this year</option><option>From whenever</option></select></div></div><div data-hook="gift-list" class="grid-list"></div></section>';
     };
 
     // pages/home.jade compiled template
     templatizer["pages"]["home"] = function tmpl_pages_home() {
-        return '<section class="page home"><h2>Currently in Development:</h2><ul><li>YGMyG</li><li>Blog with admin dashboard</li><li>reacTrack</li></ul></section>';
+        return '<section class="page home"><h2>Featured Gifts</h2><div data-hook="featured" class="featured"></div><h2>Most Popular Gifts</h2><div data-hook="popular" class="featured"></div></section>';
     };
 
     // pages/info.jade compiled template

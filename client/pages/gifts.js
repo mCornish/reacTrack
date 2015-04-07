@@ -9,8 +9,9 @@ var CategoryListView = require('../views/categoryList')
 var auth = require('../helpers/auth');
 var Occasions = require('../helpers/occasions');
 var Recipients = require('../helpers/recipients');
+var moment = require('moment');
 
-var originalCollection, currentCollection;
+var originalCollection, currentCollection, self;
 var pageSize = 20;
 
 
@@ -18,32 +19,58 @@ module.exports = PageView.extend({
     pageTitle: 'Gifts',
     template: templates.pages.gifts,
     events: {
-        'change [data-hook=gender]': 'filter',
+        'change [data-hook=female]': 'filter',
         'change [data-hook=male]': 'filter',
         'change [data-hook=either]': 'filter',
         'change [data-hook=recipient-list]': 'filter',
         'change [data-hook=occasion-list]': 'filter',
         'change [data-hook=age-list]': 'filter',
         'change [data-hook=price-min]': 'filter',
-        'change [data-hook=price-max]': 'filter'
+        'change [data-hook=price-max]': 'filter',
+        'change [data-hook=time-list]': 'filter'
     },
     render: function() {
-        var self = this;
+        self = this;
 
         this.renderWithTemplate();
         this.collection.fetch({
             success: function() {
                 var giftArray = self.collection.toJSON();
-                var sizedArray = giftArray.slice(0, pageSize);
-                var giftCollection = new AmpersandCollection(sizedArray, {
+
+                // Prepare and preserve original collection
+                giftArray.sort(function(a, b) {
+                    return b.created - a.created;
+                });
+                originalCollection = new AmpersandCollection(giftArray.slice(0, pageSize), {
                     model: Gift
                 });
 
-                self.renderCollection(giftCollection, GiftView, self.queryByHook('gift-list'), {
-                    reverse: true
+                // Get gifts from today
+                var compareDate = moment().subtract(1, 'day').startOf('day');
+                var newGifts = [];
+
+                giftArray.forEach(function(gift, index) {
+                    var date = moment(gift.created);
+
+                    if(date.isBetween(compareDate, moment())) {
+                        newGifts.push(giftArray[index]);
+                    }
+                });
+                giftArray = newGifts;
+
+                // Sort gifts by when they were created
+                giftArray.sort(function(a, b) {
+                    return b.created - a.created;
                 });
 
-                originalCollection = currentCollection = giftCollection;
+                // Get the proper number of gifts
+                giftArray = giftArray.slice(0, pageSize);
+
+
+                var giftCollection = new AmpersandCollection(giftArray, {
+                    model: Gift
+                });
+                self.renderCollection(giftCollection, GiftView, self.queryByHook('gift-list'));
             }
         });
 
@@ -65,6 +92,7 @@ module.exports = PageView.extend({
     filter: function() {
         var femaleFilter = this.queryByHook('female').checked;
         var maleFilter = this.queryByHook('male').checked;
+        var eitherFilter = this.queryByHook('either').checked;
 
         var recipientFilter = this.queryByHook('recipient-list').value;
         recipientFilter === 'Recipient' ? recipientFilter = null : '';
@@ -75,26 +103,34 @@ module.exports = PageView.extend({
         var ageFilter = this.queryByHook('age-list').value;
         ageFilter === 'Age' ? ageFilter = null : '';
 
+        var timeFilter = this.queryByHook('time-list').value;
+
         var priceMinFilter = this.queryByHook('price-min').value;
         var priceMaxFilter = this.queryByHook('price-max').value;
+
         var gifts = originalCollection.toJSON();
+
 
         femaleFilter ? gifts = filterGender('female', gifts) : '';
         maleFilter ? gifts = filterGender('male', gifts): '';
+        eitherFilter ? gifts = filterGender('either', gifts): '';
         recipientFilter ? gifts = filterRecipient(recipientFilter, gifts) : '';
         occasionFilter ? gifts = filterOccasion(occasionFilter, gifts) : '';
         ageFilter ? gifts = filterAge(ageFilter, gifts) : '';
         priceMinFilter ? gifts = filterMinPrice(priceMinFilter, gifts): '';
         priceMaxFilter ? gifts = filterMaxPrice(priceMaxFilter, gifts): '';
+        timeFilter ? gifts = filterTime(timeFilter, gifts) : '';
 
+        gifts = gifts.sort(function(a, b) {
+            return b.created - a.created;
+        });
+        gifts = gifts.slice(0, pageSize);
         var filteredCollection = new AmpersandCollection(gifts, {
             model: Gift
         });
 
         $('[data-hook="gift-list"]').empty();
-        this.renderCollection(filteredCollection, GiftView, this.queryByHook('gift-list'), {
-            reverse: true
-        });
+        this.renderCollection(filteredCollection, GiftView, this.queryByHook('gift-list'));
     }
 });
 
@@ -131,13 +167,35 @@ var getRecipients = function() {
 };
 
 var filterGender = function(gender, gifts) {
+    var gender = gender.toLowerCase();
     var newGifts = [];
 
-    gifts.forEach(function(gift, index) {
-        if(gift.gender === gender) {
-            newGifts.push(gifts[index]);
-        }
-    });
+    if(gender === 'either') {
+        newGifts = gifts;
+    }
+
+    // Adjust recipient list to selected gender
+    var recipients;
+
+    if (gender === 'male') {
+        recipients = new AmpersandCollection(Recipients.male, {
+            model: Category
+        });
+    } else if (gender === 'female') {
+        recipients = new AmpersandCollection(Recipients.female, {
+            model: Category
+        });
+    } else {
+        recipients = new AmpersandCollection(Recipients.model, {
+            model: Category
+        });
+    }
+
+    $('[data-hook="recipient-list"]').empty();
+    var recipientNode = createNode('option', 'Recipient');
+    self.queryByHook('recipient-list').appendChild(recipientNode);
+    self.renderCollection(recipients, CategoryListView, self.queryByHook('recipient-list'));
+
 
     return newGifts;
 };
@@ -207,6 +265,47 @@ var filterMaxPrice = function(maxPrice, gifts) {
 
     gifts.forEach(function(gift, index) {
         if(gift.price <= maxPrice) {
+            newGifts.push(gifts[index]);
+        }
+    });
+
+    return newGifts;
+};
+
+var filterTime = function(time, gifts) {
+    var newGifts = [];
+    var time = time.toLowerCase();
+    var compareDate, date;
+    var today = moment();
+
+    if(time.indexOf('today') > -1) {
+
+        timeString = 'day';
+
+    } else if(time.indexOf('week') > -1) {
+
+        timeString = 'week';
+
+    } else if(time.indexOf('month') > -1) {
+
+        timeString = 'month';
+
+    } else if(time.indexOf('year') > -1) {
+
+        timeString = 'year';
+
+    } else {
+
+        return gifts;
+
+    }
+
+    compareDate = moment().subtract(1, timeString).startOf('day');
+
+    gifts.forEach(function(gift, index) {
+        date = moment(gift.created);
+
+        if(date.isBetween(compareDate, today)) {
             newGifts.push(gifts[index]);
         }
     });

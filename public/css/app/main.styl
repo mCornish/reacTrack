@@ -4,7 +4,6 @@
 @import '../_mixins'
 
 
-// you styles here:
 body
   background: white
 
@@ -12,8 +11,20 @@ body
 .logout-button
     cursor: pointer
 
-* + .form-group
+.form-inline * + .form-group
     margin-left: 1em;
+
+.featured__item {
+    width: calc((100% - 10em) / 5)
+    display: inline-block
+    border: 1px solid rgb(240,240,240)
+    border-radius: 1em
+    margin: 1em
+}
+
+.featured__image
+    width: 100%
+    border-radius: 1em
 
 
 .grid-list

@@ -30,6 +30,7 @@ var ref = new Firebase('sizzling-fire-6725.firebaseIO.com');
 module.exports = Router.extend({
     routes: {
         '': 'home',
+        'find': 'find',
         'register': 'userAdd',
         'user/:id': 'userView',
         'user/:id/edit': 'userEdit',
@@ -61,6 +62,12 @@ module.exports = Router.extend({
 
     // ------- ROUTE HANDLERS ---------
     home: function () {
+        this.authenticate(new HomePage({
+            model: me,
+            collection: app.gifts
+        }));
+    },
+    find: function () {
         this.authenticate(new GiftsPage({
             model: me,
             collection: app.gifts

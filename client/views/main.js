@@ -119,7 +119,10 @@ module.exports = View.extend({
 
     handleLogoutClick: function () {
         if (ref.getAuth()) {
+            
             ref.unauth();
+            me = new Me();
+
             app.navigate('/');
         }
     }

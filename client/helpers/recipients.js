@@ -8,7 +8,7 @@ exports.array = [
 	'Daughter',
 	'Employee',
 	'Friend',
-	'Girldfriend',
+	'Girlfriend',
 	'Granddaughter',
 	'Grandfather',
 	'Grandmother',
@@ -48,4 +48,40 @@ exports.model = [
 	{name: 'Son'},
 	{name: 'Teacher'},
 	{name: 'Wife'}
+];
+
+exports.female = [
+	{name: 'Babysitter'},
+	{name: 'Client'},
+	{name: 'Co-worker'},
+	{name: 'Daughter'},
+	{name: 'Employee'},
+	{name: 'Friend'},
+	{name: 'Girlfriend'},
+	{name: 'Granddaughter'},
+	{name: 'Grandmother'},
+	{name: 'Mom'},
+	{name: 'Niece'},
+	{name: 'Pet'},
+	{name: 'Sister'},
+	{name: 'Teacher'},
+	{name: 'Wife'}
+];
+
+exports.male = [
+	{name: 'Babysitter'},
+	{name: 'Boyfriend'},
+	{name: 'Brother'},
+	{name: 'Client'},
+	{name: 'Co-worker'},
+	{name: 'Dad'},
+	{name: 'Employee'},
+	{name: 'Friend'},
+	{name: 'Grandfather'},
+	{name: 'Grandson'},
+	{name: 'Husband'},
+	{name: 'Nephew'},
+	{name: 'Pet'},
+	{name: 'Son'},
+	{name: 'Teacher'}
 ];

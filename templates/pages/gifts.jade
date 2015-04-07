@@ -1,6 +1,7 @@
 section.page
     div.container
     h2 Gifts
+
     .form-inline
         .radio
             label
@@ -12,7 +13,7 @@ section.page
                 span Male
         .radio
             label
-                input(data-hook="gender" name="gender" type="radio")
+                input(data-hook="either" name="gender" type="radio")
                 span Either
         .form-group
             select.form-control(data-hook="recipient-list")
@@ -30,7 +31,7 @@ section.page
                 option 41 - 50
                 option 50+
         //.form-group
-            input.form-control(data-hook="age" placeholder="Age")
+            input.form-control(data-hook="age-list" placeholder="Age")
         .form-group
             .input-group
                 .input-group-addon $
@@ -39,5 +40,12 @@ section.page
             .input-group
                 .input-group-addon $
                 input.form-control(data-hook="price-max" placeholder="Maximum Price")
+        .form-group
+            select.form-control(data-hook="time-list")
+                option From today
+                option From this week
+                option From this month
+                option From this year
+                option From whenever
 
     div.grid-list(data-hook="gift-list")

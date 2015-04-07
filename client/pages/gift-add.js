@@ -25,8 +25,6 @@ module.exports = PageView.extend({
                         var newOccasion = false;
                         var recipientGifts = [];
                         var occasionGifts = [];
-                        console.log(categories);
-                        console.log(data.recipient);
 
                         if (categories.length < 1) {
                             newRecipient = newOccasion = true;
@@ -38,7 +36,7 @@ module.exports = PageView.extend({
                                 if (category !== data.occasion) {
                                     newOccasion = true;
                                 }
-                            });        
+                            });
                         }
 
                         data.user_id = me.id;
@@ -73,7 +71,6 @@ module.exports = PageView.extend({
                                         });
                                     }
                                 } else {
-                                    console.log('not new');
                                     var recipient = app.categories.get(data.recipient);
                                     if(recipient) {
                                         var categoryGifts = recipient.gifts;
