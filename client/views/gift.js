@@ -22,9 +22,9 @@ module.exports = View.extend({
             hook: 'image',
             name: 'src'
         },
-        'model.viewUrl': {
+        'model.editUrl': {
             type: 'attribute',
-            hook: 'view',
+            hook: 'edit',
             name: 'href'
         },
         'model.username': {
@@ -45,6 +45,14 @@ module.exports = View.extend({
         'click [data-hook~=image]': 'popupInfo',
         'click [data-hook~=close]': 'popupClose',
         'click [data-hook~=shade]': 'popupClose'
+    },
+    render: function() {
+        var self = this;
+        var gift = this.model;
+        this.renderWithTemplate();
+        if(me.id === gift.user_id) {
+            self.queryByHook('edit').style.display = 'block';
+        }
     },
     subviews: {
         form: {

@@ -53,11 +53,12 @@ body
     -moz-column-break-inside: avoid
     -webkit-column-break-inside: avoid
     column-break-inside: avoid
-    display: inline-block;
-    margin: 0 2px 15px;
-    border: 1px solid rgba(0,0,0,.05);
-    border-radius: 1em;
-    background: #fefefe;
+    display: inline-block
+    margin: 0 2px 15px
+    border: 1px solid rgb(230,230,230);
+    border-radius: 1em
+    background: #fefefe
+    position: relative
 
 .grid-list__image
     width: 100%
@@ -68,6 +69,13 @@ body
 
 .grid-list__container
     padding 1em
+
+.edit-button {
+    display: none
+    position: absolute
+    right: 5px
+    top: 5px
+}
 
 .popup
     display: none
