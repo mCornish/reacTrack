@@ -1,9 +1,25 @@
 div.grid-list__item.js-item
 
-    a(data-hook="view")
-        //h2(data-hook="title")
-        //p(data-hook="time-passed")
-        img.grid-list__image(data-hook="image")
-        div.grid-list__container
+    img.grid-list__image(data-hook="image")
+    div.grid-list__container
+        a(data-hook="action-want wantButton")
+        p(data-hook="wants")
+
+
+    .popup__close(data-hook="close") X
+    .popup__shade(data-hook="shade")
+
+    .popup(data-hook="popup")
+        h2(data-hook="title")
+        p(data-hook="time-passed")
+        img.popup__image(data-hook="image")
+        div.popup__container
             a(data-hook="action-want wantButton")
             p(data-hook="wants")
+            
+        form(data-hook="comment-form")
+            fieldset(data-hook="field-container")
+            .buttons
+                button.btn.btn-primary(data-hook="reset", type="submit") Comment
+
+        ul.comments(data-hook='comment-list')

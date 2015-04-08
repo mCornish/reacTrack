@@ -12,10 +12,9 @@ section.page.view-gift
     img(data-hook='image')
     p(data-hook='description')
 
-    h3 Comments
-    ul.comments(data-hook='comment-list')
-
     form(data-hook="comment-form")
         fieldset(data-hook="field-container")
         .buttons
             button.btn.btn-primary(data-hook="reset", type="submit") Comment
+
+    ul.comments(data-hook='comment-list')

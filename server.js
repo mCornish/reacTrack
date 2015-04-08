@@ -89,7 +89,7 @@ app.put('/users/:id', api.updateUser);
 app.get('/gifts', api.listGifts);
 app.post('/gifts', api.addGift);
 app.get('/gifts/:id', api.getGift);
-app.put('/gift/', api.updateGift);
+app.put('/gifts/:id', api.updateGift);
 
 app.get('/comments', api.listComments);
 app.post('/comments', api.addComment);

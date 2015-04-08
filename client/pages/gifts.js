@@ -12,7 +12,7 @@ var Recipients = require('../helpers/recipients');
 var moment = require('moment');
 
 var originalCollection, currentCollection, self;
-var pageSize = 20;
+var pageSize = currentPageSize = 20;
 
 
 module.exports = PageView.extend({
@@ -27,7 +27,8 @@ module.exports = PageView.extend({
         'change [data-hook=age-list]': 'filter',
         'change [data-hook=price-min]': 'filter',
         'change [data-hook=price-max]': 'filter',
-        'change [data-hook=time-list]': 'filter'
+        'change [data-hook=time-list]': 'filter',
+        'click [data-hook=more-button]': 'addGifts'
     },
     render: function() {
         self = this;
@@ -89,6 +90,7 @@ module.exports = PageView.extend({
         this.queryByHook('occasion-list').appendChild(occasionNode);
         this.renderCollection(occasions, CategoryListView, self.queryByHook('occasion-list'));
     },
+
     filter: function() {
         var femaleFilter = this.queryByHook('female').checked;
         var maleFilter = this.queryByHook('male').checked;
@@ -110,7 +112,6 @@ module.exports = PageView.extend({
 
         var gifts = originalCollection.toJSON();
 
-
         femaleFilter ? gifts = filterGender('female', gifts) : '';
         maleFilter ? gifts = filterGender('male', gifts): '';
         eitherFilter ? gifts = filterGender('either', gifts): '';
@@ -124,13 +125,38 @@ module.exports = PageView.extend({
         gifts = gifts.sort(function(a, b) {
             return b.created - a.created;
         });
-        gifts = gifts.slice(0, pageSize);
+        gifts = gifts.slice(0, currentPageSize);
         var filteredCollection = new AmpersandCollection(gifts, {
             model: Gift
         });
 
         $('[data-hook="gift-list"]').empty();
         this.renderCollection(filteredCollection, GiftView, this.queryByHook('gift-list'));
+    },
+
+    addGifts: function() {
+        this.collection.fetch({
+            success: function() {
+                currentPageSize = currentPageSize + pageSize;
+                var giftArray = self.collection.toJSON();
+
+                // Sort gifts by when they were created
+                giftArray.sort(function(a, b) {
+                    return b.created - a.created;
+                });
+
+                // Get the proper number of gifts
+                giftArray = giftArray.slice(0, currentPageSize);
+
+                originalCollection = new AmpersandCollection(giftArray, {
+                    model: Gift
+                });
+
+                // Filter and render new page of gifts
+                self.filter();
+            }
+        });
+
     }
 });
 
