@@ -67,12 +67,15 @@ module.exports = View.extend({
 
                         data.gift_id = gift.id;
                         data.user_id = me.id;
-                        console.log(gift.id);
+
                         app.comments.create(data, {
                             wait: true,
                             success: function (collection, res) {
                                 $('[data-hook="comment-list"]').empty();
                                 renderComments(self, gift);
+                            },
+                            error: function () {
+                                alert('Error while adding comment');
                             }
                         });
                     }

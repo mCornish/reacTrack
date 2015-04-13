@@ -68,7 +68,6 @@ module.exports = PageView.extend({
                         });
 
                         if(me.id === id) {
-                            console.log(self.queryByHook('edit'));
                             self.queryByHook('edit').style.display = 'inline-block';
                         }
                     }

@@ -5,7 +5,7 @@ module.exports = AmpersandModel.extend({
     type: 'user',
     props: {
         id: ['any'],
-        email: ['string', true],
+        email: ['string', false],
         provider: ['string', true],
         username: ['string', false],
         wants: ['array', true, function() {

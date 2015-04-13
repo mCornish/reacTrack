@@ -13,6 +13,7 @@ module.exports = PageView.extend({
     pageTitle: 'Login',
     template: templates.pages.login,
     events: {
+        'click [data-hook="facebook-login"]': 'facebookLogin',
         'click [data-hook="password-reset"]': 'showResetForm',
         'click [data-hook="reset-cancel"]': 'hideResetForm'
     },
@@ -63,6 +64,9 @@ module.exports = PageView.extend({
             }
         }
     },
+    facebookLogin: function() {
+        facebookAuth();
+    },
     showResetForm: function() {
         this.queryByHook('password-reset').style.display = 'none';
         this.queryByHook('reset-form').style.display = 'block';
@@ -73,6 +77,17 @@ module.exports = PageView.extend({
     }
 });
 
+
+var facebookAuth = function() {
+    ref.authWithOAuthPopup("facebook", function(error, authData) {
+        if (error) {
+            alert("Login Failed!", error);
+        } else {
+            alert("Authenticated successfully with payload:", authData);
+            app.navigate(document.referrer);
+        }
+    });
+};
 
 var getName = function(authData) {
     switch(authData.provider) {

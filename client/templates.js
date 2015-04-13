@@ -32,7 +32,7 @@
 
     // includes/comment.jade compiled template
     templatizer["includes"]["comment"] = function tmpl_includes_comment() {
-        return '<li class="post list-group-item"><div><span>posted&nbsp;</span><span data-hook="time"></span></div><div><span>by&nbsp;</span><a data-hook="authorUrl"><span data-hook="author"></span></a></div><p data-hook="content"></p></li>';
+        return '<li class="post list-group-item"><div><span>posted&nbsp;</span><span data-hook="time"></span></div><div><span>by&nbsp;</span><a data-hook="authorUrl"><span data-hook="author"></span></a></div><p data-hook="content"></p><a data-hook="edit" class="edit-button">Edit</a></li>';
     };
 
     // includes/featuredGift.jade compiled template
@@ -137,7 +137,7 @@
         var jade_interp;
         var locals_for_with = locals || {};
         (function(message) {
-            buf.push('<section class="page login"><h2>Login</h2><form data-hook="login-form" class="login-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><div class="form-group"><button data-hook="reset" type="submit" class="btn btn-primary">Sign In</button><!--a(href="/register") Register--><a data-hook="password-reset" class="pointer">Reset Password</a></div><div id="message"></div>');
+            buf.push('<section class="page login"><h2>Login</h2><a data-hook="facebook-login" class="pointer">Login with Facebook</a><form data-hook="login-form" class="login-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><div class="form-group"><button data-hook="reset" type="submit" class="btn btn-primary">Sign In</button><!--a(href="/register") Register--><a data-hook="password-reset" class="pointer">Reset Password</a></div><div id="message"></div>');
             if (message) {
                 buf.push('<h1 class="text-center error-message">' + jade.escape((jade_interp = message) == null ? "" : jade_interp) + "</h1>");
             }

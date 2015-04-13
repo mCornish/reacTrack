@@ -18,6 +18,14 @@ module.exports = View.extend({
         },
         'model.content': {
             hook: 'content'
-        },
+        }
+    },
+    render: function() {
+        var self = this;
+        var comment = this.model;
+        this.renderWithTemplate();
+        if(me.id === comment.user_id) {
+            self.queryByHook('edit').style.display = 'block';
+        }
     }
 });

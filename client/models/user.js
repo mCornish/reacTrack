@@ -7,14 +7,14 @@ module.exports = AmpersandModel.extend({
     type: 'user',
     props: {
         id: ['any'],
-        email: ['string', true],
+        email: ['string', false],
         provider: ['string', true],
-        username: ['string', false],
-        image: ['string', false],
-        firstName: ['string', false],
-        lastName: ['string', false],
-        website: ['string', false],
-        location: ['string', false],
+        username: ['string', false, ''],
+        image: ['string', false, 'http://thesocietypages.org/socimages/files/2009/05/vimeo.jpg'],
+        firstName: ['string', false, ''],
+        lastName: ['string', false, ''],
+        website: ['string', false, ''],
+        location: ['string', false, ''],
         wants: ['array', true, function() {
             return [];
         }]

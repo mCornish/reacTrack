@@ -1,6 +1,8 @@
 section.page.login
     h2 Login
 
+    a.pointer(data-hook="facebook-login") Login with Facebook
+
     form.login-form(data-hook="login-form")
       fieldset(data-hook="field-container")
       .buttons
@@ -11,7 +13,7 @@ section.page.login
         #message
         if message
             h1.text-center.error-message #{message}
-            
+
     form.temp-hide.reset-form(data-hook="reset-form")
         fieldset(data-hook="field-container")
         .buttons
