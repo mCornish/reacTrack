@@ -1,19 +1,26 @@
 var PageView = require('./base');
 var templates = require('../templates');
 var LoginForm = require('../forms/login');
+var PasswordResetForm = require('../forms/password-reset');
+
+var flash = require('connect-flash');
+
 var Firebase = require('firebase');
 var ref = new Firebase('sizzling-fire-6725.firebaseIO.com');
-var flash = require('connect-flash');
 
 
 module.exports = PageView.extend({
     pageTitle: 'Login',
     template: templates.pages.login,
+    events: {
+        'click [data-hook="password-reset"]': 'showResetForm',
+        'click [data-hook="reset-cancel"]': 'hideResetForm'
+    },
     subviews: {
-        form: {
+        loginForm: {
             // this is the css selector that will be the `el` in the
             // prepareView function.
-            container: 'form',
+            container: '.login-form',
             // this says we'll wait for `this.model` to be truthy
             waitFor: 'model',
             prepareView: function (el) {
@@ -34,12 +41,40 @@ module.exports = PageView.extend({
                     }
                 });
             }
+        },
+        resetForm: {
+            // this is the css selector that will be the `el` in the
+            // prepareView function.
+            container: '.reset-form',
+            // this says we'll wait for `this.model` to be truthy
+            waitFor: 'model',
+            prepareView: function (el) {
+                var self = this;
+                var model = this.model;
+                return new PasswordResetForm({
+                    el: el,
+                    model: this.model,
+                    submitCallback: function (data) {
+
+                        resetPassword(data, self);
+
+                    }
+                });
+            }
         }
+    },
+    showResetForm: function() {
+        this.queryByHook('password-reset').style.display = 'none';
+        this.queryByHook('reset-form').style.display = 'block';
+    },
+    hideResetForm: function() {
+        this.queryByHook('password-reset').style.display = 'inline-block';
+        this.queryByHook('reset-form').style.display = 'none';
     }
 });
 
 
-function getName(authData) {
+var getName = function(authData) {
     switch(authData.provider) {
      case 'password':
        return authData.password.email.replace(/@.*/, '');
@@ -48,4 +83,18 @@ function getName(authData) {
      case 'facebook':
        return authData.facebook.displayName;
   }
-}
+};
+
+var resetPassword = function(data, self) {
+    ref.resetPassword({
+        email: data.email
+    }, function(error) {
+        if (error === null) {
+            alert('Password reset email sent successfully');
+            self.queryByHook('password-reset').style.display = 'inline-block';
+            self.queryByHook('reset-form').style.display = 'none';
+        } else {
+            alert('Error sending password reset email: ' + error)
+        }
+    })
+};

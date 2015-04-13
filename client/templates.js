@@ -137,11 +137,11 @@
         var jade_interp;
         var locals_for_with = locals || {};
         (function(message) {
-            buf.push('<section class="page login"><h2>Login</h2><form data-hook="login-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><div class="form-group"><button data-hook="reset" type="submit" class="btn btn-primary">Sign In</button><!--a(href="/register") Register--><div id="message"></div>');
+            buf.push('<section class="page login"><h2>Login</h2><form data-hook="login-form" class="login-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><div class="form-group"><button data-hook="reset" type="submit" class="btn btn-primary">Sign In</button><!--a(href="/register") Register--><a data-hook="password-reset" class="pointer">Reset Password</a></div><div id="message"></div>');
             if (message) {
                 buf.push('<h1 class="text-center error-message">' + jade.escape((jade_interp = message) == null ? "" : jade_interp) + "</h1>");
             }
-            buf.push("</div></div></form></section>");
+            buf.push('</div></form><form data-hook="reset-form" class="temp-hide reset-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Update</button><a data-hook="reset-cancel" class="cancel-button">Cancel</a></div></form></section>');
         }).call(this, "message" in locals_for_with ? locals_for_with.message : typeof message !== "undefined" ? message : undefined);
         return buf.join("");
     };

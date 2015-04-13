@@ -1,12 +1,19 @@
 section.page.login
     h2 Login
 
-    form(data-hook="login-form")
+    form.login-form(data-hook="login-form")
       fieldset(data-hook="field-container")
       .buttons
         .form-group
             button.btn.btn-primary(data-hook="reset", type="submit") Sign In
             //a(href="/register") Register
-            #message
-            if message
-                h1.text-center.error-message #{message}
+            a.pointer(data-hook="password-reset") Reset Password
+        #message
+        if message
+            h1.text-center.error-message #{message}
+            
+    form.temp-hide.reset-form(data-hook="reset-form")
+        fieldset(data-hook="field-container")
+        .buttons
+            button.btn.btn-primary(data-hook="reset", type="submit") Update
+            a(data-hook="reset-cancel").cancel-button Cancel
