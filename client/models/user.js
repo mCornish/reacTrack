@@ -29,10 +29,28 @@ module.exports = AmpersandModel.extend({
                 }
             }
         },
+        fullName: {
+            deps: ['firstName', 'lastName'],
+            fn: function () {
+                return this.firstName + ' ' + this.lastName;
+            }
+        },
         viewUrl: {
             deps: ['id'],
             fn: function () {
                 return '/user/' + this.id;
+            }
+        },
+        editUrl: {
+            deps: ['id'],
+            fn: function () {
+                return '/user/' + this.id + '/edit';
+            }
+        },
+        websiteName: {
+            deps: ['website'],
+            fn: function () {
+                return this.website.replace('http://www.', '').replace('https://www.', '');
             }
         }
     }

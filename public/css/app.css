@@ -68,6 +68,13 @@ body {
 }
 .edit-button {
   display: none;
+  margin: 0 1em;
+}
+.cancel-button {
+  cursor: pointer;
+  margin: 0 1em;
+}
+.gift__edit {
   position: absolute;
   right: 5px;
   top: 5px;

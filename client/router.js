@@ -35,6 +35,7 @@ module.exports = Router.extend({
         'user/:id': 'userView',
         'user/:id/edit': 'userEdit',
         'profile': 'meView',
+        'profile/edit': 'meEdit',
         'gift/:id': 'giftView',
         'new-gift': 'giftAdd',
         'gift/:id/edit': 'giftEdit',
@@ -93,6 +94,12 @@ module.exports = Router.extend({
 
     meView: function () {
         this.authenticate(new UserViewPage({
+            id: me.id
+        }));
+    },
+
+    meEdit: function () {
+        this.authenticate(new UserEditPage({
             id: me.id
         }));
     },

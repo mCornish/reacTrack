@@ -13,8 +13,16 @@ section.page
                 span Male
         .radio
             label
-                input(data-hook="either" name="gender" type="radio")
+                input(data-hook="either" name="gender" type="radio" checked)
                 span Either
+    .form-inline
+        .form-group
+            select.form-control(data-hook="time-list")
+                option From today
+                option From this week
+                option From this month
+                option From this year
+                option From whenever
         .form-group
             select.form-control(data-hook="recipient-list")
         .form-group
@@ -40,13 +48,7 @@ section.page
             .input-group
                 .input-group-addon $
                 input.form-control(data-hook="price-max" placeholder="Maximum Price")
-        .form-group
-            select.form-control(data-hook="time-list")
-                option From today
-                option From this week
-                option From this month
-                option From this year
-                option From whenever
+
 
     div.grid-list(data-hook="gift-list")
 

@@ -7,6 +7,9 @@ var UserEditForm = require('../forms/user-edit');
 module.exports = PageView.extend({
     pageTitle: 'Edit User',
     template: templates.pages.userEdit,
+    events: {
+        'click [data-hook=cancel-button]': 'cancel'
+    },
     initialize: function (spec) {
         var self = this;
         app.users.getOrFetch(spec.id, {all: true}, function (err, model) {
@@ -37,5 +40,8 @@ module.exports = PageView.extend({
                 });
             }
         }
+    },
+    cancel: function() {
+        app.navigate('/user/' + me.id);
     }
 });

@@ -1,8 +1,17 @@
 section.page.view-user
 
-    h2(data-hook='name')
+    a.edit-button(data-hook="edit" href="/profile/edit") Edit Profile
+    a Account Settings
+
+    h2(data-hook='username')
 
     image(data-hook='image')
+
+    p(data-hook="full-name")
+
+    p(data-hook="location")
+
+    a(data-hook="website" target="_blank")
 
     h3 Wants
     div.grid-list(data-hook="gift-list")
