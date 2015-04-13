@@ -37,7 +37,7 @@ module.exports = PageView.extend({
             type: 'attribute',
             hook: 'website',
             name: 'href'
-        },
+        }
     },
     initialize: function (spec) {
         self = this;

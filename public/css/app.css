@@ -74,6 +74,12 @@ body {
   cursor: pointer;
   margin: 0 1em;
 }
+.temp-hide {
+  display: none;
+}
+.pointer {
+  cursor: pointer;
+}
 .gift__edit {
   position: absolute;
   right: 5px;

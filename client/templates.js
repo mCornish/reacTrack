@@ -80,6 +80,11 @@
         return '<li class="track list-group-item"><a data-hook="view"><h2 data-hook="name"></h2><h3 data-hook="length"></h3></a></li>';
     };
 
+    // pages/account.jade compiled template
+    templatizer["pages"]["account"] = function tmpl_pages_account() {
+        return '<section class="page account"><h2>Account Settings</h2><div data-hook="email-wrapper"><span>Email Address:&nbsp;</span><span data-hook="email"></span><a data-hook="email-change" class="pointer">Change Email Address</a></div><form data-hook="email-form" class="temp-hide email-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Update</button><a data-hook="email-cancel" class="cancel-button">Cancel</a></div></form><br/><a data-hook="password-change" class="pointer">Change Password</a><form data-hook="password-form" class="temp-hide password-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Update</button><a data-hook="password-cancel" class="cancel-button">Cancel</a></div></form></section>';
+    };
+
     // pages/allPosts.jade compiled template
     templatizer["pages"]["allPosts"] = function tmpl_pages_allPosts() {
         return '<section class="page"><h2>All Posts</h2><ul data-hook="post-list" class="list-group"></ul></section>';
@@ -203,7 +208,7 @@
 
     // pages/userView.jade compiled template
     templatizer["pages"]["userView"] = function tmpl_pages_userView() {
-        return '<section class="page view-user"><a data-hook="edit" href="/profile/edit" class="edit-button">Edit Profile</a><a>Account Settings</a><h2 data-hook="username"></h2><image data-hook="image"></image><p data-hook="full-name"></p><p data-hook="location"></p><a data-hook="website" target="_blank"></a><h3>Wants</h3><div data-hook="gift-list" class="grid-list"></div></section>';
+        return '<section class="page view-user"><a data-hook="edit" href="/profile/edit" class="edit-button">Edit Profile</a><a href="/account">Account Settings</a><h2 data-hook="username"></h2><image data-hook="image"></image><p data-hook="full-name"></p><p data-hook="location"></p><a data-hook="website" target="_blank"></a><h3>Wants</h3><div data-hook="gift-list" class="grid-list"></div></section>';
     };
 
     return templatizer;

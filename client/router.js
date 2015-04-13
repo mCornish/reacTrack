@@ -4,6 +4,7 @@ var HomePage = require('./pages/home');
 var UserAddPage = require('./pages/user-add');
 var UserViewPage = require('./pages/user-view');
 var UserEditPage = require('./pages/user-edit');
+var AccountPage = require('./pages/account');
 var GiftsPage = require('./pages/gifts');
 var GiftViewPage = require('./pages/gift-view');
 var GiftAddPage = require('./pages/gift-add');
@@ -36,6 +37,7 @@ module.exports = Router.extend({
         'user/:id/edit': 'userEdit',
         'profile': 'meView',
         'profile/edit': 'meEdit',
+        'account': 'account',
         'gift/:id': 'giftView',
         'new-gift': 'giftAdd',
         'gift/:id/edit': 'giftEdit',
@@ -100,6 +102,12 @@ module.exports = Router.extend({
 
     meEdit: function () {
         this.authenticate(new UserEditPage({
+            id: me.id
+        }));
+    },
+
+    account: function () {
+        this.authenticate(new AccountPage({
             id: me.id
         }));
     },

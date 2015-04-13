@@ -1,0 +1,20 @@
+section.page.account
+
+    h2 Account Settings
+
+    div(data-hook="email-wrapper")
+        span Email Address:&nbsp;
+        span(data-hook="email")
+        a.pointer(data-hook="email-change") Change Email Address
+    form.temp-hide.email-form(data-hook="email-form")
+        fieldset(data-hook="field-container")
+        .buttons
+            button.btn.btn-primary(data-hook="reset", type="submit") Update
+            a(data-hook="email-cancel").cancel-button Cancel
+    br
+    a.pointer(data-hook="password-change") Change Password
+    form.temp-hide.password-form(data-hook="password-form")
+        fieldset(data-hook="field-container")
+        .buttons
+            button.btn.btn-primary(data-hook="reset", type="submit") Update
+            a(data-hook="password-cancel").cancel-button Cancel
