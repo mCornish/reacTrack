@@ -154,6 +154,7 @@ module.exports = View.extend({
     noCommentText: 'No comments yet.'
 });
 
+
 var renderComments = function(self, gift) {
 
     app.comments.fetch({
@@ -162,7 +163,7 @@ var renderComments = function(self, gift) {
             var commentCollection = app.comments.toJSON();
 
             commentCollection.forEach(function(comment) {
-                console.log(gift.id);
+
                 if(comment.gift_id === gift.id) {
                     comments.push(comment);
                 }

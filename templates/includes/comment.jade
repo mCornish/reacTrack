@@ -9,4 +9,10 @@ li.post.list-group-item
 
     p(data-hook="content")
 
-    a.edit-button(data-hook="edit") Edit
+    a.edit-button.pointer(data-hook="edit") Edit
+
+    form.temp-hide.edit-form(data-hook="edit-form")
+        fieldset(data-hook="field-container")
+        .buttons
+            button.btn.btn-primary(data-hook="reset", type="submit") Update
+            a(data-hook="edit-cancel").cancel-button Cancel

@@ -263,6 +263,20 @@ exports.addComment = function (req, res) {
     });
 };
 
+exports.updateComment = function(req, res) {
+    var data = req.body;
+    var id = data.id;
+
+    commentsRef.child(id).update(data, function(error) {
+        if (error) {
+            alert('Comment could not be saved: ' + error);
+        } else {
+            res.send(data);
+        }
+
+    });
+};
+
 
 exports.listCategories = function (req, res) {
     var categories = [];

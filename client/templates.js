@@ -32,7 +32,7 @@
 
     // includes/comment.jade compiled template
     templatizer["includes"]["comment"] = function tmpl_includes_comment() {
-        return '<li class="post list-group-item"><div><span>posted&nbsp;</span><span data-hook="time"></span></div><div><span>by&nbsp;</span><a data-hook="authorUrl"><span data-hook="author"></span></a></div><p data-hook="content"></p><a data-hook="edit" class="edit-button">Edit</a></li>';
+        return '<li class="post list-group-item"><div><span>posted&nbsp;</span><span data-hook="time"></span></div><div><span>by&nbsp;</span><a data-hook="authorUrl"><span data-hook="author"></span></a></div><p data-hook="content"></p><a data-hook="edit" class="edit-button pointer">Edit</a><form data-hook="edit-form" class="temp-hide edit-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Update</button><a data-hook="edit-cancel" class="cancel-button">Cancel</a></div></form></li>';
     };
 
     // includes/featuredGift.jade compiled template

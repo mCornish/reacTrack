@@ -3,6 +3,9 @@ var moment = require('moment');
 
 
 module.exports = AmpersandModel.extend({
+    urlRoot: function() {
+        return '/comments';
+    },
     props: {
         id: 'any',
         user_id: ['any', true],
