@@ -55,6 +55,11 @@
         return '<div class="grid-list__item js-item"><img data-hook="image" class="grid-list__image"/><div class="grid-list__container"><a data-hook="action-want wantButton"></a><p data-hook="wants"></p></div><a data-hook="edit" class="edit-button gift__edit">Edit</a><div data-hook="close" class="popup__close">X</div><div data-hook="shade" class="popup__shade"></div><div data-hook="popup" class="popup"><h2 data-hook="title"></h2><p data-hook="time-passed"></p><img data-hook="image" class="popup__image"/><div class="popup__container"><a data-hook="action-want wantButton"></a><p data-hook="wants"></p></div><form data-hook="comment-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Comment</button></div></form><ul data-hook="comment-list" class="comments"></ul></div></div>';
     };
 
+    // includes/giftList.jade compiled template
+    templatizer["includes"]["giftList"] = function tmpl_includes_giftList() {
+        return '<tr data-hook="view"><td data-hook="title"></td><td data-hook="username"></td><td data-hook="time"></td><td><div class="checkbox"><input data-hook="featured" type="checkbox"/></div></td></tr>';
+    };
+
     // includes/person.jade compiled template
     templatizer["includes"]["person"] = function tmpl_includes_person() {
         return '<li class="person list-group-item"><img data-hook="avatar" width="40" height="40"/><a data-hook="name"></a><span class="btn-group pull-right"> <a data-hook="action-edit" class="btn btn-default">edit </a><a href="#" data-hook="action-delete" class="btn btn-danger">delete</a></span></li>';
@@ -80,9 +85,19 @@
         return '<li class="track list-group-item"><a data-hook="view"><h2 data-hook="name"></h2><h3 data-hook="length"></h3></a></li>';
     };
 
+    // includes/userList.jade compiled template
+    templatizer["includes"]["userList"] = function tmpl_includes_userList() {
+        return '<tr data-hook="view"><td data-hook="username"></td></tr>';
+    };
+
     // pages/account.jade compiled template
     templatizer["pages"]["account"] = function tmpl_pages_account() {
         return '<section class="page account"><h2>Account Settings</h2><div data-hook="email-wrapper"><span>Email Address:&nbsp;</span><span data-hook="email"></span><a data-hook="email-change" class="pointer">Change Email Address</a></div><form data-hook="email-form" class="temp-hide email-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Update</button><a data-hook="email-cancel" class="cancel-button">Cancel</a></div></form><br/><a data-hook="password-change" class="pointer">Change Password</a><form data-hook="password-form" class="temp-hide password-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn btn-primary">Update</button><a data-hook="password-cancel" class="cancel-button">Cancel</a></div></form></section>';
+    };
+
+    // pages/admin.jade compiled template
+    templatizer["pages"]["admin"] = function tmpl_pages_admin() {
+        return '<section class="page admin"><h2>Admin Dashboard</h2><ul class="nav navbar-nav"><li><a data-hook="users-button" class="pointer">Users</a></li><li><a data-hook="gifts-button" class="pointer">Gifts</a></li></ul><div data-hook="viewport" class="viewport"></div><table class="table table-striped"><thead data-hook="users-head" class="temp-hide"><tr><th>User</th></tr></thead><thead data-hook="gifts-head" class="temp-hide"><tr><th data-hook="header-title" class="pointer">Gift</th><th data-hook="header-user" class="pointer">User</th><th data-hook="header-created" class="pointer">Created</th><th data-hook="header-featured" class="pointer">Featured</th></tr></thead><tbody data-hook="table-view"></tbody></table></section>';
     };
 
     // pages/allPosts.jade compiled template

@@ -1,0 +1,23 @@
+section.page.admin
+
+    h2 Admin Dashboard
+
+    ul.nav.navbar-nav
+        li
+            a.pointer(data-hook="users-button") Users
+        li
+            a.pointer(data-hook="gifts-button") Gifts
+
+    .viewport(data-hook="viewport")
+
+    table.table.table-striped
+        thead.temp-hide(data-hook="users-head")
+            tr
+                th User
+        thead.temp-hide(data-hook="gifts-head")
+            tr
+                th.pointer(data-hook="header-title") Gift
+                th.pointer(data-hook="header-user") User
+                th.pointer(data-hook="header-created") Created
+                th.pointer(data-hook="header-featured") Featured
+        tbody(data-hook="table-view")
