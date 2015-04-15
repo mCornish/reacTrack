@@ -83,7 +83,6 @@ var facebookAuth = function() {
         if (error) {
             alert("Login Failed!", error);
         } else {
-            alert("Authenticated successfully with payload:", authData);
             app.navigate(document.referrer);
         }
     });

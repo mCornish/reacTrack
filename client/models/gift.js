@@ -40,6 +40,12 @@ module.exports = AmpersandModel.extend({
                 return moment(this.created).fromNow();
             }
         },
+        date: {
+            deps: ['created'],
+            fn: function () {
+                return moment(this.created).format('MMM DD, YYYY');
+            }
+        },
         user: {
             deps: ['user_id'],
             fn: function () {
