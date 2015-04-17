@@ -13,11 +13,26 @@ section.page.admin
     table.table.table-striped
         thead.temp-hide(data-hook="users-head")
             tr
-                th User
+                th.pointer
+                    span User
+                    span.arrow-down
+                    span.arrow-up
         thead.temp-hide(data-hook="gifts-head")
             tr
-                th.pointer(data-hook="header-title") Gift
-                th.pointer(data-hook="header-user") User
-                th.pointer(data-hook="header-created") Created
-                th.pointer(data-hook="header-featured") Featured
+                th.pointer(data-hook="header-title")
+                    span Gift
+                    span.arrow-down
+                    span.arrow-up
+                th.pointer(data-hook="header-user")
+                    span User
+                    span.arrow-down
+                    span.arrow-up
+                th.pointer(data-hook="header-created")
+                    span Created
+                    span.arrow-down
+                    span.arrow-up
+                th.pointer(data-hook="header-featured")
+                    span Featured
+                    span.arrow-down
+                    span.arrow-up
         tbody(data-hook="table-view")
